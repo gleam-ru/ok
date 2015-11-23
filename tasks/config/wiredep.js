@@ -4,8 +4,11 @@ module.exports = function(grunt) {
         task: {
             ignorePath: "../../..",
             exclude: [
-                // 'jquery.js',
-                // 'vue.js',
+                'jquery.js',
+                'd3.js',
+                'techan.js',
+                'vue.js',
+
             ],
             src: [
                 'views/_layouts/parts/head.jade',
