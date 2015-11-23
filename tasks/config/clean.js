@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 
 	grunt.config.set('clean', {
 		tmp: ['.tmp/**'],
-        uploads: ['uploads/tmp/**'],
+        // uploads: ['uploads/tmp/**'],
 	});
 
 
