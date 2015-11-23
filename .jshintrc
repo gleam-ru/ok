@@ -1,0 +1,12 @@
+{
+	"node": true,
+	"globals": {
+		"templatizer": true,
+		"_": true,
+
+		"sails": true
+	},
+  	"curly": false,
+	"quotmark": false,
+    "undef": false
+}

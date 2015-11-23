@@ -1,29 +1,85 @@
-/**
- * Built-in Log Configuration
- * (sails.config.log)
- *
- * Configure the log level for your app, as well as the transport
- * (Underneath the covers, Sails uses Winston for logging, which
- * allows for some pretty neat custom transports/adapters for log messages)
- *
- * For more information on the Sails logger, check out:
- * http://sailsjs.org/#!/documentation/concepts/Logging
- */
+var winston = require('winston');
+var dir = './logs/';
 
+// default levels:
+// silly   : 0,
+// verbose : 1,
+// info    : 2,
+// warn    : 3,
+// debug   : 4,
+// error   : 5,
+
+
+//  ╔╦╗╦═╗╔═╗╔╗╔╔═╗╔═╗╔═╗╦═╗╔╦╗╔═╗
+//   ║ ╠╦╝╠═╣║║║╚═╗╠═╝║ ║╠╦╝ ║ ╚═╗
+//   ╩ ╩╚═╩ ╩╝╚╝╚═╝╩  ╚═╝╩╚═ ╩ ╚═╝
+
+// пишем все в консольку (вырубить при релизе!)
+var _console = new (winston.transports.Console)({
+    level: 'silly',
+    colorize: true,
+});
+
+
+// файлик-свалка
+var _fileGlobal = new (winston.transports.File)({
+    level: 'warn',
+    filename: dir+'/everything.log',
+    json: false,
+});
+
+// логи парсера
+// var _fileParser = new (winston.transports.File)({
+//     level: 'warn',
+//     filename: dir+'/everything.log',
+// });
+
+
+
+//  ╦  ╔═╗╔═╗╔═╗╔═╗╦═╗╔═╗
+//  ║  ║ ║║ ╦║ ╦║╣ ╠╦╝╚═╗
+//  ╩═╝╚═╝╚═╝╚═╝╚═╝╩╚═╚═╝
+
+// total log in every transport
+winston.loggers.add('total', {
+    transports: [
+        _console,
+        _fileGlobal,
+    ]
+});
+
+// dev default
+winston.loggers.add('logger', {
+    transports: [
+        _console,
+        // _fileGlobal,
+    ]
+});
+
+// prod default
+winston.loggers.add('prod_logger', {
+    transports: [
+        _console,
+        // _fileGlobal,
+    ]
+});
+
+
+
+
+// parser
+// winston.loggers.add('parser', {
+//     transports: [
+//         _console,
+//         _fileParser,
+//     ]
+// });
+
+
+// настройки стандарных логов sails (ну они же уже есть во фреймворке)
 module.exports.log = {
-
-  /***************************************************************************
-  *                                                                          *
-  * Valid `level` configs: i.e. the minimum log level to capture with        *
-  * sails.log.*()                                                            *
-  *                                                                          *
-  * The order of precedence for log levels from lowest to highest is:        *
-  * silly, verbose, info, debug, warn, error                                 *
-  *                                                                          *
-  * You may also set the level to "silent" to suppress all logs.             *
-  *                                                                          *
-  ***************************************************************************/
-
-  // level: 'info'
-
+    level: 'info', // default level
+    colors: false, // убираем "цветастость" (криво логгируется)
+    custom: winston.loggers.get('total'), // собственно, сам логгер
 };
+
