@@ -26,6 +26,9 @@ module.exports.bootstrap = function(cb) {
     // TODO: сделать покрасиввее
     if (sails.config.dev) {
         return Q()
+            .then(filler.process())
+            .then(cache.init())
+            .then(cron.init())
             .nodeify(cb);
     }
     else {

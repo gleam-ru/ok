@@ -5,9 +5,11 @@ var options = {
 };
 var cache = LRU(options);
 
-cache.init = function(cb) {
+
+
+cache.init = function() {
     console.log('cache inited');
-    if (cb) cb();
+    return Q();
 }
 
 module.exports = cache;

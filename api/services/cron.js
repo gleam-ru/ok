@@ -23,57 +23,20 @@ cron.add = function(name, pattern, foo) {
     return schedule;
 }
 
-cron.init = function(cb) {
+cron.init = function() {
     // UTC TIME!!!
     // http://www.corntab.com/pages/crontab-gui
-    cron.add('bondsParser', '45 5,6,7,8,9,10,11,12,13,14,15,16 * * 1,2,3,4,5', function() {
-        provider.bonds
-            .hardUpdate()
-            .catch(function(err) {
-                console.error('error while parsing bonds by cron');
-                console.error(err)
-            });
-    });
-
-    // пакование парса облигаций в дейли свечи
-    // в 3:00 каждый пн,вт,ср,чт,пт
-    cron.add('bondsNewDay', '0 3 * * 1,2,3,4,5', function() {
-        console.log('Напиши наконец-то', 'bondsNewDay')
-        // async.series([
-        //     dbTasks.bondsNewDay,
-        //     s3.clientToServer,
-        // ], function() {
-        //     if (err) {
-        //         console.error('cron new day error', err);
-        //     }
-        // });
-    });
-
-
-
-
-    // обновление inday свечей
-    cron.add('sharesInday', '25,55 5,6,7,8,9,10,11,12,13,14,15,16 * * 1,2,3,4,5', function() {
-        provider.shares
-            .updateIndayCandles()
-            .catch(function(err) {
-                console.error('sharesInday cron error');
-                console.error(err, err.stack)
-            });
-    });
-
-    // получение недостающих свечей
-    // в 22:00 каждый пн,вт,ср,чт,пт
-    cron.add('sharesNewDay', '0 22 * * 1,2,3,4,5', function() {
-        var importer = require('./sharesImporter.js');
-        importer.fixMissedCandles()
-            .catch(function(err) {
-                console.error('cron new day error', err);
-            })
-    });
+    // cron.add('bondsParser', '45 5,6,7,8,9,10,11,12,13,14,15,16 * * 1,2,3,4,5', function() {
+    //     provider.bonds
+    //         .hardUpdate()
+    //         .catch(function(err) {
+    //             console.error('error while parsing bonds by cron');
+    //             console.error(err)
+    //         });
+    // });
 
     console.log('cron inited');
-    if (cb) cb();
+    return Q();
 }
 
 module.exports = cron;
