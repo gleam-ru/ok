@@ -14,32 +14,12 @@ link(rel="shortcut icon", type="image/x-icon", href="/favicon.ico")
 //-  ╚═╝ ╩  ╩ ╩═╝╚═╝╚═╝
 //- <!-- build:css css/combined.min.css -->
 // bower:css
-link(rel='stylesheet', href='/bower_components/datatables/media/css/jquery.dataTables.css')
-link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.css')
 link(rel='stylesheet', href='/bower_components/magnific-popup/dist/magnific-popup.css')
-link(rel='stylesheet', href='/bower_components/pickmeup/css/pickmeup.css')
-link(rel='stylesheet', href='/bower_components/tooltipster/css/tooltipster.css')
-link(rel='stylesheet', href='/bower_components/lightslider/dist/css/lightslider.min.css')
-link(rel='stylesheet', href='/bower_components/cropper/dist/cropper.css')
 // endbower
-//- link(rel='stylesheet', href="/bower_components/fancytree/dist/skin-lion/ui.fancytree.min.css")
-link(rel='stylesheet', href="/bower_components/fancybox/source/jquery.fancybox.css")
-link(rel='stylesheet', href="/bower_components/chosen/chosen.min.css")
-//- link(rel='stylesheet', href="/css/bootstrap.css")
-//- link(rel='stylesheet', href="/css/bootstrap-responsive.css")
-//- link(rel='stylesheet', href="/css/stylesheet.css")
 link(rel='stylesheet', href="/css/main.css")
-//- new styles
-link(rel='stylesheet', href="/css/css/jquery.bxslider.css")
-link(rel='stylesheet', href="/css/css/styles.css")
-//- <!-- endbuild -->
-//- link(rel='stylesheet', href='/bower_components/shufflejs/css/shuffle-styles.css')
-//- link(rel='stylesheet', href='/bower_components/shufflejs/css/prism.css')
-//- link(rel='stylesheet', href='/bower_components/shufflejs/css/gallery.css')
-//- link(rel='stylesheet', href='/bower_components/shufflejs/css/style.css')
-<!--[if lt IE 9]>
-link(rel='stylesheet', href="/css/css/ie.css")
-<![endif]-->
+//- <!--[if lt IE 9]>
+//- link(rel='stylesheet', href="/css/css/ie.css")
+//- <![endif]-->
 
 
 
@@ -47,85 +27,31 @@ link(rel='stylesheet', href="/css/css/ie.css")
 //-  ╚═╗║  ╠╦╝║╠═╝ ║ ╚═╗
 //-  ╚═╝╚═╝╩╚═╩╩   ╩ ╚═╝
 //- cdn
-<!--[if lte IE 9]>
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-<![endif]-->
-<![if gt IE 9]>
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
-<![endif]>
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+//- <!--[if lte IE 9]>
+//- <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+//- <![endif]-->
+//- <![if gt IE 9]>
+//- <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script>
+//- <![endif]>
+//- <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+//- <!--[if lt IE 9]>
+//- <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+//- <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+//- <![endif]-->
 //- компиллированные jade шаблоны
 script(type="text/javascript", src="/jade_templates.js")
 //- <!-- build:js js/combined.min.js -->
 // bower:js
-script(src="/bower_components/modernizr/modernizr.js")
-script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
-script(src="/bower_components/caret/jquery.caret.js")
-script(src="/bower_components/chosen/chosen.jquery.min.js")
-script(src="/bower_components/datatables/media/js/jquery.dataTables.js")
-script(src="/bower_components/datatables-scroller/js/dataTables.scroller.js")
-script(src="/bower_components/jquery-ui/jquery-ui.js")
-script(src="/bower_components/fancytree/dist/jquery.fancytree-all.min.js")
-script(src="/bower_components/eventEmitter/EventEmitter.js")
-script(src="/bower_components/eventie/eventie.js")
-script(src="/bower_components/imagesloaded/imagesloaded.js")
-script(src="/bower_components/jquery-cookie/jquery.cookie.js")
-script(src="/bower_components/jquery-placeholder/jquery.placeholder.js")
-script(src="/bower_components/jquery-validation/dist/jquery.validate.js")
+script(src="/bower_components/jquery/dist/jquery.js")
+script(src="/bower_components/moment/moment.js")
 script(src="/bower_components/lodash/lodash.js")
 script(src="/bower_components/magnific-popup/dist/jquery.magnific-popup.js")
-script(src="/bower_components/moment/moment.js")
-script(src="/bower_components/pickmeup/js/jquery.pickmeup.js")
-script(src="/bower_components/shufflejs/dist/jquery.shuffle.js")
-script(src="/bower_components/Tabslet/jquery.tabslet.min.js")
-script(src="/bower_components/tendina/dist/tendina.js")
-script(src="/bower_components/tinymce/tinymce.min.js")
-script(src="/bower_components/tooltipster/js/jquery.tooltipster.min.js")
-script(src="/bower_components/validator-js/validator.js")
-script(src="/bower_components/lightslider/dist/js/lightslider.min.js")
-script(src="/bower_components/cropper/dist/cropper.js")
-script(src="/bower_components/core.js/client/core.js")
+script(src="/bower_components/vue/dist/vue.js")
 // endbower
-script(src="/js/tinymce/plugins/example/plugin.js")
-script(src="/bower_components/bootstrap-paginator/build/bootstrap-paginator.min.js")
-script(src="/bower_components/fancybox/source/jquery.fancybox.js")
-
-//- добавляет поддержку moment в datatables
-script(type="text/javascript", src="/js/datatables.moment.patch.js")
-
-//- модуль для fancytree (хранить состояние)
-script(src="/bower_components/fancytree/dist/src/jquery.fancytree.persist.js")
-script(src="/bower_components/fancytree/dist/src/jquery.fancytree.filter.js")
-
-//- верстальщик 
-//- script(type='text/javascript', src="/js/bootstrap-transition.js")
-//- script(type='text/javascript', src="/js/bootstrap-alert.js")
-//- script(type='text/javascript', src="/js/bootstrap-modal.js")
-//- script(type='text/javascript', src="/js/bootstrap-dropdown.js")
-//- script(type='text/javascript', src="/js/bootstrap-scrollspy.js")
-//- script(type='text/javascript', src="/js/bootstrap-tab.js")
-//- script(type='text/javascript', src="/js/bootstrap-tooltip.js")
-//- script(type='text/javascript', src="/js/bootstrap-popover.js")
-//- script(type='text/javascript', src="/js/bootstrap-button.js")
-//- script(type='text/javascript', src="/js/bootstrap-collapse.js")
-//- script(type='text/javascript', src="/js/bootstrap-carousel.js")
-//- script(type='text/javascript', src="/js/bootstrap-typeahead.js")
-script(src='/PageControllers/navigation/navigation.js')
-script(src='/PageControllers/placeholder.js')
-//- new scripts
-//- script(src='/PageControllers/bootstrap.min.js')
-script(src='/PageControllers/detect.min.js')
-script(src='/PageControllers/classie.js')
-script(src='/PageControllers/jquery.bxslider.js')
 //- __() - локализация 
-script(type="text/javascript", src="/js/langs/"+lng+".js")
+//- script(type="text/javascript", src="/js/langs/"+lng+".js")
 //- глобальные методы, локализации, etc...
 script(type="text/javascript", src="/js/main.js")
-script(type="text/javascript", src="/js/generic.js")
 
 
 //- <!-- endbuild -->

@@ -1,0 +1,21 @@
+{
+  "name": "ok",
+  "version": "0.0.0",
+  "authors": [
+    "gleam-ru <roman.demeshenko@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [],
+  "dependencies": {
+    "moment": "~2.10.6",
+    "lodash": "~3.10.1",
+    "magnific-popup": "~1.0.0",
+    "vue": "~1.0.8",
+    "jquery": "~2.1.4"
+  }
+}

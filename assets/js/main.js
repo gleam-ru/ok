@@ -5,29 +5,29 @@ installMP();
 $(document).ready(function() {
     window.cnt = $('.cnt');
 
-    // tooltipster
-    $.fn.tooltipster('setDefaults', {
-        theme: 'tooltipster-light',
-        contentAsHTML: true,
-        interactive: true
-    });
+    // // tooltipster
+    // $.fn.tooltipster('setDefaults', {
+    //     theme: 'tooltipster-light',
+    //     contentAsHTML: true,
+    //     interactive: true
+    // });
 
-    $('.tt').each(function() {
-        var el = $(this);
-        var opts = {};
-        opts.position = 'bottom';
-        opts.maxWidth = 350;
+    // $('.tt').each(function() {
+    //     var el = $(this);
+    //     var opts = {};
+    //     opts.position = 'bottom';
+    //     opts.maxWidth = 350;
 
-        if (el.hasClass('tt_interactive')) {
-            opts.interactive = true;
-            opts.interactiveTolerance = 100;
-        }
-        if (el.hasClass('tt_html')) {
-            opts.contentAsHTML = true;
-        }
+    //     if (el.hasClass('tt_interactive')) {
+    //         opts.interactive = true;
+    //         opts.interactiveTolerance = 100;
+    //     }
+    //     if (el.hasClass('tt_html')) {
+    //         opts.contentAsHTML = true;
+    //     }
 
-        el.tooltipster(opts);
-    });
+    //     el.tooltipster(opts);
+    // });
 });
 
 

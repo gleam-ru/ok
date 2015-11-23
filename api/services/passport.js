@@ -263,7 +263,7 @@ function attachPassportToExistingUser(_passport, _user_id, done) {
 }
 
 
-
+/*
 
 //  ╦  ╦╦╔═
 //  ╚╗╔╝╠╩╗
@@ -374,6 +374,7 @@ passport.use(new FacebookStrategy(sails.config.passport.strategies.facebook,
     }
 ));
 
+//*/
 
 
 
