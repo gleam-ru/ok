@@ -45,6 +45,19 @@ function _admin() {
         })
         .then(function(user) {
             return Role
+                .findOne({name: 'user'})
+                .then(function(role) {
+                    if (!_.find(user.roles, {name: role.name})) {
+                        user.roles.add(role.id)
+                        return user.save();
+                    }
+                    else {
+                        return user;
+                    }
+                })
+        })
+        .then(function(user) {
+            return Role
                 .findOne({name: 'admin'})
                 .then(function(role) {
                     if (!_.find(user.roles, {name: role.name})) {
@@ -55,7 +68,6 @@ function _admin() {
                         return user;
                     }
                 })
-
         })
 }
 

@@ -1,7 +1,21 @@
-table
-  tr(v-for='user in users')
-    td(v-text='user.id')
-    td(v-text='user.email')
-    td
-      select(v-model='user.roles' multiple)
-        option(v-for='role in roles' value='{{role.id}}') {{role.name}}
+div 
+  table
+    tr
+      td ID
+      td Email
+      td Roles
+    tr(v-for='user in users')
+      td(v-text='user.id')
+      td(v-text='user.email')
+      td
+        select(
+          multiple
+          v-model='user.roles'
+          data-uid='{{user.id}}'
+          )
+          option(
+            v-for='role in roles'
+            value='{{role.id}}'
+            disabled='{{role.name == "user"}}'
+            ) {{role.name}}
+  .btn.btn-default(v-on:click='save') Save
