@@ -19,8 +19,8 @@
 
 sailsDisk
 .data
-tst.js
-/tst.js
+uploads
+_tmp.js
 
 
 
@@ -84,7 +84,7 @@ bower_components
 ################################################
 .tmp
 dump.rdb
-/views/layouts/parts/_head.jade
+/views/_layouts/parts/_head.jade
 
 
 
