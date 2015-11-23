@@ -9,21 +9,35 @@
  * and re-run the appropriate tasks.
  *
  * For usage docs see:
- * 		https://github.com/gruntjs/grunt-contrib-watch
+ *      https://github.com/gruntjs/grunt-contrib-watch
  *
  */
 module.exports = function(grunt) {
 
-	grunt.config.set('watch', {
-		assets: {
+    grunt.config.set('watch', {
 
-			// Assets to watch:
-			files: ['assets/**/*', 'tasks/pipeline.js', '!**/node_modules/**'],
+        assets: {
+            // Assets to watch:
+            files: ['assets/**/*', '!**/node_modules/**'],
+            // When assets are changed:
+            tasks: ['sync:assets', 'less:dev'],
+        },
 
-			// When assets are changed:
-			tasks: ['syncAssets' , 'linkAssets']
-		}
-	});
+        tasks: {
+            files: ['tasks/**/*'],
+            tasks: ['default']
+        },
 
-	grunt.loadNpmTasks('grunt-contrib-watch');
+        jade2js: {
+            files: ['views/_client/**/*'],
+            tasks: ['jade2js']
+        },
+
+        usemin: {
+            files: ['views/_layouts/parts/head.jade'],
+            tasks: ['copy:head']
+        },
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
 };

@@ -11,28 +11,76 @@
  * Copies all directories nd files from the .tmp/public directory into a www directory.
  *
  * For usage docs see:
- * 		https://github.com/gruntjs/grunt-contrib-copy
+ *   https://github.com/gruntjs/grunt-contrib-copy
  */
 module.exports = function(grunt) {
 
-	grunt.config.set('copy', {
-		dev: {
-			files: [{
-				expand: true,
-				cwd: './assets',
-				src: ['**/*.!(coffee|less)'],
-				dest: '.tmp/public'
-			}]
-		},
-		build: {
-			files: [{
-				expand: true,
-				cwd: '.tmp/public',
-				src: ['**/*'],
-				dest: 'www'
-			}]
-		}
-	});
+    grunt.config.set('copy', {
+        head: { // особенности работы с мин-конкат-...
+            src:  './views/_layouts/parts/head.jade',
+            dest: './views/_layouts/parts/_head.jade',
+        },
 
-	grunt.loadNpmTasks('grunt-contrib-copy');
+        dev: {
+            files: [
+                { // assets
+                    expand: true,
+                    cwd: './assets',
+                    src: ['**/*.!(coffee|less)'],
+                    dest: '.tmp/public',
+                },
+                { // bower
+                    expand: true,
+                    cwd: './bower_components',
+                    src: ['**/*'],
+                    dest: '.tmp/public/bower_components',
+                },
+                {
+                    expand: true,
+                    cwd: './uploads',
+                    src: ['**/*'],
+                    dest: '.tmp/public/uploads',
+                },
+            ]
+        },
+
+        prod: {
+            files: [
+                { // assets
+                    expand: true,
+                    cwd: './assets',
+                    src: ['**/*.!(coffee|less)'],
+                    dest: '.tmp/public',
+                },
+                { // bower
+                    expand: true,
+                    cwd: './bower_components',
+                    src: ['**/*'],
+                    dest: '.tmp/public/bower_components',
+                },
+                {
+                    expand: true,
+                    cwd: './uploads',
+                    src: ['**/*'],
+                    dest: '.tmp/public/uploads',
+                },
+                { // бовер картинки (цена минификации - потеря путей)
+                    expand: true,
+                    flatten: true,
+                    cwd: './bower_components',
+                    src: ['**/images/*'],
+                    dest: '.tmp/public/images/',
+                },
+                { // бовер шрифты (цена минификации - потеря путей)
+                    expand: true,
+                    flatten: true,
+                    cwd: './bower_components',
+                    src: ['**/fonts/**/*'],
+                    dest: '.tmp/public/fonts/',
+                },
+            ]
+        },
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-copy');
 };
