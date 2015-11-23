@@ -1,0 +1,13 @@
+h1 Спасибо за регистрацию на ЭИП!
+p Ваша учетная запись успешно создана:
+table
+  tr
+    td Логин
+    td #{user.username}
+  tr
+    td Почта
+    td #{user.email}
+p Для ее активации перейдите по 
+  a(href='http://eip.neolant.ru/auth/activate/#{token}', target='_blank') этой ссылке
+  | .
+  

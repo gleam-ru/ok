@@ -1,0 +1,13 @@
+extends ../_layouts/default.jade
+
+block content
+  .page-404.content_wrapper.admin_view.org_exp_profile
+    h1.main_headers
+      Ошибка 404 - страница не найдена
+    if (!msg)
+      p
+        | Пожалуйста, опишите как вы попали на данную страницу. 
+        a(href='/about') Страница с контактами
+        | .
+    else
+      p!= msg

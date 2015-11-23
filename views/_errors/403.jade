@@ -1,0 +1,21 @@
+extends ../_layouts/default.jade
+
+block content
+  .page-404.content_wrapper.admin_view.org_exp_profile
+    h1.main_headers
+      Ошибка 403 - недостаточно прав
+
+    if (typeof errors !== 'undefined')
+      pre.error
+        code
+          - _.each(errors, function (error) {
+            = error
+          - });
+    p.no-m
+      | Скорее всего вы просто не авторизированы. 
+      a(href='/auth') Страница авторизации
+      | .
+    p.no-m
+      | Если ошибка останется, пожалуйста, опишите, как вы ее получили. 
+      a(href='/about') Страница с контактами
+      | .

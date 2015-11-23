@@ -1,0 +1,24 @@
+mixin button(text)
+  a.button.blue.btn.btn-default !{text}
+
+mixin roundIcon(name)
+  span.fa-stack.fa-lg.roundIcon
+    i.fa.fa-circle.fa-stack-2x
+    i.fa.fa-stack-1x.fa-inverse(class=name)
+
+mixin select(opts, selected, multiple)
+  - opts = opts || [];
+  - selected = selected || [];
+  select(
+    multiple=multiple
+    )
+    each opt in opts
+      option(
+        value=opt.id
+        selected=selected.indexOf(opt.id)
+        ) #{opt.name}
+
+mixin textInput(title)
+  - title = title || '';
+  .input-item
+    input(type='text', placeholder=title)

@@ -1,0 +1,18 @@
+extends ../_layouts/default.jade
+
+block content
+  .page-404.content_wrapper.admin_view.org_exp_profile
+    h1.main_headers
+      | Ошибка 500 - Поздравляю! Вы поломали сервер.
+    pre.error #{data}
+
+    if (typeof errors !== 'undefined')
+      pre.error
+        code
+          - _.each(errors, function (error) {
+            = error
+          - });
+    p
+      | Пожалуйста, опишите как вы получили данную ошибку. 
+      a(href='/about') Страница с контактами
+      | .

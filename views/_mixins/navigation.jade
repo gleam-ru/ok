@@ -1,0 +1,34 @@
+mixin Navigation(list)
+  if list
+    //- -------
+    //- level 1
+    //- -------
+    ul.nav.navbar-nav#top_nav
+      each menuPosition in list
+        if (canSee(menuPosition, user))
+          li(class=(menuPosition.children)? "dropdown nav_dropdown" : "")
+            - var href = menuPosition.href ? menuPosition.href : '/'
+            a(
+              href = menuPosition.href || '/'
+              class=(menuPosition.children)? "dropdown-toggle" : ""
+              )
+              | !{__(menuPosition.name)}
+            //- -------
+            //- level 2
+            //- -------
+            if menuPosition.children
+              ul.dropdown-menu.my_drop_down_menu
+                each child in menuPosition.children
+                  if (canSee(child, user))
+                    li
+                      a(
+                        href = child.href || '/'
+                        )
+                        if(!child.id)
+                          | !{__(child.name)}
+                        else
+                          - var loc= res.locals.getLocale()
+                          - loc=loc?loc:'ru';
+                          - var _name=child.name[loc]
+                          - _name=_name?_name:_.first(_.values(child.name))
+                          | !{__(_name)}

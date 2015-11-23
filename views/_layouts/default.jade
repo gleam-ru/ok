@@ -1,0 +1,15 @@
+include ../_mixins/global.jade
+
+mixin breadcrumbs(list)
+  .bc
+
+doctype
+html
+  head
+    include ./parts/_head.jade
+    block postHead
+
+  body
+    div.cnt
+      block content
+    block afterAll
