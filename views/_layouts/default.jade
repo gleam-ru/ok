@@ -1,18 +1,21 @@
-include ../_mixins/global.jade
+include ../_mixins/global
 
 mixin breadcrumbs(list)
   .bc
 
 doctype
-html
+html.js
   head
     block head
-      include ./parts/_head.jade
+      include ./parts/_head
     title
       block title
         | #{pageTitle ? pageTitle + ' - ' : ''}
         | OK
   body
-    div.cnt
-      block content
+    include ./parts/navigation
+    //- div.cnt
+    block content
     block afterAll
+  
+    include ./parts/footer

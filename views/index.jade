@@ -1,20 +1,99 @@
 extends ./_layouts/default.jade
 
 block append head
-  +globalVar('users', users)
-  +globalVar('roles', roles)
-  script(src='/ViewControllers/index.js')
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
   style.
-    #vue select {
-      width: 300px;
-      }
-    #vue tr {
-      border-top: solid 1px rgba(0,0,0, 0.2);
-      border-bottom: solid 1px rgba(0,0,0, 0.2);
-      }
-      #vue td {
-        padding: 10px 20px;
-        }
+
 
 block content
-  #vue
+  section.page-title.parallax3.parallax-fix.page-title-large
+    .opacity-medium.bg-black
+    <img class="parallax-background-img" src="images/parallax-img20.jpg" alt="" />
+    //- img.parallax-background-img(src='images/parallax-img20.jpg', alt='')
+    .container
+      .row
+        .col-md-12.col-sm-12.text-center.animated.fadeInUp
+          .separator-line.bg-yellow.no-margin-top.margin-four
+          // page title
+          h1.white-text Et-line Icons
+          // end page title
+          // page title tagline
+          span.white-text Lorem Ipsum is simply dummy text of the printing.
+          // end title tagline
+
+  section.wow.fadeIn
+    .container
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.no-margin-top.xs-margin-bottom-seven
+            strong.black-text Icon Style #1
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-video.i-large-box.i-plain
+          i.icon-lock.i-large-box.i-plain
+          i.icon-tools.i-large-box.i-plain
+          i.icon-picture.i-large-box.i-plain
+          i.icon-scissors.i-large-box.i-plain
+          i.icon-hotairballoon.i-large-box.i-plain
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.xs-margin-bottom-seven
+            strong.black-text Icon Style #2
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-video.i-large-box.i-rounded.i-bordered
+          i.icon-lock.i-large-box.i-rounded.i-bordered
+          i.icon-tools.i-large-box.i-rounded.i-bordered
+          i.icon-picture.i-large-box.i-rounded.i-bordered
+          i.icon-scissors.i-large-box.i-rounded.i-bordered
+          i.icon-hotairballoon.i-large-box.i-rounded.i-bordered
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.xs-margin-bottom-seven
+            strong.black-text Icon Style #3
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-target.i-large-box.i-rounded
+          i.icon-map.i-large-box.i-rounded
+          i.icon-lifesaver.i-large-box.i-rounded
+          i.icon-hourglass.i-large-box.i-rounded
+          i.icon-envelope.i-large-box.i-rounded
+          i.icon-global.i-large-box.i-rounded
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.xs-margin-bottom-seven
+            strong.black-text Icon Style #4
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-wine.i-large-box.i-rounded.i-bordered.i-light
+          i.icon-chat.i-large-box.i-rounded.i-bordered.i-light
+          i.icon-compass.i-large-box.i-rounded.i-bordered.i-light
+          i.icon-aperture.i-large-box.i-rounded.i-bordered.i-light
+          i.icon-happy.i-large-box.i-rounded.i-bordered.i-light
+          i.icon-clock.i-large-box.i-rounded.i-bordered.i-light
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.xs-margin-bottom-seven
+            strong.black-text Icon Style #5
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-laptop.i-large-box.i-rounded.i-3d
+          i.icon-tablet.i-large-box.i-rounded.i-3d
+          i.icon-calendar.i-large-box.i-rounded.i-3d
+          i.icon-camera.i-large-box.i-rounded.i-3d
+          i.icon-bargraph.i-large-box.i-rounded.i-3d
+          i.icon-basket.i-large-box.i-rounded.i-3d
+      .row
+        .col-md-7.col-sm-10.center-col.text-center
+          h6.xs-margin-bottom-seven
+            strong.black-text Icon Style #6
+      .row
+        .col-md-12.col-sm-10.center-col.text-center.icon-box
+          i.icon-presentation.i-large-box.i-rounded.i-3d-border.bg-orange
+          i.icon-printer.i-large-box.i-rounded.i-3d-border.bg-yellow
+          i.icon-wallet.i-large-box.i-rounded.i-3d-border.bg-yellow-ochre
+          i.icon-telescope.i-large-box.i-rounded.i-3d-border.bg-green
+          i.icon-tools.i-large-box.i-rounded.i-3d-border.bg-dark-blue
+          i.icon-map-pin.i-large-box.i-rounded.i-3d-border.bg-dark-gray
