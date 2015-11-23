@@ -1,0 +1,7 @@
+table
+  tr(v-for='user in users')
+    td(v-text='user.id')
+    td(v-text='user.email')
+    td
+      select(v-model='user.roles' multiple)
+        option(v-for='role in roles' value='{{role.id}}') {{role.name}}

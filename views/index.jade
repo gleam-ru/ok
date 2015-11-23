@@ -1,10 +1,11 @@
 extends ./_layouts/default.jade
 
 block append head
-  +globalVar('test_var', [1,2,3,4])
+  +globalVar('users', users)
+  +globalVar('roles', roles)
   script(src='/ViewControllers/index.js')
   style.
 
 
 block content
-  p it`s alive!!!
+  #vue
