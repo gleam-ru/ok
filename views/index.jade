@@ -1,17 +1,9 @@
 extends ./_layouts/default.jade
 
-block postHead
-  //- +PasteInlineData(['news', news])
-  //- +PasteInlineData(['qa', qa])
-  //- +PasteInlineData(['org', org])
-  //- +PasteInlineData(['expert', expert])
-  //- script(src='/PageControllers/index.js')
-  //- style.
-  //-   .bc{display:none}
-
-
-//- block pageHead
-//-   h1 Экспертно-информационный портал
+block append head
+  +globalVar('test_var', [1,2,3,4])
+  script(src='/ViewControllers/index.js')
+  style.
 
 
 block content

@@ -6,18 +6,13 @@
  */
 
 module.exports = {
+
 	index: function(req, res) {
-        return res.render('index', {
-            title: 'Бложик',
-        });
+        var data = {
+            pageTitle: 'Index',
+            test: 'test_data',
+        }
+        return res.render('index', data);
     },
 
-    test: function(req, res) {
-        return res.send(''+
-            '<div id="test">'+
-                'чо как'+
-            '</div>'+
-            '')
-    }
 };
-

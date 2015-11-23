@@ -6,9 +6,12 @@ mixin breadcrumbs(list)
 doctype
 html
   head
-    include ./parts/_head.jade
-    block postHead
-
+    block head
+      include ./parts/_head.jade
+    title
+      block title
+        | #{pageTitle ? pageTitle + ' - ' : ''}
+        | OK
   body
     div.cnt
       block content

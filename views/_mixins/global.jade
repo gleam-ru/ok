@@ -5,12 +5,20 @@ mixin json(data)
 
 //- вставка данных в тело страницы в виде скрипта,
 //- args == ["name", {data}]
-mixin PasteInlineData(args)
-  - name = args[0]
-  - data = args[1]
-  if (typeof name !== 'undefined' && typeof data !== 'undefined')
+mixin globalVar(name, data)
+  if (typeof name !== 'undefined')
+    - var jsonString = JSON.stringify(data);
+    - if (!jsonString) console.warn('inlineData is undef: ', name);
     script.
-      window["#{name}"] = !{JSON.stringify(data).replace(/<\//g, "<\\/")};
+      var store;
+      if (window.globalVars) {
+        store = window.globalVars;
+      }
+      else {
+        store = {};  
+      }
+      store['#{name}'] = !{jsonString ? jsonString.replace(/<\//g, "<\\/") : 'undefined'};
+      window.globalVars = store;
 
 mixin error(data)
   .g-alert.type_error.with_close.ib.error
