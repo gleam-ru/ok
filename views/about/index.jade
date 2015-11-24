@@ -1,0 +1,141 @@
+extends ../_layouts/default.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+
+  style.
+    .main-cnt {
+      padding-top: 30px;
+      min-height: calc(100% - 200px);
+      }
+    .mystyle-address {
+      min-height: 70px;
+      }
+
+
+block content
+  
+  section.wow.fadeIn.no-padding
+    .container-fuild
+      .row.no-margin
+        #canvas1.col-md-12.col-sm-12.no-padding.contact-map.map
+          iframe#map_canvas1(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.843821917424!2d144.956054!3d-37.817127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1427947693651')
+
+  section.main-cnt
+    .container
+      .row
+        .tab-style1
+          .row
+            .col-md-12.col-sm-12
+              ul.nav.nav-tabs.nav-tabs-light.text-left
+                li
+                  a(href='#tab_sec1', data-toggle='tab') About us
+                li.active
+                  a(href='#tab_sec2', data-toggle='tab') Contact us
+                li
+                  a(href='#tab_sec3', data-toggle='tab') Financial advisory
+          .tab-content
+            
+            #tab_sec1.tab-pane.fade.in
+              .row
+                .col-md-12.col-sm-12
+                  p
+                    | United Arab Emirates - based RUMEX International provides sophisticated bullion, commodities, currency and securities trading and consulting solutions to institutional and private investors.
+                  p
+                    | Institutional clients include banks, global and regional hedge funds, asset managers, investment banks and non-bank financial institutions. These are equally split between Europe, the Middle East and Asia. 
+                  p
+                    | Private clients range from individual private traders through to experienced business people managing both personal and family assets. 
+                  p
+                    | RUMEX International is one of the fastest growing independent investment companies globally. 
+                  p
+                    | RUMEX International offers: 
+                    ul.flat-list.flat-list-icon
+                      li
+                        i.fa.fa-check
+                        b Execution 
+                        | – we are continually investing in our technology in order to provide you with the fastest execution
+                      li
+                        i.fa.fa-check
+                        b Price 
+                        | - our access to deep liquidity is reflected in some of the best prices anywhere in the world 
+                      li
+                        i.fa.fa-check
+                        b Support 
+                        | - we offer 24/6 support and 24/5 trading
+                  p
+                    | Regulated by RAK Investment Authority
+                  p
+                    | RUMEX International is a very well capitalised company. The financial strength of the company has allowed on-going investment in technology; access to tier one liquidity providers and the provision of a very high level of client support.
+                  p
+                    | Located in a stable and secure marketplace, RUMEX International is a new force in global trading. The company is focused on providing the consistent spreads and prices institutions and individual are looking for. Located between the Far-East and Europe RUMEX International helps bridge flows and maintain liquidity from the closing of Singapore through to the opening of London.
+
+            #tab_sec2.tab-pane.fade.in.active
+              .row
+                .col-md-4.col-sm-4.xs-margin-bottom-ten
+                  .position-relative
+                    img(src='/images/about/dubai.jpg', alt='')
+                  p.text-med.black-text.letter-spacing-1.margin-ten.no-margin-bottom.text-uppercase.font-weight-600.xs-margin-top-five
+                    | London - Head Office
+                  p.mystyle-address
+                    | Suite 4 Level 1, 141 Bridge Road
+                    br
+                    |  London, E2 8DY.
+                  .wide-separator-line.bg-mid-gray.no-margin-lr
+                  p.black-text.no-margin-bottom
+                    i.fa.fa-phone
+                    |  123 456 7890
+                  p.black-text
+                    i.fa.fa-envelope-o
+                    a(href='mailto:no-reply@domain.com') no-reply@domain.com
+                .col-md-4.col-sm-4.xs-margin-bottom-ten
+                  .position-relative
+                    img(src='/images/about/moscow.jpg', alt='')
+                  p.text-med.black-text.letter-spacing-1.margin-ten.no-margin-bottom.text-uppercase.font-weight-600.xs-margin-top-five
+                    | New York - Office
+                  p.mystyle-address
+                    | 401 Broadway, 24th Floor
+                    br
+                    |  New York, NY 10013.
+                  .wide-separator-line.bg-mid-gray.no-margin-lr
+                  p.black-text.no-margin-bottom
+                    i.fa.fa-phone
+                    |  123 456 7890
+                  p.black-text
+                    i.fa.fa-envelope-o
+                    a(href='mailto:no-reply@domain.com') no-reply@domain.com
+                .col-md-4.col-sm-4
+                  .position-relative
+                    img(src='/images/about/mexico.jpg', alt='')
+                  p.text-med.black-text.letter-spacing-1.margin-ten.no-margin-bottom.text-uppercase.font-weight-600.xs-margin-top-five
+                    | Los Angeles - Office
+                  p.mystyle-address
+                    | 2221 Lincoln Blvd
+                    br
+                    |  90291 Venice, Los Angeles.
+                  .wide-separator-line.bg-mid-gray.no-margin-lr
+                  p.black-text.no-margin-bottom
+                    i.fa.fa-phone
+                    |  123 456 7890
+                  p.black-text
+                    i.fa.fa-envelope-o
+                    a(href='mailto:no-reply@domain.com') no-reply@domain.com
+            
+            #tab_sec3.tab-pane.med-text.fade.in
+              .row
+                .col-md-12.col-sm-12
+                  p
+                    | RUMEX Advisors is changing the investment world by offering low-cost investing and helped investors keep more of their money. Now we've reinvented financial advice by combining the personal attention of an advisor with powerful technology—all at a low cost.
+                  p
+                    | Your investment goals are as personal as you are. And although identifying your goals is a great start, getting there is another story. Whether you're investing for retirement, living in retirement, or saving for a college education, a home, or other goals, a RUMEX Advisors can help you with financial planning and investment advice. Your partnership with a  RUMEX Advisors is at the heart of our service. An advisor works closely with you to develop a customized goals-based financial plan according to your unique situation—and can manage your portfolio throughout your retirement years.
+                  p
+                    | You get advice from the company that's designed to put your interests first. Our advisors don't get paid incentives for their recommendations or for selling you investment products and services. 
+                    a(href='/') Learn how a RUMEX Advisors partners with you 
+                  p
+                    | A RUMEX Advisors can help you earn more in net portfolio returns over time. 
+                    a(href='/') Find out how you can earn more 
+                  p
+                    | And just as you'd expect from RUMEX Advisors, you get it all at a low cost—only 1% of your assets under management annually. 
+                    a(href='/') See how you could benefit from our low fee
+

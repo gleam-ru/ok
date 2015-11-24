@@ -9,13 +9,13 @@ module.exports.routes = {
     //
     // Profile page
     //
-    'get  /me': 'Profile',
+    'get  /profile': 'Profile',
 
 
     // Settings
-    'get  /settings'              : 'Settings',
+    'get  /settings': 'Settings',
     //---
-    'post /settings/update'      : 'Settings.update',
+    'post /settings/update': 'Settings.update',
 
     // Auth
     'get  /auth'                  : 'Auth',
@@ -23,24 +23,21 @@ module.exports.routes = {
     'get  /auth/:strategy'        : 'Auth.addStrategy',
     'get  /auth/:strategy/remove' : 'Auth.removeStrategy',
     //---
-    'post /auth/:action'  : 'Auth.action', // 'login', 'register'
+    'post /auth/:action'          : 'Auth.action', // 'login', 'register'
 
 
     //
     // About page
     //
-    'get  /about'              : 'About',
-    'get  /about/feedback'     : 'About.feedback',
-    'get  /about/donation'     : 'About.donation',
-    'get  /about/donation/thx' : 'About.thx',
+    'get  /about': 'Static.about',
 
 
     //
     // Admin
     //
-    'get  /adm'                    : 'Admin',
-    'get  /adm/users'              : 'Admin.all_users',
-    'get  /adm/users/:id/edit'     : 'Admin.userEditor',
+    'get  /admin'                    : 'Admin',
+    'get  /admin/users'              : 'Admin.all_users',
+    'get  /admin/users/:id/edit'     : 'Admin.userEditor',
     //---
-    'post /adm/users'              : 'Admin.updateUserData',
+    'post /admin/users'              : 'Admin.updateUserData',
 };

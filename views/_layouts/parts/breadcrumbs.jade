@@ -1,0 +1,5 @@
+include ../../_mixins/breadcrumbs
+
+if (bc && Array.isArray(bc) && bc.length > 0)
+  .col-md-4.col-sm-12.breadcrumb.text-uppercase.wow.fadeInUp.xs-display-none.text-right(data-wow-duration='600ms')
+    +Breadcrumbs(bc)

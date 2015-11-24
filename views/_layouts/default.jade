@@ -1,7 +1,6 @@
 include ../_mixins/global
 
-mixin breadcrumbs(list)
-  .bc
+
 
 doctype
 html.js
@@ -9,14 +8,27 @@ html.js
     block head
       include ./parts/_head
     title
-      block title
+      block pageTitle
         | #{pageTitle ? pageTitle + ' - ' : ''}
         | OK
   body
-    include ./parts/navigation
-    //- div.cnt
-    block content
-    block afterAll
+    block navigation
+      nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-border-bottom.nav-light-transparent(role='navigation')
+        .container
+          .row
+            include ./parts/navigation
+    block bc
+      section.content-top-margin.page-title.page-title-small.bg-dark-gray
+        .container
+          .row
+            .col-md-8.col-sm-12.wow.fadeInUp(data-wow-duration='300ms')
+              h1.white-text
+                block title
+                  | Title goes here
+            include ./parts/breadcrumbs
+    
+    div.cnt
+      block content
   
     include ./parts/footer
       a.scrollToTop(href='javascript:;')

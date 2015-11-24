@@ -1,0 +1,7 @@
+mixin Breadcrumbs(list)
+  - var last = list.splice(-1);
+  ul
+    for item in list
+      li
+        a(href=item.href).white-text !{item.name}
+    li.white-text !{last[0].name}
