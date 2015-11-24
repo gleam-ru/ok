@@ -3,7 +3,7 @@ include ../_mixins/global
 
 
 doctype
-html.js
+html(style='height: auto;')
   head
     block head
       include ./parts/_head
@@ -26,8 +26,7 @@ html.js
                 block title
                   | Title goes here
             include ./parts/breadcrumbs
-    
-    div.cnt
+    .cnt
       block content
   
     include ./parts/footer

@@ -9,7 +9,9 @@ module.exports.routes = {
 //////////
 // Blog //
 //////////
-    'get  /blog': 'Blog',
+    'get  /blog'            : 'Blog',
+    'get  /blog/get/:id'    : 'Blog.get',
+    'get  /blog/tags/:tag'  : 'Blog.tag',
 
 
 
@@ -43,6 +45,7 @@ module.exports.routes = {
 /////////////
     'get  /profile'           : 'Profile',
     'get  /profile/settings'  : 'Profile.settings',
+    'get  /profile/get/:id'   : 'Profile.get',
 
 
 

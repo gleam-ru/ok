@@ -28,6 +28,11 @@ mixin info(data)
   .g-alert.type_success.with_close.ib
     .g-alert-body #{__('Data_updated')}
 
-//- TODO: deprecated
 mixin separator()
-  div.separator
+  .wide-separator-line.bg-mid-gray.no-margin-lr.margin-one
+
+
+mixin revealButton(icon, text)
+  span.btn.button-reveal.button
+    i.fa(class=icon)
+    span #{text}
