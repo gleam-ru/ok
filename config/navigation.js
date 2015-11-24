@@ -1,71 +1,52 @@
 module.exports.navigation = [
-
-    //
-    // login/register
-    //
-    {
-        name     : "Профиль",
-        href     : "/me",
-        canSee   : ["admin", "user"],
-        children : [
-            {
-                name     : "Настройки",
-                href     : "/settings",
-            },
-            {
-                name     : "Выйти",
-                href     : "/logout",
-            },
-        ],
-    },
-    {
-        name     : "Войти",
-        href     : "/auth",
-        canSee   : ["ghost"],
-    },
-
-    //
-    // Сервисы
-    //
-    {
-        name     : "Сервисы",
-        href     : "/services",
-        children : [
-            {
-                name     : "Облигации",
-                href     : "/services/bonds",
-            },
-            {
-                name     : "Акции",
-                href     : "/services/shares",
-            },
-        ]
-    },
-
-    //
-    // About
-    //
-    {
-        name     : "О проекте",
-        href     : "/about",
-        children : [
-            {
-                name     : "Обсуждение",
-                href     : "/about/feedback",
-            },
-            {
-                name     : "Поддержать проект",
-                href     : "/about/donation",
-            },
-        ]
-    },
-
-    //
-    // ОдминЪка
-    //
     {
         name     : "Админка",
-        href     : "/adm",
-        canSee   : ["admin"],
+        href     : "/admin",
+        // canSee   : ["admin"],
+    },
+
+    {
+        name     : "Блог",
+        href     : "/blog",
+    },
+
+    {
+        name     : "Закрытый раздел",
+        href     : "/paid",
+    },
+
+    {
+        name     : "О компании",
+        href     : "/about",
+    },
+
+    {
+        name     : "ВиО",
+        href     : "/qa",
+    },
+
+
+
+
+    {
+        name     : "Профиль",
+        href     : "/profile",
+        // canSee   : ["user"],
+    },
+    // {
+    //     name     : "Настройки",
+    //     href     : "/settings",
+    //     // canSee   : ["user"],
+    // },
+    {
+        name     : "Выход",
+        href     : "/logout",
+        // canSee   : ["user"],
+    },
+
+    {
+        name     : "Регистрация / Вход",
+        href     : "/auth",
+        canSee   : ["ghost"],
     },
 ];

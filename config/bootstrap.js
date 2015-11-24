@@ -23,6 +23,13 @@ module.exports.bootstrap = function(cb) {
 
     global.appRoot = __dirname+'/..';
 
+
+    global.canSee = function(menu, user) {
+        if (!menu.canSee) return true;
+        var roles = user.roles ? _.map(user.roles, 'id') : [6]; // гость
+        return _.intersection(menu.canSee, roles).length !== 0;
+    }
+
     // TODO: сделать покрасиввее
     if (sails.config.dev) {
         return Q()

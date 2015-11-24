@@ -1,34 +1,23 @@
 mixin Navigation(list)
-  if list
-    //- -------
-    //- level 1
-    //- -------
-    ul.nav.navbar-nav#top_nav
-      each menuPosition in list
-        if (canSee(menuPosition, user))
-          li(class=(menuPosition.children)? "dropdown nav_dropdown" : "")
-            - var href = menuPosition.href ? menuPosition.href : '/'
-            a(
-              href = menuPosition.href || '/'
-              class=(menuPosition.children)? "dropdown-toggle" : ""
-              )
-              | !{__(menuPosition.name)}
-            //- -------
-            //- level 2
-            //- -------
-            if menuPosition.children
-              ul.dropdown-menu.my_drop_down_menu
-                each child in menuPosition.children
-                  if (canSee(child, user))
-                    li
-                      a(
-                        href = child.href || '/'
-                        )
-                        if(!child.id)
-                          | !{__(child.name)}
-                        else
-                          - var loc= res.locals.getLocale()
-                          - loc=loc?loc:'ru';
-                          - var _name=child.name[loc]
-                          - _name=_name?_name:_.first(_.values(child.name))
-                          | !{__(_name)}
+  nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-border-bottom.nav-white(role='navigation')
+    .container
+      .row
+        .col-md-2.pull-left
+          a.logo-light(href='/')
+            img.logo(alt='', src='images/logo-white.png')
+          a.logo-dark(href='/')
+            img.logo(alt='', src='images/logo-light.png')
+        .navbar-header.col-sm-8.col-xs-2.pull-right
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        .col-md-8.no-padding-right.accordion-menu.text-right
+          .navbar-collapse.collapse
+            ul.nav.navbar-nav.navbar-right.panel-group
+              for item in list
+                if (canSee(item, user))
+                  li
+                    a(href= item.href ? item.href : '/')
+                      | !{item.name}
