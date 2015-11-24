@@ -1,23 +1,54 @@
 module.exports.routes = {
 
-    //
-    // Main page
-    //
+///////////////
+// Main page //
+///////////////
     'get  /': 'Index',
 
 
-    //
-    // Profile page
-    //
-    'get  /profile': 'Profile',
+//////////
+// Blog //
+//////////
+    'get  /blog': 'Blog',
 
 
-    // Settings
-    'get  /settings': 'Settings',
-    //---
-    'post /settings/update': 'Settings.update',
 
-    // Auth
+//////////
+// paid //
+//////////
+    'get  /paid'            : 'Paid',
+    'get  /paid/portfolio'  : 'Paid.portfolio',
+    'get  /paid/ideas'      : 'Paid.ideas',
+    'get  /paid/archive'    : 'Paid.archive',
+
+
+
+///////////
+// About //
+///////////
+    'get  /about': 'Static.about',
+
+
+
+////////
+// QA //
+////////
+    'get  /qa'      : 'QA',
+    'get  /qa/new'  : 'QA.new',
+
+
+
+/////////////
+// Profile //
+/////////////
+    'get  /profile'           : 'Profile',
+    'get  /profile/settings'  : 'Profile.settings',
+
+
+
+//////////
+// Auth //
+//////////
     'get  /auth'                  : 'Auth',
     'get  /logout'                : 'Auth.logout',
     'get  /auth/:strategy'        : 'Auth.addStrategy',
@@ -26,18 +57,24 @@ module.exports.routes = {
     'post /auth/:action'          : 'Auth.action', // 'login', 'register'
 
 
-    //
-    // About page
-    //
-    'get  /about': 'Static.about',
 
-
-    //
-    // Admin
-    //
+///////////
+// Admin //
+///////////
     'get  /admin'                    : 'Admin',
-    'get  /admin/users'              : 'Admin.all_users',
-    'get  /admin/users/:id/edit'     : 'Admin.userEditor',
+    'get  /admin/users'              : 'Admin.users',
+    'get  /admin/users/:id/edit'     : 'Admin.user',
     //---
     'post /admin/users'              : 'Admin.updateUserData',
+
+
+
+//////////////
+// Settings //
+//////////////
+    // Settings
+    // 'get  /settings': 'Settings',
+    //---
+    // 'post /settings/update': 'Settings.update',
+
 };
