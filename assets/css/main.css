@@ -186,3 +186,19 @@ ul.no-dots>li {list-style: none;}
         line-height: 16px;
         padding: 8px 10px;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+section.wow.fadeIn.animated {
+    min-height: calc(100% - 543px);
+    }
+
