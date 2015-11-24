@@ -1805,6 +1805,7 @@ $(document).ready(function() {
     var IsParallaxGenerated = false;
 
     function SetParallax() {
+        return
         if ($(window).width() > 1030 && !IsParallaxGenerated) {
             $('.parallax1').parallax("50%", 0.1);
             $('.parallax2').parallax("50%", 0.2);

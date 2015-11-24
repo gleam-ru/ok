@@ -9,24 +9,30 @@ nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-na
           img.logo(alt='', src='images/logo-white.png')
         a.logo-dark(href='index.html')
           img.logo(alt='', src='images/logo-light.png')
-
+      .navbar-header.col-sm-8.col-xs-2.pull-right
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
       .col-md-8.no-padding-right.accordion-menu.text-right
-        ul.nav.navbar-nav.navbar-right.panel-group
-          li
-            a(href='#collapse1')
-              | Home
-          li
-            a(href='#collapse5')
-              | Portfolio 
-          li
-            a(href='#collapse4')
-              | Pages 
-          li
-            a(href='#collapse3')
-              | Elements
-          li
-            a(href='#collapse6')
-              | Blog 
-          li
-            a(href='#collapse7')
-              | Shop 
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right.panel-group
+            li
+              a(href='#collapse1')
+                | Home
+            li
+              a(href='#collapse5')
+                | Portfolio 
+            li
+              a(href='#collapse4')
+                | Pages 
+            li
+              a(href='#collapse3')
+                | Elements
+            li
+              a(href='#collapse6')
+                | Blog 
+            li
+              a(href='#collapse7')
+                | Shop 
