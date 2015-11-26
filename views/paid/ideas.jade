@@ -1,0 +1,43 @@
+extends ../_layouts/default.jade
+//- blog-grid-3columns.html
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+  style.
+    .blog-title > a {font-size: 40px;}
+
+
+
+mixin pagination()
+  .row
+    .col-md-12.col-sm-12.col-xs-12.wow.fadeInUp
+      .pagination
+        a(href='#')
+          img(src='images/arrow-pre-small.png', alt='')
+        a(href='#') 1
+        a(href='#') 2
+        a.active(href='#') 3
+        a(href='#') 4
+        a(href='#') 5
+        a(href='#')
+          img(src='images/arrow-next-small.png', alt='')
+
+
+mixin post(post)
+  .col-md-4.col-sm-6.col-xs-6.blog-listing.wow.fadeInUp(data-wow-duration='300ms')
+    .blog-title
+      a(href='#{post.url || "/"}') #{post.title || 'Noname'}
+    .mb-10
+    .blog-details
+      .blog-short-description !{post.description || ''}
+
+
+block content
+  section.wow.fadeIn
+    .container
+      .row.blog-3col
+        for idea in ideas
+          +post(idea)
+      //- +pagination()
