@@ -194,6 +194,7 @@ ul.no-dots>li {list-style: none;}
 
 
 
-
-
+.cnt{
+    min-height: calc(100vh - 278px);
+}
 
