@@ -1,0 +1,18 @@
+extends ../_layouts/default.jade
+//- blog-grid-3columns.html
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+  style.
+    .blog-title > a {font-size: 40px;}
+    .cnt > section {padding-top: 20px;}
+
+
+
+block content
+  section.blog-details-text
+    .container
+      .col-md-12.col-sm-10.center-col
+        |!{idea.description}
