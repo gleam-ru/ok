@@ -23,6 +23,7 @@ module.exports.routes = {
     'get  /paid/ideas'           : 'Paid.ideas',
     'get  /paid/ideas/get/:id'   : 'Paid.idea',
     'get  /paid/archive'         : 'Paid.archive',
+    'get  /paid/allocation'      : 'Paid.allocation',
 
 
 

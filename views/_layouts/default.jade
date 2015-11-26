@@ -24,7 +24,7 @@ html(style='height: auto;')
             .col-md-8.col-sm-12.wow.fadeInUp(data-wow-duration='300ms')
               h1.white-text
                 block title
-                  | Title goes here
+                  | #{title || 'Title goes here'}
             include ./parts/breadcrumbs
     .cnt
       block content

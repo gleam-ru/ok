@@ -1,0 +1,50 @@
+extends ../_layouts/default.jade
+//- blog-grid-3columns.html
+
+block append head
+  +globalVar('parts', parts)
+  //- +globalVar('roles', roles)
+  script(src='/ViewControllers/paid/allocation.js')
+  style.
+    #parts {width: 400px !important; height: 400px !important;}
+    #table {
+      width: 100%;
+      margin-bottom: 60px;
+      }
+    #table tr {
+      border-top: solid 1px rgba(0,0,0, 0.1);
+      border-bottom: solid 1px rgba(0,0,0, 0.1);
+      }
+    #table td {
+      line-height: 30px;
+      }
+    .tab-style1 {padding-top: 30px;}
+
+
+block content
+  .container
+    .row
+      .tab-style1
+        .row
+          .col-md-12.col-sm-12
+            ul.nav.nav-tabs.nav-tabs-light.text-left
+              li.active
+                a(href='#tab_sec1', data-toggle='tab') Table
+              li#chartTab
+                a(href='#tab_sec2', data-toggle='tab') Chart
+        .tab-content
+          #tab_sec1.tab-pane.fade.in.active
+            - var i = 1;
+            .col-md-6.no-padding
+              table#table
+                tr
+                  th(style='width: 30px;') #
+                  th Name
+                  th Value
+                each part in parts
+                  tr
+                    td #{i++}
+                    td #{part.label}
+                    td #{part.value}
+          #tab_sec2.tab-pane.fade.in
+            canvas#parts
