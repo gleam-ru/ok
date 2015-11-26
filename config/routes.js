@@ -38,7 +38,7 @@ module.exports.routes = {
 // QA //
 ////////
     'get  /qa'      : 'QA',
-    'get  /qa/new'  : 'QA.new',
+    'post /qa'      : 'QA.posted',
 
 
 

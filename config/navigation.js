@@ -21,7 +21,7 @@ module.exports.navigation = [
     },
 
     {
-        name     : "ВиО",
+        name     : "Задать вопрос",
         href     : "/qa",
     },
 
