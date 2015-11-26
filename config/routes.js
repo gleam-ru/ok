@@ -18,11 +18,11 @@ module.exports.routes = {
 //////////
 // paid //
 //////////
-    'get  /paid'               : 'Paid',
-    'get  /paid/portfolio'     : 'Paid.portfolio',
-    'get  /paid/ideas'         : 'Paid.ideas',
-    'get  /paid/ideas/get/:id' : 'Paid.idea',
-    'get  /paid/archive'       : 'Paid.archive',
+    'get  /paid'                 : 'Paid',
+    'get  /paid/portfolio'       : 'Paid.portfolio',
+    'get  /paid/ideas'           : 'Paid.ideas',
+    'get  /paid/ideas/get/:id'   : 'Paid.idea',
+    'get  /paid/archive'         : 'Paid.archive',
 
 
 

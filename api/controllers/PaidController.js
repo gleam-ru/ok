@@ -125,5 +125,53 @@ module.exports = {
             })
     },
 
+
+
+    archive: function(req, res) {
+        var data = {
+            pageTitle: 'Archive',
+            title: 'Archive',
+            bc: [
+                {name: 'Home', href: '/'},
+                {name: 'Paid', href: '/paid'},
+                {name: 'Archive', href: '/paid/archive'},
+            ],
+
+            ideas: [
+                {
+                    title: 'URKA',
+                    result: 13.1,
+                    url: '/paid/ideas/get/1',
+                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    title: 'SBERP',
+                    result: 146.5,
+                    url: '/paid/ideas/get/1',
+                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    title: 'GAZP',
+                    result: -5.2,
+                    url: '/paid/ideas/get/1',
+                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    title: 'LKOH',
+                    result: 7.3,
+                    url: '/paid/ideas/get/1',
+                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    title: 'MTLR',
+                    result: -20.0,
+                    url: '/paid/ideas/get/1',
+                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }
+            ],
+        }
+        return Q()
+            .then(function() {
+                return res.render('paid/ideas', data)
+            })
+    },
+
+
 };
 

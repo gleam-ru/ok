@@ -7,6 +7,8 @@ block append head
   //- script(src='/ViewControllers/index.js')
   style.
     .blog-title > a {font-size: 40px;}
+    .percent {line-height: 1; font-size: 33px; margin-left: 15px;}
+    .percent:after { content: '';}
 
 
 
@@ -29,6 +31,11 @@ mixin post(post)
   .col-md-4.col-sm-6.col-xs-6.blog-listing.wow.fadeInUp(data-wow-duration='300ms')
     .blog-title
       a(href='#{post.url || "/"}') #{post.title || 'Noname'}
+        if (post.result)
+          if post.result >= 0
+            span.percent.green (+#{post.result}%)
+          else
+            span.percent.red (#{post.result}%)
     .mb-10
     .blog-details
       .blog-short-description !{post.description || ''}

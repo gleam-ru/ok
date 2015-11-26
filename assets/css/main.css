@@ -198,9 +198,15 @@ ul.no-dots>li {list-style: none;}
     min-height: calc(100vh - 278px);
 }
 
+.green {
+    color: #4D9E50;
+}
 .percent_green {
     font-weight: bold;
     color: #4D9E50;
+}
+.red {
+    color: #D05252;
 }
 .percent_red {
     font-weight: bold;
