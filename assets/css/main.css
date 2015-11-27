@@ -212,3 +212,5 @@ ul.no-dots>li {list-style: none;}
     font-weight: bold;
     color: #D05252;
 }
+
+.logo {max-width: 170px;}

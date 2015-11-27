@@ -20,7 +20,6 @@ module.exports.routes = {
 //////////
     'get  /paid'                 : 'Paid',
     'get  /paid/pay'             : 'Paid.pay',
-    'get  /paid/portfolio'       : 'Paid.portfolio',
     'get  /paid/ideas'           : 'Paid.ideas',
     'get  /paid/ideas/get/:id'   : 'Paid.idea',
     'get  /paid/archive'         : 'Paid.archive',
