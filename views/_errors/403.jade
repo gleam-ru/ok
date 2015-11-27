@@ -1,21 +1,12 @@
-extends ../_layouts/default.jade
+extends ../_layouts/no-title.jade
 
 block content
-  .page-404.content_wrapper.admin_view.org_exp_profile
-    h1.main_headers
-      Ошибка 403 - недостаточно прав
+  section
+    .container
+      .row
+        .col-md-10.col-sm-8.col-xs-11.text-center.center-col
+          p.not-found-title.black-text 403!
+          p.text-med.text-uppercase.letter-spacing-2
+            | Go away
+          a.highlight-button-dark.btn.btn-small.no-margin-right(href='/') okay...
 
-    if (typeof errors !== 'undefined')
-      pre.error
-        code
-          - _.each(errors, function (error) {
-            = error
-          - });
-    p.no-m
-      | Скорее всего вы просто не авторизированы. 
-      a(href='/auth') Страница авторизации
-      | .
-    p.no-m
-      | Если ошибка останется, пожалуйста, опишите, как вы ее получили. 
-      a(href='/about') Страница с контактами
-      | .
