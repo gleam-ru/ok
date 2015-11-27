@@ -7,18 +7,18 @@ block append head
   script(src='/ViewControllers/paid/allocation.js')
   style.
     #parts {width: 400px !important; height: 400px !important;}
-    #table {
-      width: 100%;
-      margin-bottom: 60px;
-      }
-    #table tr {
-      border-top: solid 1px rgba(0,0,0, 0.1);
-      border-bottom: solid 1px rgba(0,0,0, 0.1);
-      }
-    #table td {
-      line-height: 30px;
-      }
     .tab-style1 {padding-top: 30px;}
+    .progress-name {margin: 5px 0 0px;}
+
+
+mixin progressBarItem(item)
+  .progress-bar-sub
+    .progress-name
+      strong #{item.name}
+      |  #{item.value}%
+    .progress
+      .progress-bar(role='progressbar', aria-valuenow='#{item.value}', aria-valuemin='0', aria-valuemax='100', style='width: #{item.value}%;')
+
 
 
 block content
@@ -34,17 +34,8 @@ block content
                 a(href='#tab_sec2', data-toggle='tab') Chart
         .tab-content
           #tab_sec1.tab-pane.fade.in.active
-            - var i = 1;
-            .col-md-6.no-padding
-              table#table
-                tr
-                  th(style='width: 30px;') #
-                  th Name
-                  th Value
-                each part in parts
-                  tr
-                    td #{i++}
-                    td #{part.label}
-                    td #{part.value}
+            .progress-bar-main
+              each part in parts
+                +progressBarItem(part)
           #tab_sec2.tab-pane.fade.in
             canvas#parts
