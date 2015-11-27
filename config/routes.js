@@ -46,8 +46,8 @@ module.exports.routes = {
 // Profile //
 /////////////
     'get  /profile'           : 'Profile.get',
-    'get  /profile/settings'  : 'Profile.settings',
     'get  /profile/get/:id'   : 'Profile.get',
+    'get  /profile/settings'  : 'Profile.edit',
 
 
 
@@ -68,7 +68,7 @@ module.exports.routes = {
 ///////////
     'get  /admin'                    : 'Admin',
     'get  /admin/users'              : 'Admin.users',
-    'get  /admin/users/:id/edit'     : 'Admin.user',
+    'get  /admin/users/edit/:id'     : 'Admin.user',
     //---
     'post /admin/users'              : 'Admin.updateUserData',
 

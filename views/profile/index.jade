@@ -16,20 +16,8 @@ block content
         .col-md-4.col-sm-12.sm-margin-bottom-ten
           img(src='/images/users/#{profile.id}/#{profile.photo}', alt='')
         .col-md-7.col-sm-12.col-md-offset-1
-          p.text-uppercase.letter-spacing-2.margin-two introduce yourself
-          .row
-            .col-md-6
-              input(type='text', placeholder='Name', required='', name='name')
-            .col-md-6
-              input(type='text', placeholder='Surname', required='', name='surname')
-          p.text-uppercase.letter-spacing-2.margin-two for recovery and subscriptions
-          input(type='text', placeholder='Email', required='', name='email')
-          p.text-uppercase.letter-spacing-2.margin-two Change password
-          .row
-            .col-md-6
-              input(type='text', placeholder='Password_1', required='', name='pass1')
-            .col-md-6
-              input(type='text', placeholder='Password_2', required='', name='pass2')
-          +smallSeparator()
+          h1
+            | #{profile.surname+' '+profile.name}
+          .margin-ten
           a(href='#')
-            +revealButton('fa-save', 'Save')
+            +revealButton('fa-envelope-o', 'Send email')
