@@ -45,7 +45,7 @@ module.exports.routes = {
 /////////////
 // Profile //
 /////////////
-    'get  /profile'           : 'Profile',
+    'get  /profile'           : 'Profile.get',
     'get  /profile/settings'  : 'Profile.settings',
     'get  /profile/get/:id'   : 'Profile.get',
 
