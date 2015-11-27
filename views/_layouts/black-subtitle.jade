@@ -1,0 +1,23 @@
+extends ./default.jade
+
+block append head
+  style.
+    .sticky-nav.nav-border-bottom {border-bottom: 1px solid rgba(0,0,0,0.2);}
+    .cnt {min-height: calc(100vh - 434px);}
+    .cnt > section {padding: 50px 0px;}
+    .breadcrumb * {color: #f7f7f7 !important;}
+
+
+block bc
+  section.content-top-margin.page-title.bg-dark-gray
+    .container
+      .row
+        .col-lg-8.col-md-7.col-sm-12.wow.fadeInUp.animated(data-wow-duration='300ms', style='visibility: visible; animation-duration: 300ms; animation-name: fadeInUp;')
+          h1.white-text
+            block title
+              | #{title || 'Title goes here'}
+          span.white-text.xs-display-none
+            block subTitle
+              | #{subtitle || 'subtitle goes here'}
+          .separator-line.margin-three.bg-white.no-margin-lr.sm-margin-top-three.sm-margin-bottom-three.no-margin-bottom.xs-display-none
+        include ./parts/breadcrumbs
