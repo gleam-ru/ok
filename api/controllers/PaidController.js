@@ -42,6 +42,49 @@ module.exports = {
 
 
 
+    pay: function(req, res) {
+        var data = {
+            pageTitle: 'Paid',
+            title: 'Paid',
+            bc: [
+                {name: 'Home', href: '/'},
+                {name: 'Paid', href: '/paid'},
+            ],
+
+            rates: [
+                {
+                    id: 1,
+                    name: 'First decision',
+                    description: 'Lorem Ipsum is simply dummy text',
+                    price: '100$',
+                    overview: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    responsibilities: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    id: 2,
+                    name: 'One more',
+                    description: 'Lorem Ipsum is simply dummy text',
+                    price: '10$',
+                    overview: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    responsibilities: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }, {
+                    id: 3,
+                    hot: true,
+                    name: 'And our greatest',
+                    description: 'Lorem Ipsum is simply dummy text',
+                    price: '1000$',
+                    overview: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                    responsibilities: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+                }
+            ],
+        }
+        return Q()
+            .then(function() {
+                return res.render('paid/pay', data)
+            })
+    },
+
+
+
     ideas: function(req, res) {
         var data = {
             pageTitle: 'Ideas',
