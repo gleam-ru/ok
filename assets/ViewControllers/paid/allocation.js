@@ -18,7 +18,4 @@ $(document).ready(function() {
         }
     })
 
-    $('#tab_sec2').on('shown.bs.tab', function() {
-    })
-
 });
