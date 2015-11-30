@@ -1,3 +1,3 @@
-# ok
+TODO:
+    # if was logged in -> sign in
 
-a [Sails](http://sailsjs.org) application
