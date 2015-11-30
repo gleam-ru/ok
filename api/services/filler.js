@@ -27,10 +27,10 @@ function _admin() {
     return Q()
         .then(function() {
             return User
-                .findOrCreate({username: 'admin'}, {
-                    username: 'admin',
+                .findOrCreate({email: "admin@host.org"}, {
+                    name: 'admin',
+                    surname: 'adminov',
                     email: "admin@host.org",
-                    access: "admin",
                 })
         })
         .then(function(user) {
@@ -59,7 +59,7 @@ function _admin() {
         })
         .then(function(user) {
             return Role
-                .findOne({name: 'admin'})
+                .findOne({email: 'admin@host.org'})
                 .then(function(role) {
                     if (!_.find(user.roles, {name: role.name})) {
                         user.roles.add(role.id)

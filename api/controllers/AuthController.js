@@ -110,6 +110,7 @@ var AuthController = {
 
         // LOGIN
         if (!action || action == 'login') {
+            req.flash('login', true);
             passport.authenticate(['local'], function (err, user, challenges) {
                 if (err || !user) {
                     // ошибка или оправдание - показать пользователю
@@ -119,9 +120,9 @@ var AuthController = {
                 // аутентификация успешна
                 passport.login(req, res, user, function(err) {
                     if (err) return AuthController.tryAgain(req, res, err);
-                    if (!user.username || !user.email) {
+                    if (!user.email) {
                         // отсутствуют требуемые поля
-                        req.flash('info', 'Пожалуйста, заполните информацию о себе.')
+                        req.flash('info', 'Please fill information about yourself')
                         return res.redirect(sails.config.passport.fillCredentials);
                     }
                     return res.redirect(sails.config.passport.successRedirect);
@@ -131,20 +132,24 @@ var AuthController = {
 
         // REGISTER
         else if (action == 'register') {
-            var email = req.param('email');
-            var username = req.param('username');
+            req.flash('registering', true);
+            var name     = req.param('name');
+            var surname  = req.param('surname');
+            var email    = req.param('email');
             var password = req.param('password');
 
             // minLength от Waterline всегда пропускает 0 символов... -_-
-            if (!username || !password)
+            if (!password) {
                 return AuthController.tryAgain(req, res, new Error('Все поля обязательны для заполнения'));
+            }
 
             var created = [];
             return Q.resolve()
                 .then(function() {
                     return Q.all([
                         User.create({
-                            username: username,
+                            name: name,
+                            surname: surname,
                             email: email,
                         }),
                         Role.findOne({name: 'user'}),
@@ -172,13 +177,16 @@ var AuthController = {
                     console.info('New local user! ID:', user.id, user.email);
                     // аутентифицируем пользователя
                     passport.login(req, res, user, function(err) {
-                        if (err) return AuthController.tryAgain(req, res, err);
-                        return res.redirect(sails.config.passport.fillCredentials);
+                        if (err) {
+                            return AuthController.tryAgain(req, res, err);
+                        }
+                        res.cookie('was_registered', true, { path: '/', httpOnly: true, maxAge: 604800000 })
+                        return res.redirect('/');
                     });
                 })
                 .catch(function(err) {
-                    console.error('Ошибка при регистрации. Откат.');
-                    console.info('user cred:', email, username, password);
+                    console.error('Ошибка при регистрации. Откат');
+                    console.error(err);
                     return Q.all(_.map(created, function(inst) {
                         return Q.resolve()
                             .then(function() {
@@ -207,33 +215,21 @@ var AuthController = {
 
     // возвращает на предыдущую страницу, но теперь с ошибками.
     // сохраняет заполненные данные
-    tryAgain: function(req, res, errors) {
+    tryAgain: function(req, res, err) {
         // сообщения об ошибке
-        if (errors) {
-            if (!Array.isArray(errors)) {
-                log.warn('tryAgain', errors || errors.message);
-                errors = [errors];
+        var errors = [];
+        if (err) {
+            if (Array.isArray(err)) {
+                errors = _.flatten(_.map(err, parseError))
             }
-            var flashes = [];
-            _.each(errors, function(err) {
-                if (!err.Errors) {
-                    // ошибка, но не от валидации...
-                    flashes.push(err.message || err);
-                }
-                else {
-                    _.each(err.Errors, function(trouble) {
-                        _.each(trouble, function(instance) {
-                            flashes.push(instance.message);
-                        });
-                    });
-                }
-            });
-            req.flash('error', flashes);
+            else {
+                errors = parseError(err);
+            }
+            req.flash('error', errors);
         }
 
         // данные, чтобы форма восстановила свои данные
-        req.flash('form', req.body);
-
+        req.flash('signup', req.body);
         // вьюшки должны уметь показывать error & form
         var referer = req.get('referer');
         res.redirect(referer || '/');
@@ -242,3 +238,59 @@ var AuthController = {
 };
 
 module.exports = AuthController;
+
+
+function parseError(err) {
+    var errors = [];
+    if (err.invalidAttributes) {
+        /*
+        err looks like: {
+            code: 'E_VALIDATION',
+            invalidAttributes: {
+                email: [
+                    [Object]
+                ]
+            },
+            _e: {
+                handle: 17,
+                type: 'error',
+                className: 'Error',
+                constructorFunction: {
+                    ref: 33
+                },
+                protoObject: {
+                    ref: 34
+                },
+                prototypeObject: {
+                    ref: 3
+                },
+                properties: [
+                    [Object]
+                ],
+                text: 'Error'
+            },
+            rawStack: '    at WLValidationError.WLError (C:\\Users\\demeshenko\\AppData\\Roaming\\nvm\\v0.12.... (length: 1986)',
+            reason: '1 attribute is invalid',
+            status: 400,
+            model: undefined,
+            details: 'Invalid attributes sent to undefined:\n • email\n   • A record with that `email` a... (length: 113)',
+            isOperational: true
+        }
+        //*/
+        _.each(err.invalidAttributes, function(attr_review, attr_name) {
+            var error = '<b>'+attr_name+'</b>: ';
+            _.each(attr_review, function(item) {
+                errors.push(error.slice()+item.message)
+            })
+        })
+    }
+    else if (err.message) {
+        errors.push(err.message)
+    }
+    else {
+        console.error('unhandled error');
+        console.error(err.stack);
+        errors.push('<b>Please, contact Administrator</b>');
+    }
+    return errors;
+}

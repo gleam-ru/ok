@@ -33,8 +33,6 @@ mixin providers(providers)
     .margin-four
 
 
-
-
 block content
   section.main-cnt
     .container
@@ -49,32 +47,96 @@ block content
               li
                 a(href='#signin', data-toggle='tab') Sign in
         .tab-content
-          #signup.tab-pane.fade.in
+          form#signup.tab-pane.fade.in(
+            role='form'
+            action='/auth/register'
+            method='post'
+            )
+            - var form = req.flash('signup')[0] || {}
             .row
+              if req.flash('register').length
+                for error in req.flash('error')
+                  +error(error)
               .col-md-6.col-sm-10
                 p.text-uppercase.letter-spacing-2.margin-two introduce yourself
                 .row
                   .col-md-6
-                    input(type='text', placeholder='Name', required='', name='name')
+                    input.fn-name(
+                      type='text'
+                      placeholder='Name'
+                      name='name'
+                      value=form.name
+                      required
+                      )
                   .col-md-6
-                    input(type='text', placeholder='Surname', required='', name='surname')
+                    input.fn-surname(
+                      type='text'
+                      placeholder='Surname'
+                      name='surname'
+                      value=form.surname
+                      required
+                      )
                 p.text-uppercase.letter-spacing-2.margin-two for recovery and subscriptions
-                input(type='text', placeholder='Email', required='', name='email')
+                input.fn-email(
+                  type='text'
+                  placeholder='Email'
+                  name='email'
+                  value=form.email
+                  required=''
+                  )
                 p.text-uppercase.letter-spacing-2.margin-two Password
                 .row
                   .col-md-6
-                    input(type='text', placeholder='Password_1', required='', name='pass1')
+                    input.fn-pass1(
+                      type='password'
+                      placeholder='Password'
+                      name='password'
+                      value=form.password
+                      required
+                      )
                   .col-md-6
-                    input(type='text', placeholder='Password_2', required='', name='pass2')
+                    input.fn-pass2(
+                      type='password'
+                      placeholder='Repeat password'
+                      name='repeat_password'
+                      value=form.repeat_password
+                      required
+                      )
+                    input.hidden.fn-submit(
+                      type='submit'
+                      )
                 .mt-10
                 +smallSeparator()
-                a(href='#')
+                a(href='#')#signupBtn
                   +revealButton('fa-envelope', 'Sign up')
-          #signin.tab-pane.fade.in
+          form#signin.tab-pane.fade.in(
+            role='form'
+            action='/auth/login'
+            method='post'
+            )
+            - var form = req.flash('signin')[0] || {}
             .row
+              if req.flash('login').length
+                for error in req.flash('error')
+                  +error(error)
               .col-md-6.col-sm-10
-                input(type='text', placeholder='Email', required='', name='email')
-                input(type='text', placeholder='Password', required='', name='pass')
+                input(
+                  type='text'
+                  placeholder='Email'
+                  required=''
+                  name='identifier'
+                  value=form.identifier
+                  )
+                input(
+                  type='password'
+                  placeholder='Password'
+                  required=''
+                  name='password'
+                  value=form.pass
+                  )
+                input.hidden.fn-submit(
+                  type='submit'
+                  )
                 +smallSeparator()
-                a(href='#')
+                a(href='#')#signinBtn
                   +revealButton('fa-sign-in', 'Sign in')

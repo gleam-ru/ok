@@ -24,13 +24,17 @@ mixin globalVar(name, data)
       store['#{name}'] = !{jsonString ? jsonString.replace(/<\//g, "<\\/") : 'undefined'};
       window.globalVars = store;
 
+//- file:///D:/work/rumex/H-Code/www.themezaa.com/html/h-code/alert-massage.html
 mixin error(data)
-  .g-alert.type_error.with_close.ib.error
-    .g-alert-body #{data}
+  .alert.alert-danger(role='alert')
+    strong Oh snap!
+    |  !{data}
 
+//- file:///D:/work/rumex/H-Code/www.themezaa.com/html/h-code/alert-massage.html
 mixin info(data)
-  .g-alert.type_success.with_close.ib
-    .g-alert-body #{__('Data_updated')}
+  .alert.alert-success(role='alert')
+    strong Alert!
+    |  !{data}
 
 mixin separator()
   .wide-separator-line.bg-mid-gray.no-margin-lr.margin-one

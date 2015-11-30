@@ -74,36 +74,23 @@ passport.deserializeUser(function(id, cb) {
 var LocalStrategy      = require('passport-local').Strategy;
 passport.use(new LocalStrategy(sails.config.passport.local,
     function(identifier, password, cb) {
-        var isEmail = validator.isEmail(identifier);
-        var query = {};
-        if (isEmail) {
-            query.email = identifier;
-        }
-        else {
-            query.username = identifier;
-        }
         User
-            .findOne(query)
+            .findOne({email: identifier})
             .populateAll()
             .then(function(user) {
                 if (!user) {
-                    if (isEmail) {
-                        throw new Error('Неправильный почтовый адрес');
-                    }
-                    else{
-                        throw new Error('Неправильное имя пользователя');
-                    }
+                    throw new Error('Wrong user identifier');
                 }
                 var user_passport = _.find(user.passports, {strategy: 'local'})
                 if (!user_passport) {
                     console.error('bad user:', user);
-                    throw new Error('У пользователя не установлен пароль, авторизация невозможна');
+                    throw new Error('User has no password. Authentication is impossible.');
                 }
                 return Q
                     .ninvoke(user_passport, 'validatePassword', password)
                     .then(function(res) {
                         if (!res) {
-                            throw new Error('Неправильный пароль');
+                            throw new Error('Wrong password');
                         }
                         return user;
                     })

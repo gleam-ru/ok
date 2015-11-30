@@ -214,3 +214,9 @@ ul.no-dots>li {list-style: none;}
 }
 
 .logo {max-width: 170px;}
+
+
+input.has-error {
+    border-color: #D05252;
+    color: #D05252;
+    }

@@ -1,8 +1,8 @@
 var User = {
     attributes: {
-        username  : { type: 'string', unique: true, minLength: 3 },
+        name      : { type: 'string', unique: true, minLength: 3 },
+        surname   : { type: 'string', unique: true, minLength: 3 },
         email     : { type: 'email',  unique: true },
-        access    : { type: 'string', defaultsTo: 'user' },
         roles     : { collection: 'Role', via: 'users' },
 
         passports : { collection: 'Passport', via: 'user' },

@@ -1,11 +1,11 @@
 module.exports.passport = {
 
-    successRedirect: '/me',
-    fillCredentials: '/settings',
+    successRedirect: '/',
+    fillCredentials: '/profile/settings',
 
     local: {
         usernameField: 'identifier',
-        successRedirect: '/me',
+        successRedirect: '/',
         failureRedirect: '/auth',
         failureFlash: true,
     },
