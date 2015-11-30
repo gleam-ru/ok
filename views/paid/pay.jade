@@ -1,0 +1,67 @@
+extends ../_layouts/default.jade
+//- blog-grid-3columns.html
+
+block append head
+  script(src='/ViewControllers/paid/pay.js')
+  style.
+    #rates .margin-ten:last-child {display: none;}
+
+mixin _separator()
+  .margin-ten
+    +separator()
+
+- var i = 1;
+mixin tile(item)
+  .clearfix
+    .col-md-6.col-sm-12.no-padding-left.position-relative
+      h2.font-weight-600 #{item.price}
+      .separator-line.bg-black.no-margin-lr
+      p.text-large.black-text.letter-spacing-2.no-margin-bottom #{item.name}
+      span.text-uppercase.letter-spacing-1 #{item.description}
+      a.highlight-button-black-border.btn.btn-medium(href='#') Buy now
+      if (item.hot)
+        //- span.urgent-job.white-text.text-uppercase.letter-spacing-1.font-weight-600 Hot
+    .col-md-6.col-sm-12.no-padding-left
+      p.black-text
+        strong Overview
+      p.margin-one #{item.overview}
+      p.black-text.margin-ten.no-margin-bottom
+        strong Responsibilities
+      p.margin-one #{item.responsibilities}
+
+
+block content
+  section.wow.fadeIn.xs-no-padding-bottom
+    .container
+      .row
+        .col-md-7.col-sm-6#rates
+          for rate in rates
+            +tile(rate)
+            +_separator()
+        .col-md-4.col-sm-6.col-md-offset-1.bg-gray.career-form.xs-margin-top-ten
+          p.title-small.text-uppercase.black-text
+            strong Superheroes
+            |  apply here!
+          p.text-med.margin-five We'll get back to you within 48 hours.
+          .separator-line.bg-black.no-margin-lr.margin-ten
+          form#careersform(action='javascript:void(0)', method='post')
+            #success.no-margin-lr
+            .form-group.no-margin-bottom
+              label.text-uppercase Your Name
+              input#name.input-round.med-input(type='text', name='name')
+            .form-group.no-margin-bottom
+              label.text-uppercase Email
+              input#email.input-round.med-input(type='text', name='email')
+            .form-group.no-margin-bottom
+              label.text-uppercase Position
+              .select-style.input-round.med-input
+                select#selectposition(name='selectposition')
+                  option(value='') Select rate
+                  for rate in rates
+                    option(value='#{rate.id}') #{rate.name}
+            .form-group.no-margin-bottom
+              label.text-uppercase Message
+              textarea#comment.input-round.med-input(name='comment')
+            .form-group.no-margin-bottom
+              span.required.margin-three *Please complete all fields correctly
+              button#careers-button.highlight-button-dark.btn.btn-small.button.xs-margin-bottom-five(type='submit') Submit

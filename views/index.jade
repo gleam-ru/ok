@@ -1,20 +1,23 @@
-extends ./_layouts/default.jade
+extends ./_layouts/no-title.jade
 
 block append head
-  +globalVar('users', users)
-  +globalVar('roles', roles)
-  script(src='/ViewControllers/index.js')
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
   style.
-    #vue select {
-      width: 300px;
-      }
-    #vue tr {
-      border-top: solid 1px rgba(0,0,0, 0.2);
-      border-bottom: solid 1px rgba(0,0,0, 0.2);
-      }
-      #vue td {
-        padding: 10px 20px;
-        }
+
 
 block content
-  #vue
+  section.page-title.parallax3.parallax-fix.page-title-large
+    .opacity-medium.bg-black
+    img.parallax-background-img(src="images/parallax-img20.jpg" alt="")
+    .container
+      .row
+        .col-md-12.col-sm-12.text-center.animated.fadeInUp
+          .separator-line.bg-yellow.no-margin-top.margin-four
+          h1.white-text RuMex
+          span.white-text Invest today - Secure tomorrow.
+
+  section.wow.fadeIn
+    .container
+      | asd

@@ -1,0 +1,80 @@
+extends ./_layouts/default.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  script(src='/ViewControllers/auth.js')
+  style.
+    .cnt {background-color: #f7f7f7;}
+    .main-cnt {padding-top: 50px;}
+    .nav-tabs > li,
+    .nav-tabs > li > a {
+      font-size: 33px;
+      font-weight: 100;
+      border-bottom-width: 2px !important;
+      padding-bottom: 0px;
+      }
+    .nav-tabs-light {height: 90px;}
+    .providers {padding-left: 15px;}
+    .providers i.first {margin-left: 0px;}
+
+
+mixin providers(providers)
+  .providers
+    p.text-uppercase.letter-spacing-2.margin-one You can use one of the available providers
+    - var f = true;
+    for p in providers
+      a(href='#{p.href}')
+        if f
+          - f = false;
+          i.i-small-box.i-rounded.i-bordered.fa.first(class='#{p.icon}')
+        else
+          i.i-small-box.i-rounded.i-bordered.fa(class='#{p.icon}')
+    .margin-four
+
+
+
+
+block content
+  section.main-cnt
+    .container
+      .row
+        +providers(providers)
+      .tab-style1
+        .row
+          .col-md-12.col-sm-12
+            ul.nav.nav-tabs.nav-tabs-light.text-left
+              li
+                a(href='#signup', data-toggle='tab') Sign up
+              li
+                a(href='#signin', data-toggle='tab') Sign in
+        .tab-content
+          #signup.tab-pane.fade.in
+            .row
+              .col-md-6.col-sm-10
+                p.text-uppercase.letter-spacing-2.margin-two introduce yourself
+                .row
+                  .col-md-6
+                    input(type='text', placeholder='Name', required='', name='name')
+                  .col-md-6
+                    input(type='text', placeholder='Surname', required='', name='surname')
+                p.text-uppercase.letter-spacing-2.margin-two for recovery and subscriptions
+                input(type='text', placeholder='Email', required='', name='email')
+                p.text-uppercase.letter-spacing-2.margin-two Password
+                .row
+                  .col-md-6
+                    input(type='text', placeholder='Password_1', required='', name='pass1')
+                  .col-md-6
+                    input(type='text', placeholder='Password_2', required='', name='pass2')
+                .mt-10
+                +smallSeparator()
+                a(href='#')
+                  +revealButton('fa-envelope', 'Sign up')
+          #signin.tab-pane.fade.in
+            .row
+              .col-md-6.col-sm-10
+                input(type='text', placeholder='Email', required='', name='email')
+                input(type='text', placeholder='Password', required='', name='pass')
+                +smallSeparator()
+                a(href='#')
+                  +revealButton('fa-sign-in', 'Sign in')

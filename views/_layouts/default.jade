@@ -1,18 +1,37 @@
-include ../_mixins/global.jade
+include ../_mixins/global
 
-mixin breadcrumbs(list)
-  .bc
+
 
 doctype
-html
+html(style='height: auto;')
   head
     block head
-      include ./parts/_head.jade
+      include ./parts/_head
+      style.
+        html {background: #000;}
+        .cnt {background: #fff;}
     title
-      block title
+      block pageTitle
         | #{pageTitle ? pageTitle + ' - ' : ''}
         | OK
   body
-    div.cnt
+    block navigation
+      nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-white.nav-dark-transparent(role='navigation')
+        .container
+          .row
+            include ./parts/navigation
+    block bc
+      section.content-top-margin.page-title.page-title-small.bg-dark-gray
+        .container
+          .row
+            .col-md-8.col-sm-12.wow.fadeInUp(data-wow-duration='300ms')
+              h1.white-text
+                block title
+                  | #{title || 'Title goes here'}
+            include ./parts/breadcrumbs
+    .cnt
       block content
-    block afterAll
+  
+    include ./parts/footer
+      a.scrollToTop(href='javascript:;')
+        i.fa.fa-angle-up

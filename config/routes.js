@@ -1,46 +1,85 @@
 module.exports.routes = {
 
-    //
-    // Main page
-    //
+///////////////
+// Main page //
+///////////////
     'get  /': 'Index',
 
 
-    //
-    // Profile page
-    //
-    'get  /me': 'Profile',
+//////////
+// Blog //
+//////////
+    'get  /blog'            : 'Blog',
+    'get  /blog/get/:id'    : 'Blog.get',
+    'get  /blog/tags/:tag'  : 'Blog.tag',
 
 
-    // Settings
-    'get  /settings'              : 'Settings',
-    //---
-    'post /settings/update'      : 'Settings.update',
 
-    // Auth
+//////////
+// paid //
+//////////
+    'get  /paid'                 : 'Paid',
+    'get  /paid/pay'             : 'Paid.pay',
+    'get  /paid/ideas'           : 'Paid.ideas',
+    'get  /paid/ideas/get/:id'   : 'Paid.idea',
+    'get  /paid/archive'         : 'Paid.archive',
+    'get  /paid/allocation'      : 'Paid.allocation',
+
+
+
+///////////
+// About //
+///////////
+    'get  /about': 'Static.about',
+
+
+
+////////
+// QA //
+////////
+    'get  /qa'      : 'QA',
+    'post /qa'      : 'QA.posted',
+
+
+
+/////////////
+// Profile //
+/////////////
+    'get  /profile'           : 'Profile.get',
+    'get  /profile/get/:id'   : 'Profile.get',
+    'get  /profile/settings'  : 'Profile.edit',
+
+
+
+//////////
+// Auth //
+//////////
     'get  /auth'                  : 'Auth',
     'get  /logout'                : 'Auth.logout',
     'get  /auth/:strategy'        : 'Auth.addStrategy',
     'get  /auth/:strategy/remove' : 'Auth.removeStrategy',
     //---
-    'post /auth/:action'  : 'Auth.action', // 'login', 'register'
+    'post /auth/:action'          : 'Auth.action', // 'login', 'register'
 
 
-    //
-    // About page
-    //
-    'get  /about'              : 'About',
-    'get  /about/feedback'     : 'About.feedback',
-    'get  /about/donation'     : 'About.donation',
-    'get  /about/donation/thx' : 'About.thx',
 
-
-    //
-    // Admin
-    //
-    'get  /adm'                    : 'Admin',
-    'get  /adm/users'              : 'Admin.all_users',
-    'get  /adm/users/:id/edit'     : 'Admin.userEditor',
+///////////
+// Admin //
+///////////
+    'get  /admin'                    : 'Admin',
+    'get  /admin/users'              : 'Admin.users',
+    'get  /admin/users/edit/:id'     : 'Admin.user',
     //---
-    'post /adm/users'              : 'Admin.updateUserData',
+    'post /admin/users'              : 'Admin.updateUserData',
+
+
+
+//////////////
+// Settings //
+//////////////
+    // Settings
+    // 'get  /settings': 'Settings',
+    //---
+    // 'post /settings/update': 'Settings.update',
+
 };

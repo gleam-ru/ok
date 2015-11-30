@@ -1,2 +1,14 @@
-include ../../_mixins/navigation.jade
-+Navigation(sails.config.navigation)
+include ../../_mixins/navigation
+
+
+
+include ./logo
+.navbar-header.col-sm-8.col-xs-2.pull-right
+  button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+    span.sr-only Toggle navigation
+    span.icon-bar
+    span.icon-bar
+    span.icon-bar
+.col-md-10.no-padding-right.accordion-menu.text-right
+  .navbar-collapse.collapse
+    +Navigation(sails.config.navigation)

@@ -1,0 +1,53 @@
+extends ../_layouts/white-subtitle.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+
+  style.
+    .mystyle-contents {margin-bottom: 30px;}
+
+
+
+mixin author()
+  .avtar.text-left
+    a(href='/profile/get/1')
+      img(src='/images/avtar15.jpg', alt='')
+  .blog-date-right.no-padding-bottom 02 January 2015
+  .blog-date-right
+    | Posted by 
+    a(href='profile/get/1') Paul Scrivens
+  .separator-line.bg-black.no-margin-lr.no-margin.xs-margin-bottom-ten
+
+
+block content
+  section.wow
+    .container
+      .row
+        .blog-listing.blog-listing-classic.blog-listing-full.wow.fadeIn
+          .col-md-2.col-sm-2.col-xs-5.clearfix.text-center.xs-padding-right
+            +author()
+          .col-md-10.col-sm-10.col-xs-12.xs-padding-left
+            .blog-details
+              .blog-title
+                a(href='/blog/get/1') This is a Standard post with a Preview Image
+              .blog-date.no-padding-top
+                a(href='blog/tags/design') Design
+                | , 
+                a(href='blog/tags/branding') Branding
+              div
+                a.blog-like(href='#')
+                  i.fa.fa-heart-o
+                  | Likes
+                a.blog-share(href='#')
+                  i.fa.fa-share-alt
+                  | Share
+                a.comment(href='#')
+                  i.fa.fa-comment-o
+                  | 3 comment(s)
+              .separator-line.bg-black.no-margin-lr.margin-four
+              div.mystyle-contents
+                | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.
+              a(href='/blog/get/1')
+                +revealButton('fa-arrow-right', 'More')

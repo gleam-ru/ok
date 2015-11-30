@@ -1,0 +1,25 @@
+extends ../_layouts/no-title.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  script(src='/ViewControllers/QA/index.js')
+  style.
+
+
+
+block content
+  section.wow.fadeIn
+    .container
+      .row
+        .col-md-7.col-sm-10.center-col.text-center.margin-ten.no-margin-top.xs-margin-bottom-seven
+          h6.no-margin-top.margin-ten.xs-margin-bottom-seven
+            strong.black-text Ask a question
+      .row
+        .col-md-7.col-sm-10.text-center.center-col
+          form#qa
+            input(type='text', placeholder='Your Name', required='', name='name')
+            input(type='text', placeholder='Your Email', required='', name='email')
+            textarea(placeholder='Your Message', name='comment')
+            span.required *Please complete all fields correctly
+            button.btn.btn-black.no-margin-bottom.btn-small(type='submit') Submit

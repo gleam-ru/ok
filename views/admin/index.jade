@@ -1,0 +1,15 @@
+extends ../_layouts/no-title.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  script(src='/ViewControllers/admin/index.js')
+  style.
+    
+
+
+block content
+  section.wow.fadeIn
+    .container
+      .row
+        |Admin panel
