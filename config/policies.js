@@ -7,7 +7,7 @@
  */
 module.exports.policies = {
     // вдруг уже аутентифицирован?
-    // '*': ['rememberMe'],
+    '*': ['rememberMe'],
 
     // // работать с профилем может только аутентифицированный пользователь
     // ProfileController: {
