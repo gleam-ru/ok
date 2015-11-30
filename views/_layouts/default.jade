@@ -7,13 +7,16 @@ html(style='height: auto;')
   head
     block head
       include ./parts/_head
+      style.
+        html {background: #000;}
+        .cnt {background: #fff;}
     title
       block pageTitle
         | #{pageTitle ? pageTitle + ' - ' : ''}
         | OK
   body
     block navigation
-      nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-border-bottom.nav-light-transparent(role='navigation')
+      nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-white.nav-dark-transparent(role='navigation')
         .container
           .row
             include ./parts/navigation
