@@ -25,8 +25,10 @@ module.exports.bootstrap = function(cb) {
 
 
     global.canSee = function(menu, user) {
-        if (!menu.canSee) return true;
-        var roles = user.roles ? _.map(user.roles, 'id') : [6]; // гость
+        if (!menu.canSee) {
+            return true;
+        }
+        var roles = user.roles && _.map(user.roles, 'name') || ['ghost']; // гость
         return _.intersection(menu.canSee, roles).length !== 0;
     }
 

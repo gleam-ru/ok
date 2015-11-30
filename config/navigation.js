@@ -2,7 +2,7 @@ module.exports.navigation = [
     {
         name     : "Админка",
         href     : "/admin",
-        // canSee   : ["admin"],
+        canSee   : ["admin"],
     },
 
     {
@@ -31,7 +31,7 @@ module.exports.navigation = [
     {
         name     : "Профиль",
         href     : "/profile",
-        // canSee   : ["user"],
+        canSee   : ["user"],
     },
     // {
     //     name     : "Настройки",
@@ -41,7 +41,7 @@ module.exports.navigation = [
     {
         name     : "Выход",
         href     : "/logout",
-        // canSee   : ["user"],
+        canSee   : ["user"],
     },
 
     {

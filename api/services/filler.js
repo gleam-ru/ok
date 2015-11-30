@@ -11,8 +11,9 @@ function _role() {
     console.log('filler:_role');
     var roles = [
         {name: 'admin'},
-        {name: 'user'},
         {name: 'paid'},
+        {name: 'user'},
+        {name: 'ghost'},
     ];
     return Q()
         .then(function() {
