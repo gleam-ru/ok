@@ -59,7 +59,7 @@ function _admin() {
         })
         .then(function(user) {
             return Role
-                .findOne({email: 'admin@host.org'})
+                .findOne({name: 'admin'})
                 .then(function(role) {
                     if (!_.find(user.roles, {name: role.name})) {
                         user.roles.add(role.id)

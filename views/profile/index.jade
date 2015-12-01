@@ -30,6 +30,9 @@ block content
         .col-md-7.col-sm-12.col-md-offset-1
           h1
             | #{profile.surname+' '+profile.name}
+          p.text-uppercase.letter-spacing-2.margin-two
+            for role in profile.roles
+              |  #{role.name}  
           .margin-ten
           a(href='#')
             +revealButton('fa-envelope-o', 'Send email')
