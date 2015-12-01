@@ -4,33 +4,80 @@ extends ../_layouts/default.jade
 block append head
   //- +globalVar('users', users)
   //- +globalVar('roles', roles)
-  //- script(src='/ViewControllers/index.js')
+  script(src='/ViewControllers/profile/edit.js')
   style.
 
 
-
+block flashes
 block content
   section
     .container
-      .row
+      - var form = req.flash('form')[0] || {}
+      form#form.row(
+        role='form'
+        action='/profile/update'
+        method='post'
+        )
         .col-md-4.col-sm-12.sm-margin-bottom-ten
           img(src='/images/users/1/team-member11.jpg', alt='')
           //- img(src='/images/users/#{profile.id}/#{profile.photo}', alt='')
         .col-md-7.col-sm-12.col-md-offset-1
+          +flashes()
           p.text-uppercase.letter-spacing-2.margin-two introduce yourself
           .row
             .col-md-6
-              input(type='text', placeholder='Name', required='', name='name')
+              input(
+                type='hidden'
+                name='id'
+                value='#{form.id || profile.id}'
+                )
+              input.fn-name(
+                type='text'
+                placeholder='Name'
+                required=''
+                name='name'
+                value='#{form.name || profile.name}'
+                )
             .col-md-6
-              input(type='text', placeholder='Surname', required='', name='surname')
+              input.fn-surname(
+                type='text'
+                placeholder='Surname'
+                required=''
+                name='surname'
+                value='#{form.surname || profile.surname}'
+                )
           p.text-uppercase.letter-spacing-2.margin-two for recovery and subscriptions
-          input(type='text', placeholder='Email', required='', name='email')
+          input.fn-email(
+            type='text'
+            placeholder='Email'
+            required=''
+            name='email'
+            value='#{form.email || profile.email}'
+            )
           p.text-uppercase.letter-spacing-2.margin-two Change password
           .row
+            .col-md-12
+              input.fn-pass0(
+                type='password'
+                placeholder='Current password'
+                required=''
+                name='pass0'
+                )
+          .row
             .col-md-6
-              input(type='text', placeholder='Password_1', required='', name='pass1')
+              input.fn-pass1(
+                type='password'
+                placeholder='new Password'
+                required=''
+                name='pass1'
+                )
             .col-md-6
-              input(type='text', placeholder='Password_2', required='', name='pass2')
+              input.fn-pass2(
+                type='password'
+                placeholder='Repeat new password'
+                required=''
+                name='pass2'
+                )
           +smallSeparator()
-          a(href='#')
+          a#saveBtn(href='#')
             +revealButton('fa-save', 'Save')

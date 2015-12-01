@@ -92,4 +92,71 @@ module.exports = {
                 return res.render('profile/edit', data)
             })
     },
+
+
+
+    // POST
+    update: function(req, res) {
+        var id       = req.param('id');
+        var name     = req.param('name');
+        var surname  = req.param('surname');
+        var email    = req.param('email');
+        var old_pass = req.param('pass0');
+        var new_pass = req.param('pass1');
+
+        var referer = req.get('referer')
+
+        Q()
+            .then(function() {
+                return User
+                    .findOne({id: id})
+                    .populateAll()
+            })
+            .then(function(user) {
+                _.extend(user, {
+                    name: name,
+                    surname: surname,
+                    email: email,
+                })
+                return user.save();
+            })
+            .then(function(user) {
+                if (old_pass) {
+                    return Passport
+                        .findOne({user: user.id, strategy: 'local'})
+                }
+            })
+            .then(function(passport) {
+                if (old_pass) {
+                    return new Promise(function(resolve, reject) {
+                        passport.validatePassword(old_pass, function(err, ok) {
+                            if (err) {
+                                return reject(err);
+                            }
+                            if (ok) {
+                                passport.password = new_pass;
+                                passport.save()
+                                return resolve()
+                            }
+                            else {
+                                return reject(new Error('Current password is wrong'))
+                            }
+                        })
+                    })
+
+                }
+            })
+            .then(function() {
+                flashes.push(req, 'info', 'Updated successfully');
+                var referer = req.get('referer')
+                return res.redirect(referer);
+            })
+            .catch(function(err) {
+                flashes.push(req, 'form', req.body)
+                console.error('user.update failed')
+                console.error(err.stack);
+                flashes.error(req, err);
+                return res.redirect(referer);
+            })
+    },
 };

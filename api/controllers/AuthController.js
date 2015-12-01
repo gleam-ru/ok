@@ -110,7 +110,7 @@ var AuthController = {
 
         // LOGIN
         if (!action || action == 'login') {
-            req.flash('login', true);
+            flashes.push(req, 'login', true);
             passport.authenticate(['local'], function (err, user, challenges) {
                 if (err || !user) {
                     // ошибка или оправдание - показать пользователю
@@ -132,7 +132,7 @@ var AuthController = {
 
         // REGISTER
         else if (action == 'register') {
-            req.flash('registering', true);
+            flashes.push(req, 'register', true);
             var name     = req.param('name');
             var surname  = req.param('surname');
             var email    = req.param('email');
@@ -217,20 +217,13 @@ var AuthController = {
     // сохраняет заполненные данные
     tryAgain: function(req, res, err) {
         // сообщения об ошибке
-        var errors = [];
         if (err) {
-            if (Array.isArray(err)) {
-                errors = _.flatten(_.map(err, parseError))
-            }
-            else {
-                errors = parseError(err);
-            }
-            req.flash('error', errors);
+            flashes.error(req, err);
         }
 
-        // данные, чтобы форма восстановила свои данные
-        req.flash('signup', req.body);
-        // вьюшки должны уметь показывать error & form
+        // чтобы форма восстановила свои данные
+        flashes.push(req, 'signup', req.body)
+
         var referer = req.get('referer');
         res.redirect(referer || '/');
     },
@@ -238,59 +231,3 @@ var AuthController = {
 };
 
 module.exports = AuthController;
-
-
-function parseError(err) {
-    var errors = [];
-    if (err.invalidAttributes) {
-        /*
-        err looks like: {
-            code: 'E_VALIDATION',
-            invalidAttributes: {
-                email: [
-                    [Object]
-                ]
-            },
-            _e: {
-                handle: 17,
-                type: 'error',
-                className: 'Error',
-                constructorFunction: {
-                    ref: 33
-                },
-                protoObject: {
-                    ref: 34
-                },
-                prototypeObject: {
-                    ref: 3
-                },
-                properties: [
-                    [Object]
-                ],
-                text: 'Error'
-            },
-            rawStack: '    at WLValidationError.WLError (C:\\Users\\demeshenko\\AppData\\Roaming\\nvm\\v0.12.... (length: 1986)',
-            reason: '1 attribute is invalid',
-            status: 400,
-            model: undefined,
-            details: 'Invalid attributes sent to undefined:\n • email\n   • A record with that `email` a... (length: 113)',
-            isOperational: true
-        }
-        //*/
-        _.each(err.invalidAttributes, function(attr_review, attr_name) {
-            var error = '<b>'+attr_name+'</b>: ';
-            _.each(attr_review, function(item) {
-                errors.push(error.slice()+item.message)
-            })
-        })
-    }
-    else if (err.message) {
-        errors.push(err.message)
-    }
-    else {
-        console.error('unhandled error');
-        console.error(err.stack);
-        errors.push('<b>Please, contact Administrator</b>');
-    }
-    return errors;
-}

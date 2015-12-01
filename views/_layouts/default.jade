@@ -1,6 +1,11 @@
 include ../_mixins/global
 
-
+mixin flashes()
+  div
+    for error in req.flash('error')
+      +error(error)
+    for info in req.flash('info')
+      +info(info)
 
 doctype
 html(style='height: auto;')
@@ -30,6 +35,8 @@ html(style='height: auto;')
                   | #{title || 'Title goes here'}
             include ./parts/breadcrumbs
     .cnt
+      block flashes
+        +flashes()
       block content
   
     include ./parts/footer

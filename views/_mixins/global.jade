@@ -26,15 +26,17 @@ mixin globalVar(name, data)
 
 //- file:///D:/work/rumex/H-Code/www.themezaa.com/html/h-code/alert-massage.html
 mixin error(data)
-  .alert.alert-danger(role='alert')
-    strong Oh snap!
-    |  !{data}
+  div
+    .alert.alert-danger(role='alert')
+      strong Oh snap!
+      |  !{data}
 
 //- file:///D:/work/rumex/H-Code/www.themezaa.com/html/h-code/alert-massage.html
 mixin info(data)
-  .alert.alert-success(role='alert')
-    strong Alert!
-    |  !{data}
+  div
+    .alert.alert-success(role='alert')
+      strong Alert!
+      |  !{data}
 
 mixin separator()
   .wide-separator-line.bg-mid-gray.no-margin-lr.margin-one

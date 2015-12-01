@@ -48,6 +48,8 @@ module.exports.routes = {
     'get  /profile'           : 'Profile.get',
     'get  /profile/get/:id'   : 'Profile.get',
     'get  /profile/settings'  : 'Profile.edit',
+    // --
+    'post /profile/update'    : 'Profile.update',
 
 
 

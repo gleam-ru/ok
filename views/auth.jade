@@ -33,6 +33,7 @@ mixin providers(providers)
     .margin-four
 
 
+block flashes
 block content
   section.main-cnt
     .container
@@ -54,10 +55,9 @@ block content
             )
             - var form = req.flash('signup')[0] || {}
             .row
-              if req.flash('register').length
-                for error in req.flash('error')
-                  +error(error)
               .col-md-6.col-sm-10
+                if req.flash('register').length
+                  +flashes()
                 p.text-uppercase.letter-spacing-2.margin-two introduce yourself
                 .row
                   .col-md-6
@@ -116,10 +116,9 @@ block content
             )
             - var form = req.flash('signin')[0] || {}
             .row
-              if req.flash('login').length
-                for error in req.flash('error')
-                  +error(error)
               .col-md-6.col-sm-10
+                if req.flash('login').length
+                  +flashes()
                 input(
                   type='text'
                   placeholder='Email'
