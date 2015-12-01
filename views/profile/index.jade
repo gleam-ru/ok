@@ -4,17 +4,29 @@ extends ../_layouts/default.jade
 block append head
   //- +globalVar('users', users)
   //- +globalVar('roles', roles)
-  //- script(src='/ViewControllers/index.js')
+  script(src='/ViewControllers/profile/index.js')
   style.
+    .vi-photo-container {position: relative;}
+    .vi-photo-container > a {position: absolute; bottom: -3px; right: 1px;}
 
-
+mixin iconButton(icon)
+  .btn.button.social-icon.vi-iconButton
+    i.fa(class='#{icon}')
 
 block content
   section
     .container
       .row
-        .col-md-4.col-sm-12.sm-margin-bottom-ten
-          img(src='/images/users/#{profile.id}/#{profile.photo}', alt='')
+        .col-md-4.col-sm-12.sm-margin-bottom-ten.vi-photo-container
+          img(src='/images/users/1/team-member11.jpg', alt='')
+          //- img(src='/images/users/#{profile.id}/#{profile.photo}', alt='')
+          if (user.id === profile.id)
+            a#settings(href='/profile/settings')
+              +iconButton('fa-gear')
+          else if (hasRole(user, 'admin'))
+            a#settings(href='/admin/users/edit/#{profile.id}')
+              +iconButton('fa-pencil')
+
         .col-md-7.col-sm-12.col-md-offset-1
           h1
             | #{profile.surname+' '+profile.name}

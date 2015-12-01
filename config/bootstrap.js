@@ -32,6 +32,11 @@ module.exports.bootstrap = function(cb) {
         return _.intersection(menu.canSee, roles).length !== 0;
     }
 
+    // у пользователя есть роль...
+    global.hasRole = function(user, role) {
+        return _.findIndex(user.roles, {name: role}) !== -1;
+    }
+
     // TODO: сделать покрасиввее
     if (sails.config.dev) {
         return Q()

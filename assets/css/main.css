@@ -220,3 +220,6 @@ input.has-error {
     border-color: #D05252;
     color: #D05252;
     }
+
+.vi-iconButton:hover {background-color: rgba(0,0,0, 0.8);}
+.vi-iconButton {background-color: rgba(0,0,0, 0.6);}

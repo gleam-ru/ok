@@ -1,5 +1,8 @@
 TODO:
 
+views:
+    # social icons
+      file:///D:/work/rumex/H-Code/www.themezaa.com/html/h-code/buttons.html
 
 
 Server:

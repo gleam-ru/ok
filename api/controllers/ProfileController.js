@@ -7,13 +7,18 @@
 
 module.exports = {
     get: function(req, res) {
-        var id = parseInt(req.get('id'));
+        var id = parseInt(req.param('id'));
         if (!id) {
             if (req.user) {
                 id = req.user.id;
             }
             else {
-                // return res.notFound();
+                return res.notFound();
+            }
+        }
+        else {
+            if (id === req.user.id) {
+                return res.redirect('/profile');
             }
         }
         var data = {
@@ -26,13 +31,21 @@ module.exports = {
 
             profile: _.extend({}, req.user, {
                 id: 1,
-                name: 'Name',
-                surname: 'Surname',
-                email: 'name@host.org',
+                name: 'No-Name',
+                surname: 'No-Surname',
+                email: 'No-Email',
                 photo: 'team-member11.jpg',
             }),
         }
         return Q()
+            .then(function() {
+                return User
+                    .findOne({id: id})
+                    .populateAll()
+                    .then(function(user) {
+                        _.extend(data.profile, user);
+                    })
+            })
             .then(function() {
                 return res.render('profile', data)
             })
@@ -40,13 +53,13 @@ module.exports = {
 
 
     edit: function(req, res) {
-        var id = parseInt(req.get('id'));
+        var id = parseInt(req.param('id'));
         if (!id) {
             if (req.user) {
                 id = req.user.id;
             }
             else {
-                // return res.notFound();
+                return res.notFound();
             }
         }
         var data = {
@@ -54,19 +67,27 @@ module.exports = {
             title: 'Settings',
             bc: [
                 {name: 'Home', href: '/'},
-                {name: 'Profile', href: '/profile/'+id},
+                {name: 'Profile', href: '/profile/get/'+id},
                 {name: 'Settings', href: '/profile/settings'},
             ],
 
             profile: _.extend({}, req.user, {
                 id: 1,
-                name: 'Name',
-                surname: 'Surname',
-                email: 'name@host.org',
+                name: 'No-Name',
+                surname: 'No-Surname',
+                email: 'No-Email',
                 photo: 'team-member11.jpg',
             }),
         }
         return Q()
+            .then(function() {
+                return User
+                    .findOne({id: id})
+                    .populateAll()
+                    .then(function(user) {
+                        _.extend(data.profile, user);
+                    })
+            })
             .then(function() {
                 return res.render('profile/edit', data)
             })
