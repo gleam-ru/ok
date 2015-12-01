@@ -52,6 +52,43 @@ module.exports = {
             .then(function() {
                 return res.render('profile/edit', data)
             })
+    },
+
+
+    users: function(req, res) {
+        var data = {
+            pageTitle: 'All users',
+            title: 'All users',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'Users', href: '/admin/users'},
+            ],
+        }
+
+        Q()
+            .then(function() {
+                return Role
+                    .find()
+                    .then(function(roles) {
+                        _.remove(roles, {name: 'ghost'})
+                        data.roles = roles;
+                    })
+            })
+            .then(function() {
+                return User
+                    .find()
+                    .populateAll()
+                    .then(function(users) {
+                        data.users = users;
+                    })
+            })
+            .then(function() {
+                return res.render('admin/users', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
 
     },
 

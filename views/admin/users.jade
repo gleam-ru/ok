@@ -1,0 +1,24 @@
+extends ../_layouts/black-title.jade
+
+block append head
+  +globalVar('users', users)
+  +globalVar('roles', roles)
+  script(src='/ViewControllers/admin/users.js')
+  style.
+    #vue select {
+      width: 300px;
+      }
+    #vue tr {
+      border-top: solid 1px rgba(0,0,0, 0.2);
+      border-bottom: solid 1px rgba(0,0,0, 0.2);
+      }
+      #vue td {
+        padding: 10px 20px;
+        }
+    
+
+
+block content
+  section
+    .container
+      #vue

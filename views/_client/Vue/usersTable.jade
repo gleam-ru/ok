@@ -1,5 +1,5 @@
 div 
-  table
+  table.margin-two
     tr
       td ID
       td Email
@@ -18,4 +18,7 @@ div
             value='{{role.id}}'
             disabled='{{role.name == "user"}}'
             ) {{role.name}}
-  .btn.btn-default(v-on:click='save') Save
+  a(v-on:click='save' href='#')
+    span.btn.button-reveal.button
+      i.fa.fa-save
+      span Save
