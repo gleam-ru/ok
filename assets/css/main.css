@@ -142,6 +142,28 @@ ul.no-dots>li {list-style: none;}
  *  @modules
  */
 
+/* bootstrap tagsinput */
+.bootstrap-tagsinput {
+    display: block;
+    border-radius: 0px;
+    border-color: #DFDFDF;
+    min-height: 41px;
+    margin-bottom: 20px;
+    line-height: 23px;
+    padding: 8px 15px;
+    }
+    .bootstrap-tagsinput input {
+        padding: 0px;
+        }
+    .bootstrap-tagsinput .tag {
+        background-color: #000;
+        font-size: 13px;
+        text-transform: uppercase;
+        padding: .2em .6em .2em;
+        font-weight: 500;
+        }
+
+
 /* pickmeup */
 .pickmeup {z-index: 10000;}
 .pickmeup {background: #2c3e50;}

@@ -1,9 +1,14 @@
 extends ../_layouts/no-title.jade
 
+block prepend head
+  link(rel='stylesheet', href="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css")
+  link(rel='stylesheet', href="/bower_components/alloyeditor/dist/alloy-editor/assets/alloy-editor-atlas-min.css")
+
+
 block append head
   //- +globalVar('users', users)
   //- +globalVar('roles', roles)
-  link(rel='stylesheet', href="/bower_components/alloyeditor/dist/alloy-editor/assets/alloy-editor-atlas-min.css")
+  script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
   script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")
   script(src='/ViewControllers/admin/create.js')
   style.
@@ -40,7 +45,7 @@ block content
         placeholder='Post name'
         )
       input#tags(
-        placeholder='tags'
+        placeholder='type some tags'
         )
       #zone
       a#save(href='#')

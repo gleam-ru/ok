@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    var $tags = $('#tags')
+    var $name = $('#name')
+    $tags.tagsinput({
+        confirmKeys: [9, 13, 44],
+        trimValue: true,
+    })
+
+
     setupToolbar_link();
     setupToolbar_image();
     setupToolbar_text();
@@ -94,9 +102,15 @@ $(document).ready(function() {
 
     restore_ls();
 
-    nativeEditor.on('change', function(event) {
+    nativeEditor.on('change', function() {
         modified = true;
     });
+    $tags.on('change', function() {
+        modified = true;
+    })
+    $name.on('change', function() {
+        modified = true;
+    })
 
     setInterval(function() {
         if (modified) {
@@ -108,8 +122,8 @@ $(document).ready(function() {
         var snapshot = nativeEditor.getData();
         var data = {
             snapshot: snapshot,
-            title: 'qwe',
-            tags: ['tag', 'moar tag'],
+            title: $('#name').val(),
+            tags: $tags.tagsinput('items'),
         };
         localStorage.setItem('post', JSON.stringify(data));
         modified = false;
@@ -118,7 +132,9 @@ $(document).ready(function() {
     function restore_ls() {
         var data = JSON.parse(localStorage.getItem('post') || '{}');
         $('#name').val(data.title || '');
-        $('#tags').val(data.tags || '');
+        _.each(data.tags, function(tag) {
+            $tags.tagsinput('add', tag);
+        })
         nativeEditor.setData(data.snapshot);
         // not working :(
         // nativeEditor.loadSnapshot(snapshot);

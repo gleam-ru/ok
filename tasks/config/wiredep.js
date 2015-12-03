@@ -4,7 +4,10 @@ module.exports = function(grunt) {
         task: {
             ignorePath: "../../..",
             exclude: [
+                'bootstrap-tagsinput.js',
+                'bootstrap-tagsinput.css',
                 'alloy-editor-all-min.js',
+                'alloy-editor-ocean-min.css',
                 // 'vue.js',
             ],
             src: [
