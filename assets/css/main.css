@@ -189,12 +189,22 @@ ul.no-dots>li {list-style: none;}
 
 
 
+.ae-ui .ae-toolbar-add {
+    /*left: 50px !important;*/
+    background-color: #29353D;
+    border-color: #29353D;
+    color: #FFFFFF;
+    }
+/*.ae-ui .ae-toolbar-add .ae-button {
+    height: 30px;
+    width: 30px;
+    }*/
 
 
 
 
-
-.cnt{
+.cnt {
+    padding: 0px;
     min-height: calc(100vh - 278px);
 }
 

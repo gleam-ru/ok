@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         task: {
             ignorePath: "../../..",
             exclude: [
-                // 'jquery.js',
+                'alloy-editor-all-min.js',
                 // 'vue.js',
             ],
             src: [

@@ -16,6 +16,38 @@ module.exports.bootstrap = function(cb) {
         })
         return Q.all(results);
     }
+    // console.log(sanitize('<p>asd'))
+    // >> <p>asd</p>
+    global.sanitize = function(text) {
+        return require("sanitize-html")(text, {
+            // разрешить все теги и все атрибуты
+            allowedTags: [
+                'h1',
+                'h2',
+                'h3',
+                'h4',
+                'h5',
+                'h6',
+                'p',
+                'ul',
+                'ol',
+                'li',
+                'hr',
+                'table',
+                'th',
+                'tr',
+                'td',
+                'span',
+                'div',
+                'i',
+                'b',
+                's',
+                'u',
+                'img',
+            ],
+            allowedAttributes: false,
+        })
+    }
 
     // проверить по YYYY-MM-DD перед заменой!!! некоторые сервисы требуют
     // повторной инициализации ddf

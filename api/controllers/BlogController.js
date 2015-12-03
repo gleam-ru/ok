@@ -5,6 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+
 module.exports = {
     index: function(req, res) {
         var data = {
@@ -42,4 +43,3 @@ module.exports = {
     },
 
 };
-

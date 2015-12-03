@@ -89,7 +89,68 @@ module.exports = {
             .catch(function(err) {
                 return res.serverError(err);
             })
+    },
 
+
+
+    create: function(req, res) {
+        var data = {
+            pageTitle: 'All users',
+            title: 'All users',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'Users', href: '/admin/users'},
+            ],
+        }
+
+        Q()
+            .then(function() {
+                return res.render('admin/create', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+    },
+
+    create_POST: function(req, res) {
+        var cheerio = require('cheerio');
+        var msg = req.param('msg');
+
+        msg.snapshot = sanitize(msg.snapshot)
+        var $ = cheerio.load(msg.snapshot)
+
+        return Q()
+            .then(function() {
+                return Post.create({
+                    name: msg.name || 'Noname',
+                });
+            })
+            .then(function(post) {
+                var $imgs = $('img');
+                var tasks = [];
+                $imgs.each(function(i, img) {
+                    var $img = $(img);
+                    var data = $img.attr('src')
+                    tasks.push(
+                        uploader
+                            .uploadBase64Image(data, 'posts/'+post.id+'/')
+                            .then(function(uploaded) {
+                                if (!uploaded) {
+                                    $img.remove();
+                                }
+                                else {
+                                    $img.attr('src', uploaded);
+                                }
+                            })
+                    );
+                })
+                return Q.all(tasks);
+            })
+            .then(function() {
+                var text = $.html();
+            })
+            .catch(res.serverError)
     },
 
 };

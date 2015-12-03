@@ -6,7 +6,7 @@ var $blog;
 $(document).ready(function() {
 
     // Show Animated Counters
-    animatecounters();
+    // animatecounters();
     /*==============================================================*/
     //Smooth Scroll - START CODE
     /*==============================================================*/
@@ -165,7 +165,7 @@ $(document).ready(function() {
     /*==============================================================*/
     //Set Parallax - START CODE
     /*==============================================================*/
-    SetParallax();
+    // SetParallax();
     /*==============================================================*/
     //Set Parallax - END CODE
     /*==============================================================*/
@@ -975,14 +975,14 @@ $(document).ready(function() {
     //WOW Animation  - START CODE
     /*==============================================================*/
 
-    var wow = new WOW({
-        boxClass: 'wow',
-        animateClass: 'animated',
-        offset: 90,
-        mobile: false,
-        live: true
-    });
-    wow.init();
+    // var wow = new WOW({
+    //     boxClass: 'wow',
+    //     animateClass: 'animated',
+    //     offset: 90,
+    //     mobile: false,
+    //     live: true
+    // });
+    // wow.init();
     /*==============================================================*/
     //WOW Animation  - END CODE
     /*==============================================================*/
@@ -1200,33 +1200,33 @@ $(document).ready(function() {
     //Parallax - START CODE
     /*==============================================================*/
 
-    var $elem = $('#content');
-    $('#scroll_to_top').fadeIn('slow');
-    $('#nav_down').fadeIn('slow');
-    $(window).bind('scrollstart', function() {
-        $('#scroll_to_top,#nav_down').stop().animate({
-            'opacity': '0.2'
-        });
-    });
-    $(window).bind('scrollstop', function() {
-        $('#scroll_to_top,#nav_down').stop().animate({
-            'opacity': '1'
-        });
-    });
-    $('#nav_down').click(
-        function(e) {
-            $('html, body').animate({
-                scrollTop: $elem.height()
-            }, 800);
-        }
-    );
-    $('#scroll_to_top').click(
-        function(e) {
-            $('html, body').animate({
-                scrollTop: '0px'
-            }, 800);
-        }
-    );
+    // var $elem = $('#content');
+    // $('#scroll_to_top').fadeIn('slow');
+    // $('#nav_down').fadeIn('slow');
+    // $(window).bind('scrollstart', function() {
+    //     $('#scroll_to_top,#nav_down').stop().animate({
+    //         'opacity': '0.2'
+    //     });
+    // });
+    // $(window).bind('scrollstop', function() {
+    //     $('#scroll_to_top,#nav_down').stop().animate({
+    //         'opacity': '1'
+    //     });
+    // });
+    // $('#nav_down').click(
+    //     function(e) {
+    //         $('html, body').animate({
+    //             scrollTop: $elem.height()
+    //         }, 800);
+    //     }
+    // );
+    // $('#scroll_to_top').click(
+    //     function(e) {
+    //         $('html, body').animate({
+    //             scrollTop: '0px'
+    //         }, 800);
+    //     }
+    // );
     /*==============================================================*/
     //Parallax - END CODE
     /*==============================================================*/

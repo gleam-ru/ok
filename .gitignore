@@ -12,6 +12,9 @@ tst.js
 # fake head
 views/_layouts/parts/_head.jade
 
+# uploads
+uploads
+
 
 
 

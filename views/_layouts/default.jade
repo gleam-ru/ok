@@ -34,7 +34,7 @@ html(style='height: auto;')
                 block title
                   | #{title || 'Title goes here'}
             include ./parts/breadcrumbs
-    .cnt
+    section.cnt
       block flashes
         +flashes()
       block content
