@@ -23,16 +23,27 @@ module.exports = {
     },
 
     get: function(req, res) {
+        var id = parseInt(req.param('id'));
+        if (!id) {
+            return res.notFound();
+        }
         var data = {
             pageTitle: 'Post',
             title: 'Post',
             bc: [
                 {name: 'Home', href: '/'},
                 {name: 'Blog', href: '/blog'},
-                {name: 'Post', href: '/blog/get/1'},
+                {name: 'Post', href: '/blog/get/'+id},
             ]
         }
         return Q()
+            .then(function() {
+                return Post.findOne({id: id}).populateAll();
+            })
+            .then(function(post) {
+                data.post = post.toJSON();
+                data.title = data.post.title;
+            })
             .then(function() {
                 return res.render('blog/post', data)
             })

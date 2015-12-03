@@ -148,7 +148,7 @@ module.exports = {
                                     $img.remove();
                                 }
                                 else {
-                                    $img.attr('src', uploaded);
+                                    $img.attr('src', '/uploads/posts/'+post.id+'/'+uploaded);
                                 }
                             })
                     );
