@@ -51,7 +51,7 @@ function installJQMethods() {
     $.fn.mask = function(state) {
         if(state === undefined || state) {
             // add mask
-            var mask = $("<div id='mask'><img src='/img/loading.png'/></div>");
+            var mask = $("<div id='mask'><img src='/images/loading.gif'/></div>");
             if (this.find('#mask').length > 0) return;
             this.append(mask);
 

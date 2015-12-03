@@ -10,7 +10,7 @@ var uploadsForDev = '/.tmp/public/uploads/';
 
 uploader.uploadBase64Image = function(str, path) {
     if (!path || !str) {
-        return false;
+        return Q.resolve(false);
     }
     var randomFilename = Math.random().toString(36).substring(7)+'.jpeg';
     var path_1 = appRoot+uploadsDir+path;
@@ -56,7 +56,7 @@ function saveBase64Image(string, path, name) {
             return result;
         })
         .then(function(result) {
-            console.log('saving base64:', randomFilename);
+            console.log('saving base64:', fullPath);
             return Q.nbind(fs.writeFile, fs)(fullPath, result.data)
         })
 }

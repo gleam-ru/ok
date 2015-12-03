@@ -92,15 +92,13 @@ module.exports = {
     },
 
 
-
+    // страница с созданием чего-либо
     create: function(req, res) {
         var data = {
-            pageTitle: 'All users',
-            title: 'All users',
+            pageTitle: 'New',
+            title: 'New',
             bc: [
                 {name: 'Home',  href: '/'},
-                {name: 'Admin', href: '/admin'},
-                {name: 'Users', href: '/admin/users'},
             ],
         }
 
@@ -117,16 +115,26 @@ module.exports = {
         var cheerio = require('cheerio');
         var msg = req.param('msg');
 
-        msg.snapshot = sanitize(msg.snapshot)
+        if (!msg || !msg.title || !req.user || !req.user.id) {
+            return res.badRequest();
+        }
+
         var $ = cheerio.load(msg.snapshot)
+
+        var accum = {};
 
         return Q()
             .then(function() {
+                return User.findOne({id: req.user.id});
+            })
+            .then(function(user) {
                 return Post.create({
-                    name: msg.name || 'Noname',
+                    author : user.id,
+                    title  : msg.title,
                 });
             })
             .then(function(post) {
+                accum.post = post;
                 var $imgs = $('img');
                 var tasks = [];
                 $imgs.each(function(i, img) {
@@ -148,9 +156,22 @@ module.exports = {
                 return Q.all(tasks);
             })
             .then(function() {
-                var text = $.html();
+                return accum.post.update({
+                    tags: msg.tags || [],
+                    text: $.html(),
+                });
             })
-            .catch(res.serverError)
+            .then(function(post) {
+                res.send({id: post.id});
+                return res.ok();
+            })
+            .catch(function(err) {
+                if (accum.post) {
+                    accum.post.destroy();
+                }
+                console.error('create_POST err', err)
+                return res.serverError(err);
+            })
     },
 
 };

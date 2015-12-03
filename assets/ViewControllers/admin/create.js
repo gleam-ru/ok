@@ -128,9 +128,20 @@ $(document).ready(function() {
 
 
     $('#save').on('click', function() {
+        cnt.mask();
         var data = save_ls();
         $.post('/create', {
             msg: data,
+        })
+        .done(function(data) {
+            window.location.href = '/blog/get/'+data.id;
+        })
+        .fail(function(err) {
+            mp.alert('something went wrong...');
+            console.error(err);
+        })
+        .always(function() {
+            cnt.unmask();
         })
     })
 
