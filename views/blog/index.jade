@@ -7,47 +7,75 @@ block append head
 
   style.
     .mystyle-contents {margin-bottom: 30px;}
+    .blog-listing-full .blog-title a {margin-bottom: 20px;}
+    .blog-listing-full .blog-date {margin: 20px 0 20px;}
+    #addPost {vertical-align: text-top; margin-left: 10px;}
+
+
+block append title
+  if hasRole(user, 'admin')
+    a#addPost(href='/create')
+      +iconButton('fa-plus')
 
 
 
-mixin author()
-  .avtar.text-left
-    a(href='/profile/get/1')
-      img(src='/images/avtar15.jpg', alt='')
-  .blog-date-right.no-padding-bottom 02 January 2015
-  .blog-date-right
-    | Posted by 
-    a(href='profile/get/1') Paul Scrivens
-  .separator-line.bg-black.no-margin-lr.no-margin.xs-margin-bottom-ten
+mixin author(post)
+  if post
+    - var author = post.author
+    if author
+      .avtar.text-left
+        a(href='/profile/get/#{author.id}')
+          img(src='/images/avtar15.jpg', alt='')
+      .blog-date-right.no-padding-bottom #{moment(post.createdAt).format('DD MMMM YYYY')}
+      .blog-date-right
+        | Posted by 
+        a(href='profile/get/#{author.id}') #{author.name} #{author.surname}
+      .separator-line.bg-black.no-margin-lr.no-margin.xs-margin-bottom-ten
+
+mixin tags(tags)
+  if tags && tags.length
+    - var first = true;
+    each tag in tags
+      if !first
+        | , 
+      a(href='blog/tags/#{tag.name}') #{tag.name}
+      - first = false;
+
+mixin post(post)
+  if post
+    .row
+      .blog-listing.blog-listing-classic.blog-listing-full.wow.fadeIn
+        .col-md-2.col-sm-2.col-xs-5.clearfix.text-center.xs-padding-right
+          +author(post)
+        .col-md-10.col-sm-10.col-xs-12.xs-padding-left
+          .blog-details
+            .blog-title
+              a(href='/blog/get/#{post.id}') #{post.title}
+            .blog-date.no-padding-top
+              +tags(post.tags)
+            //- div
+              a.blog-like(href='#')
+                i.fa.fa-heart-o
+                | Likes
+              a.blog-share(href='#')
+                i.fa.fa-share-alt
+                | Share
+              a.comment(href='#')
+                i.fa.fa-comment-o
+                | 3 comment(s)
+            .separator-line.bg-black.no-margin-lr.margin-four
+            div.mystyle-contents
+              | !{post.text}
+            a(href='/blog/get/#{post.id}')
+              +revealButton('fa-arrow-right', 'More')
 
 
 block content
   section.wow
     .container
-      .row
-        .blog-listing.blog-listing-classic.blog-listing-full.wow.fadeIn
-          .col-md-2.col-sm-2.col-xs-5.clearfix.text-center.xs-padding-right
-            +author()
-          .col-md-10.col-sm-10.col-xs-12.xs-padding-left
-            .blog-details
-              .blog-title
-                a(href='/blog/get/1') This is a Standard post with a Preview Image
-              .blog-date.no-padding-top
-                a(href='blog/tags/design') Design
-                | , 
-                a(href='blog/tags/branding') Branding
-              div
-                a.blog-like(href='#')
-                  i.fa.fa-heart-o
-                  | Likes
-                a.blog-share(href='#')
-                  i.fa.fa-share-alt
-                  | Share
-                a.comment(href='#')
-                  i.fa.fa-comment-o
-                  | 3 comment(s)
-              .separator-line.bg-black.no-margin-lr.margin-four
-              div.mystyle-contents
-                | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.
-              a(href='/blog/get/1')
-                +revealButton('fa-arrow-right', 'More')
+      if posts && posts.length
+        for post in posts
+          +post(post)
+      else
+        .row
+          .blog-title here is no posts yet...

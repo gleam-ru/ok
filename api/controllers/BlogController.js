@@ -14,12 +14,22 @@ module.exports = {
             bc: [
                 {name: 'Home', href: '/'},
                 {name: 'Blog', href: '/blog'},
-            ]
+            ],
+            posts: [],
         }
         return Q()
             .then(function() {
+                return Post.find().populateAll();
+            })
+            .then(function(posts) {
+                data.posts = _.map(posts, function(post) {
+                    return post.getPreview();
+                }).reverse()
+            })
+            .then(function() {
                 return res.render('blog', data)
             })
+            .catch(res.serverError)
     },
 
     get: function(req, res) {

@@ -4,6 +4,7 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
+var sanitize = require('sanitize-html');
 
 module.exports = {
 
@@ -19,6 +20,23 @@ module.exports = {
         },
 
 
+        // preview for feed
+        getPreview : function() {
+            var me = this;
+            if (!me.text) {
+                return me;
+            }
+            var idx = me.text.indexOf('<hr>');
+            var text = me.text.slice();
+            if (idx + 1) {
+                text = text.slice(0, idx);
+            }
+            else {
+                text = text.slice(0, 700);
+            }
+            me.text = sanitize(text);
+            return me;
+        },
 
         update : function(_data) {
             var me = this;
