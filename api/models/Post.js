@@ -21,6 +21,8 @@ module.exports = {
             via        : 'posts',
         },
 
+        blog    : {model: 'Blog'},
+
 
         // preview for feed
         getPreview : function() {

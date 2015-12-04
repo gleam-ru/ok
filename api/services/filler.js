@@ -4,7 +4,22 @@ me.process = function(cb) {
     return Q.all([
         _role(),
         _admin(),
+        _blog(),
     ])
+}
+
+function _blog() {
+    console.log('filler:_blog');
+    var blogs = [
+        {name: 'analytics'},
+        {name: 'reviews'},
+        {name: 'recommendations'},
+        {name: 'archive'},
+    ];
+    return Q()
+        .then(function() {
+            return Blog.findOrCreate(blogs, blogs)
+        })
 }
 
 function _role() {
