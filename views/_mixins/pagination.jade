@@ -4,18 +4,18 @@ mixin pagination(page, last)
       .col-md-12.col-sm-12.col-xs-12.wow.fadeInUp.animated
         .pagination
           if page !== 1
-            a(href='?page=1')
+            a(href='#' data-page='1')
               i.fa.fa-angle-double-left
           else
             a(href='#')
               i.fa.fa-angle-double-left
           if page > 1
-            a(href='?page=#{page - 1}') #{page - 1}
-          a(href='?page=#{page}').active #{page}
+            a(href='#' data-page='#{page - 1}') #{page - 1}
+          a(href='#' data-page='#{page}').active #{page}
           if page !== last
-            a(href='?page=#{page + 1}') #{page + 1}
+            a(href='#' data-page='#{page + 1}') #{page + 1}
             span
-              a(href='?page=#{last}')
+              a(href='#' data-page='#{last}')
                 i.fa.fa-angle-double-right
           else
             a(href='#')

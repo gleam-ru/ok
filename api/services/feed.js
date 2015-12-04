@@ -22,7 +22,7 @@ feed.get = function(params) {
             getPostsByTypes(types),
             getPostsByTags(tags),
         ])
-        .then(formatResults)
+        .then(boolAnd)
         .then(function(posts) {
             // pagination logic...
             if (currentPage) {
@@ -54,8 +54,23 @@ feed.get = function(params) {
 
 module.exports = feed;
 
-function formatResults(results) {
-    return _(results)
+function boolAnd(data) {
+    if (!data || !data.length) {
+        return [];
+    }
+    var results = _.map(data[0], 'id');
+    for (var i = 1; i < data.length; i++) {
+        var part = _.map(data[i], 'id');
+        results = _.intersection(results, part);
+    }
+    return Post
+        .find({id: results})
+        .populateAll()
+        .then(boolOr)
+}
+
+function boolOr(data) {
+    return _(data)
         .flatten()
         .sortBy('id')
         .uniq(true, 'id')
@@ -70,33 +85,50 @@ function formatResults(results) {
 function getPostsByTags(list) {
     return Q
         .all(_.map(list, getPostsByTag))
-        .then(formatResults)
+        .then(boolOr)
 }
 
 // получает посты по всем типам, указанным в списке
 function getPostsByTypes(list) {
     return Q
         .all(_.map(list, getPostsByType))
-        .then(formatResults)
+        .then(function(posts) {
+            return posts
+        })
+        .then(boolOr)
 }
 
 
 // получает посты по типу
 function getPostsByType(name) {
     if (!name) {
-        return Post.find({blog: undefined}).populateAll();
+        return Post.find({blog: undefined}).populateAll()
+        .then(function(posts) {
+            return posts
+        });
     }
     else {
         return Blog
             .findOne({name: name})
-            .populate('posts');
+            .populate('posts')
+            .then(function(blog) {
+                return blog.posts;
+            });
     }
 }
 
 
 // получает посты по тегу
 function getPostsByTag(name) {
-    return Tag
-        .findOne({name: name})
-        .populate('posts');
+    if (!name) {
+        return Post.find().populateAll();
+    }
+    else {
+        return Tag
+            .findOne({name: name})
+            .populate('posts')
+            .then(function(tag) {
+                return tag.posts;
+            });
+    }
 }

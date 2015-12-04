@@ -47,7 +47,7 @@ mixin tags(tags)
     each tag in tags
       if !first
         | , 
-      a(href='blog/tags/#{tag.name}') #{tag.name}
+      a(href='blog?tags[]=#{tag.name}') #{tag.name}
       - first = false;
 
 mixin post(post)

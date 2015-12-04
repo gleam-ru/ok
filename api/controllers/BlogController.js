@@ -17,12 +17,19 @@ module.exports = {
             ],
             posts: [],
             page: req.param('page'),
+            tags: req.param('tags'),
         }
         return Q()
+            .then(function() {
+                if (Array.isArray(data.tags) && data.tags.length) {
+                    data.subtitle = 'with tags: '+data.tags.join(', ');
+                }
+            })
             .then(function() {
                 return feed.get({
                     type: undefined,
                     page: data.page || 1,
+                    tags: data.tags,
                 });
             })
             .spread(function(posts, pagination) {

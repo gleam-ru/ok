@@ -5,6 +5,15 @@ installMP();
 $(document).ready(function() {
     window.cnt = $('.cnt');
 
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault();
+        var $me = $(this);
+        var page = $me.data('page');
+        setUrlParam('page', page);
+        return false;
+    })
+
+
     // // tooltipster
     // $.fn.tooltipster('setDefaults', {
     //     theme: 'tooltipster-light',
@@ -41,6 +50,43 @@ function installGlobals() {
     window.href = window.location.pathname.replace(/\/$/, "");
     // Default Date Format
     window.ddf = 'YYYY-MM-DD';
+
+    window.getUrlParams = function() {
+        var vars = {},
+            hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    window.setUrlParam = function(key, value) {
+        key = encodeURI(key);
+        value = encodeURI(value);
+
+        var kvp = document.location.search.substr(1).split('&');
+
+        var i = kvp.length;
+        var x;
+        while (i--) {
+            x = kvp[i].split('=');
+
+            if (x[0] == key) {
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
+            }
+        }
+
+        if (i < 0) {
+            kvp[kvp.length] = [key, value].join('=');
+        }
+
+        //this will reload the page, it's likely better to store this until finished
+        document.location.search = kvp.join('&');
+    }
 }
 
 
