@@ -16,15 +16,18 @@ module.exports = {
                 {name: 'Blog', href: '/blog'},
             ],
             posts: [],
+            page: req.param('page'),
         }
         return Q()
             .then(function() {
-                return Post.find().populateAll();
+                return feed.get({
+                    type: undefined,
+                    page: data.page || 1,
+                });
             })
-            .then(function(posts) {
-                data.posts = _.map(posts, function(post) {
-                    return post.getPreview();
-                }).reverse()
+            .spread(function(posts, pagination) {
+                data.posts = posts;
+                data.pagination = pagination;
             })
             .then(function() {
                 return res.render('blog', data)

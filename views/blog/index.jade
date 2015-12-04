@@ -1,4 +1,6 @@
-extends ../_layouts/white-subtitle.jade
+extends ../_layouts/white-subtitle
+include ../_mixins/pagination
+
 
 block append head
   //- +globalVar('users', users)
@@ -89,3 +91,4 @@ block content
       else
         .row
           .blog-title here is no posts yet...
+      +pagination(pagination.current, pagination.total)
