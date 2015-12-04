@@ -92,7 +92,7 @@ module.exports = {
     },
 
 
-    // страница с созданием чего-либо
+    // страница с созданием поста
     create: function(req, res) {
         var data = {
             pageTitle: 'New',
@@ -111,67 +111,80 @@ module.exports = {
             })
     },
 
-    create_POST: function(req, res) {
-        var cheerio = require('cheerio');
+    post_POST: function(req, res) {
         var msg = req.param('msg');
+        console.debug(1)
 
         if (!msg || !msg.title || !req.user || !req.user.id) {
+            console.debug(2)
             return res.badRequest();
         }
 
-        var $ = cheerio.load(msg.snapshot)
-
-        var accum = {};
-
         return Q()
             .then(function() {
+                console.debug(3)
                 return User.findOne({id: req.user.id});
             })
             .then(function(user) {
-                return Post.create({
+                if (!user) {
+                    console.debug(4.0)
+                    throw new Error('authorize first!');
+                }
+                console.debug(4.1)
+                msg.editor = user.id;
+                return Post.findOrCreate({id: msg.id}, {
                     author : user.id,
+                    title  : msg.title,
+                })
+            })
+            .then(function(post) {
+                console.debug(5)
+                return post.update({
+                    tags   : msg.tags,
+                    text   : msg.snapshot,
                     title  : msg.title,
                 });
             })
             .then(function(post) {
-                accum.post = post;
-                var $imgs = $('img');
-                var tasks = [];
-                $imgs.each(function(i, img) {
-                    var $img = $(img);
-                    var data = $img.attr('src')
-                    tasks.push(
-                        uploader
-                            .uploadBase64Image(data, 'posts/'+post.id+'/')
-                            .then(function(uploaded) {
-                                if (!uploaded) {
-                                    $img.remove();
-                                }
-                                else {
-                                    $img.attr('src', '/uploads/posts/'+post.id+'/'+uploaded);
-                                }
-                            })
-                    );
-                })
-                return Q.all(tasks);
-            })
-            .then(function() {
-                return accum.post.update({
-                    tags: msg.tags || [],
-                    text: $.html(),
-                });
-            })
-            .then(function(post) {
+                console.debug(6)
                 res.send({id: post.id});
                 return res.ok();
             })
             .catch(function(err) {
-                if (accum.post) {
-                    accum.post.destroy();
-                }
-                console.error('create_POST err', err)
+                console.debug(7)
+                console.error('post_POST err', err)
                 return res.serverError(err);
             })
     },
 
+
+    // страница с редактированием поста
+    edit: function(req, res) {
+        var id = parseInt(req.param('id'))
+        if (!id) {
+            return res.notFound();
+        }
+        var data = {
+            pageTitle: 'Edit',
+            title: 'Edit',
+            bc: [
+                {name: 'Home',  href: '/'},
+            ],
+        }
+
+        Q()
+            .then(function() {
+                return Post.findOne({id: id}).populateAll();
+            })
+            .then(function(post) {
+                data.post = post.toJSON();
+                data.post.tags = _.map(post.tags, 'name').join(',');
+            })
+            .then(function() {
+                return res.render('admin/edit', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+    },
 };

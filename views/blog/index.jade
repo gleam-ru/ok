@@ -7,9 +7,16 @@ block append head
 
   style.
     .mystyle-contents {margin-bottom: 30px;}
-    .blog-listing-full .blog-title a {margin-bottom: 20px;}
+    .blog-listing-full .blog-title a {
+      margin-bottom: 20px;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: top;
+      }
+    .blog-listing-full .blog-title a.fn-edit {
+      margin-top: 1px;
+      }
     .blog-listing-full .blog-date {margin: 20px 0 20px;}
-    #addPost {vertical-align: text-top; margin-left: 10px;}
 
 
 block append title
@@ -51,6 +58,9 @@ mixin post(post)
           .blog-details
             .blog-title
               a(href='/blog/get/#{post.id}') #{post.title}
+              if hasRole(user, 'admin')
+                a.fn-edit(href='/edit?id=#{post.id}')
+                  +iconButton('fa-pencil')
             .blog-date.no-padding-top
               +tags(post.tags)
             //- div

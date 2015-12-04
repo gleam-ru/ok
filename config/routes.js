@@ -74,7 +74,10 @@ module.exports.routes = {
     'post /admin/users'              : 'Admin.updateUserData',
     //---
     'get  /create'     : 'Admin.create',
-    'post /create'     : 'Admin.create_POST',
+    'post /create'     : 'Admin.post_POST',
+    //---
+    'get  /edit'       : 'Admin.edit',
+    'post /edit'       : 'Admin.post_POST',
     //---
 
 

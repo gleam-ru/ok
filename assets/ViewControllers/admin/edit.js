@@ -27,59 +27,20 @@ $(document).ready(function() {
     });
 
     var nativeEditor = editor.get('nativeEditor');
-    var modified = false;
 
-    restore_ls();
-
-    nativeEditor.on('change', function() {
-        modified = true;
-    });
-    $tags.on('change', function() {
-        modified = true;
-    })
-    $name.on('change', function() {
-        modified = true;
-    })
-
-    setInterval(function() {
-        if (modified) {
-            save_ls();
-        }
-    }, 3000);
-
-    function save_ls() {
+    $('#save').on('click', function() {
+        cnt.mask();
         var snapshot = nativeEditor.getData();
         var data = {
+            id: $('#id').val(),
             snapshot: snapshot,
             title: $('#name').val(),
             tags: $tags.tagsinput('items'),
         };
-        localStorage.setItem('post', JSON.stringify(data));
-        modified = false;
-        return data;
-    }
-    function restore_ls() {
-        var data = JSON.parse(localStorage.getItem('post') || '{}');
-        $('#name').val(data.title || '');
-        _.each(data.tags, function(tag) {
-            $tags.tagsinput('add', tag);
-        })
-        nativeEditor.setData(data.snapshot);
-        // not working :(
-        // nativeEditor.loadSnapshot(snapshot);
-        modified = false;
-    }
-
-
-
-    $('#save').on('click', function() {
-        cnt.mask();
-        var data = save_ls();
-        $.post('/create', {
+        $.post('/edit', {
             msg: data,
         })
         .done(function(data) {
-            localStorage.setItem('post', undefined);
             window.location.href = '/blog/get/'+data.id;
         })
         .fail(function(err) {

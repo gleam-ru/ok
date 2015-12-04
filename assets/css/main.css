@@ -255,3 +255,13 @@ input.has-error {
 
 .vi-iconButton:hover {background-color: rgba(0,0,0, 0.8);}
 .vi-iconButton {background-color: rgba(0,0,0, 0.6);}
+
+
+.page-title .title  {
+    line-height: 22px;
+    }
+.page-title .title > a {
+    vertical-align: middle;
+    margin-left: 10px;
+    display: inline-block;
+    }

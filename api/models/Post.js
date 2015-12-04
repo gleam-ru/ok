@@ -5,11 +5,13 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 var sanitize = require('sanitize-html');
+var cheerio = require('cheerio');
 
 module.exports = {
 
     attributes: {
         author  : {model: 'User', required: true},
+        editor  : {model: 'User'},
 
         title   : {type: 'text', defaultsTo: '', required: true},
         text    : {type: 'text', defaultsTo: ''},
@@ -40,15 +42,26 @@ module.exports = {
 
         update : function(_data) {
             var me = this;
-            var data = _.clone(_data);
+            var data = _.extend({
+                tags  : [],
+                text  : '',
+                title : 'No title',
+            }, _data);
+
+            var $ = cheerio.load(data.text)
             return Q()
                 .then(function() {
+                    return Post.findOne({id: me.id}).populate('tags');
+                })
+                // get tags instances
+                .then(function(post) {
+                    me = post;
                     data.tags = _.map(data.tags, function(tag) {
                         return {name: tag};
                     })
                     return Tag.findOrCreate(data.tags, data.tags);
                 })
-                // tags
+                // merge tags with post
                 .then(function(tags) {
                     data.tags = undefined;
 
@@ -57,20 +70,55 @@ module.exports = {
 
                     var toDelete = _.difference(existing, needed);
                     var toAdd    = _.difference(needed, existing);
-
+                    var tag;
                     _.each(toDelete, function(id) {
-                        var tag = _.find(me.tags, {id: id});
-                        me.tags.remove(tag);
+                        tag = _.find(me.tags, {id: id});
+                        if (tag && tag.id) {
+                            me.tags.remove(tag.id);
+                        }
                     })
                     _.each(toAdd, function(id) {
-                        var tag = _.find(tags, {id: id});
-                        me.tags.add(tag);
+                        tag = _.find(tags, {id: id});
+                        if (tag && tag.id) {
+                            me.tags.add(tag.id);
+                        }
                     })
-
-                    return me;
                 })
-                .then(function(me) {
+                // upload images
+                .then(function() {
+                    var $imgs = $('img');
+                    var tasks = [];
+                    $imgs.each(function(i, img) {
+                        var $img = $(img);
+                        var data = $img.attr('src')
+                        // картинка уже есть в аплоадах
+                        if (data && data.indexOf('/uploads/') !== -1) {
+                            return;
+                        }
+                        // загружаю картинку
+                        tasks.push(
+                            uploader
+                                .uploadBase64Image(data, 'posts/'+me.id+'/')
+                                .then(function(uploaded) {
+                                    if (!uploaded) {
+                                        console.warn('Картинка не загружена. Удаляю.')
+                                        $img.remove();
+                                    }
+                                    else {
+                                        $img.attr('src', '/uploads/posts/'+me.id+'/'+uploaded);
+                                    }
+                                })
+                        );
+                    })
+                    return Q.all(tasks);
+                })
+                // merge post with other data
+                .then(function() {
+                    data.text = $.html();
                     _.extend(me, data);
+                })
+                // save post
+                .then(function() {
                     return me.save()
                 })
         },

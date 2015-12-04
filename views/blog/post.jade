@@ -7,6 +7,10 @@ block append head
   style.
 
 
+block append title
+  if hasRole(user, 'admin')
+    a#editPost(href='/edit?id=#{post.id}')
+      +iconButton('fa-pencil')
 
 block content
 

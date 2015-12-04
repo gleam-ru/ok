@@ -46,7 +46,7 @@ function saveBase64Image(string, path, name) {
             var matches = string.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
             var result = {};
 
-            if (matches.length !== 3) {
+            if (!matches || matches.length !== 3) {
                 throw new Error('Invalid input string');
             }
 
