@@ -79,7 +79,7 @@ $(document).ready(function() {
             msg: data,
         })
         .done(function(data) {
-            localStorage.setItem('post', undefined);
+            localStorage.setItem('post', '{}');
             window.location.href = '/blog/get/'+data.id;
         })
         .fail(function(err) {
