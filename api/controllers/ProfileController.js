@@ -17,7 +17,7 @@ module.exports = {
             }
         }
         else {
-            if (id === req.user.id) {
+            if (id === req.user && req.user.id) {
                 return res.redirect('/profile');
             }
         }

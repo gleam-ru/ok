@@ -6,25 +6,11 @@ block append head
   //- +globalVar('roles', roles)
   //- script(src='/ViewControllers/index.js')
   style.
-    .blog-title > a {font-size: 40px;}
+    .blog-title > a {font-size: 40px; line-height: 40px;}
     .percent {line-height: 1; font-size: 33px; margin-left: 15px;}
     .percent:after { content: '';}
 
 
-
-mixin pagination()
-  .row
-    .col-md-12.col-sm-12.col-xs-12.wow.fadeInUp
-      .pagination
-        a(href='#')
-          img(src='/images/arrow-pre-small.png', alt='')
-        a(href='#') 1
-        a(href='#') 2
-        a.active(href='#') 3
-        a(href='#') 4
-        a(href='#') 5
-        a(href='#')
-          img(src='/images/arrow-next-small.png', alt='')
 
 
 mixin post(post)
