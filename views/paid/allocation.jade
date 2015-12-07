@@ -4,6 +4,7 @@ extends ../_layouts/black-title.jade
 block append head
   +globalVar('parts', parts)
   //- +globalVar('roles', roles)
+  script(src="/bower_components/Chart.js/Chart.js")
   script(src='/ViewControllers/paid/allocation.js')
   style.
     #parts {width: 400px !important; height: 400px !important;}
