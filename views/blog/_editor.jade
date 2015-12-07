@@ -6,14 +6,17 @@ block prepend head
 
 
 block append head
-  //- +globalVar('users', users)
-  //- +globalVar('roles', roles)
+  //- +globalVar('languages', languages)
+  //- +globalVar('blogs', blogs)
   script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
   script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")
   script(src='/Components/Editor.js')
   style.
     body {
       overflow: hidden;
+      }
+    #meta select {
+      min-height: 43px;
       }
     :focus {
       outline: none !important;
@@ -45,13 +48,31 @@ block append head
 block content
   section.wow.fadeIn
     .container
-      .row
+      .row#meta
         .col-md-2.no-padding.pr-10
-          select
+          select#language(
+            v-model='language'
+            )
+            option(
+              v-for='language in languages'
+              value='{{language.id}}'
+              ) {{language.name}}
         .col-md-4.no-padding.pl-10.pr-10
-          select
+          select#blog(
+            v-model='blog'
+            )
+            option(
+              v-for='blog in blogs'
+              value='{{blog.id}}'
+              ) {{blog.name}}
         .col-md-6.no-padding.pl-10
-          select
+          select#post(
+            v-model='post'
+            )
+            option(
+              v-for='post in posts'
+              value='{{post.id}}'
+              ) {{post.name}}
       .row
         input#id.hidden(
           value= post && post.id

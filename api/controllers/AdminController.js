@@ -103,6 +103,14 @@ module.exports = {
         }
 
         Q()
+        // Q.all([
+        //         Blog.find().populateAll(),
+        //         Language.find(),
+        //     ])
+        //     .spread(function(blogs, languages) {
+        //         data.blogs     = blogs;
+        //         data.languages = languages;
+        //     })
             .then(function() {
                 return res.render('blog/create', data);
             })
@@ -110,6 +118,48 @@ module.exports = {
                 return res.serverError(err);
             })
     },
+
+
+
+    // страница с редактированием поста
+    edit: function(req, res) {
+        var id = parseInt(req.param('id'))
+        if (!id) {
+            return res.notFound();
+        }
+        var data = {
+            pageTitle: 'Edit',
+            title: 'Edit',
+            bc: [
+                {name: 'Home',  href: '/'},
+            ],
+        }
+
+        Q()
+        // Q.all([
+        //         Blog.find().populateAll(),
+        //         Language.find(),
+        //     ])
+        //     .spread(function(blogs, languages) {
+        //         data.blogs     = blogs;
+        //         data.languages = languages;
+        //     })
+            .then(function() {
+                return Post.findOne({id: id}).populateAll();
+            })
+            .then(function(post) {
+                data.post = post.toJSON();
+                data.post.tags = _.map(post.tags, 'name').join(',');
+            })
+            .then(function() {
+                return res.render('blog/edit', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+    },
+
+
 
     post_POST: function(req, res) {
         var msg = req.param('msg');
@@ -145,37 +195,6 @@ module.exports = {
             })
             .catch(function(err) {
                 console.error('post_POST err', err)
-                return res.serverError(err);
-            })
-    },
-
-
-    // страница с редактированием поста
-    edit: function(req, res) {
-        var id = parseInt(req.param('id'))
-        if (!id) {
-            return res.notFound();
-        }
-        var data = {
-            pageTitle: 'Edit',
-            title: 'Edit',
-            bc: [
-                {name: 'Home',  href: '/'},
-            ],
-        }
-
-        Q()
-            .then(function() {
-                return Post.findOne({id: id}).populateAll();
-            })
-            .then(function(post) {
-                data.post = post.toJSON();
-                data.post.tags = _.map(post.tags, 'name').join(',');
-            })
-            .then(function() {
-                return res.render('blog/edit', data);
-            })
-            .catch(function(err) {
                 return res.serverError(err);
             })
     },

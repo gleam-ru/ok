@@ -1,3 +1,4 @@
+// TODO: сделать полноценной Vue страницей
 window.initAlloy = function(config) {
     config = _.extend({
         storeAs        : 'post',
@@ -14,6 +15,7 @@ window.initAlloy = function(config) {
         me.name         = $('#name');
         me.tags         = initTags();
         me.editor       = initEditor();
+        me.meta         = initMeta();
         me.nativeEditor = me.editor.get('nativeEditor');
 
         me.save_ls = function() {
@@ -22,6 +24,7 @@ window.initAlloy = function(config) {
                 snapshot : snapshot,
                 title    : me.name.val(),
                 tags     : me.tags.tagsinput('items'),
+                meta     : me.meta.get(),
             };
             if (me.config.storeAs) {
                 localStorage.setItem(me.config.storeAs, JSON.stringify(data));
@@ -38,6 +41,7 @@ window.initAlloy = function(config) {
                 me.tags.tagsinput('add', tag);
             })
             me.nativeEditor.setData(data.snapshot);
+            me.meta.set(data.meta);
             me.modified = false;
             // not working :(
             // nativeEditor.loadSnapshot(snapshot);
@@ -61,6 +65,10 @@ window.initAlloy = function(config) {
             me.config.onSmthChange(this);
         })
         me.name.on('change', function() {
+            me.modified = true;
+            me.config.onSmthChange(this);
+        })
+        $(document).on('metaIsChanged', function() {
             me.modified = true;
             me.config.onSmthChange(this);
         })
@@ -253,4 +261,146 @@ function initEditor() {
             },
         },
     });
+}
+
+function initMeta() {
+    window.vm = new Vue({
+        debug: true,
+        el: '#meta',
+        data: {
+            language  : 1,
+            languages : [],
+            blog      : 1,
+            blogs     : [],
+            post      : '',
+            posts     : [],
+        },
+
+        ready: function() {
+            var vm = this;
+            vm.set({});
+        },
+
+        watch: {
+            blog: function() {
+                var vm = this;
+                console.log(vm.blog);
+                vm.getPosts();
+                vm.onChange();
+            },
+            post: function() {
+                vm.onChange();
+            },
+            language: function() {
+                vm.onChange();
+            },
+        },
+
+        methods: {
+            get: function() {
+                return {
+                    language : this.language,
+                    blog     : this.blog,
+                    post     : this.post,
+                }
+            },
+
+            set: function(data) {
+                var vm = this;
+                var cfg = _.extend({
+                    language: 1,
+                    blog: 1,
+                    post: '',
+                }, data);
+                vm.getLanguages(function() {
+                    vm.$data.language = cfg.language;
+                    vm.getBlogs(function() {
+                        vm.$data.blog = cfg.blog;
+                        vm.getPosts(function() {
+                            vm.$data.post = cfg.post;
+                        });
+                    });
+                });
+            },
+
+            onChange: function() {
+                $(document).trigger('metaIsChanged');
+            },
+
+
+            getLanguages: function(next) {
+                var vm = this;
+                var $el = $(vm.$el).find('#language');
+                $el.disable();
+                $.get('/api/language')
+                .done(function (languages) {
+                    vm.$data.languages = _.map(languages, function(l) {
+                        return {
+                            id: l.id,
+                            name: l.code,
+                        }
+                    });
+                    if (next) {
+                        next();
+                    }
+                })
+                .fail(function(err) {
+                    console.error(err);
+                    mp.alert('smth went wrong...')
+                })
+                .always(function() {
+                    $el.enable();
+                })
+            },
+
+            getBlogs: function(next) {
+                var vm = this;
+                var $el = $(vm.$el).find('#blog');
+                $el.disable();
+                $.get('/api/blog')
+                .done(function (blogs) {
+                    vm.$data.blogs = blogs;
+                    if (next) {
+                        next();
+                    }
+                })
+                .fail(function(err) {
+                    console.error(err);
+                    mp.alert('smth went wrong...')
+                })
+                .always(function() {
+                    $el.enable();
+                })
+            },
+
+            getPosts: function(next) {
+                var vm = this;
+                vm.$data.post = '';
+                var $el = $(vm.$el).find('#post');
+                $el.disable();
+                $.get('/api/post?where={"blog":'+(vm.blog||'null')+'}')
+                .done(function (posts) {
+                    vm.$data.posts = _.map([{}].concat(posts), function(p) {
+                        return {
+                            id: p.id,
+                            name: p.title,
+                        }
+                    });
+                    if (next) {
+                        next();
+                    }
+                })
+                .fail(function(err) {
+                    console.error(err);
+                    mp.alert('smth went wrong...')
+                })
+                .always(function() {
+                    $el.enable();
+                })
+            },
+        }
+
+    })
+
+    return window.vm;
 }

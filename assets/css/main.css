@@ -132,7 +132,10 @@ ul.no-dots>li {list-style: none;}
         height: 100px;
         position: absolute;
         }
-
+.disabled {
+    opacity: 0.4;
+    cursor: default;
+    }
 
 
 /***

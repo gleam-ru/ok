@@ -113,6 +113,28 @@ function installJQMethods() {
         this.mask(false);
     }
 
+
+    $(document).on('click', '.disabled', function(e) {
+        e.preventDefault();
+        return false;
+    })
+    $.fn.disable = function(state) {
+
+        if(state === undefined || state) {
+            // disable
+            this.prop('disabled', 'disabled');
+            this.addClass('disabled');
+        }
+        else {
+            this.prop('disabled', false);
+            this.removeClass('disabled');
+        }
+
+    }
+    $.fn.enable = function() {
+        this.disable(false);
+    }
+
     // уведомление об результате действия
     // state - true/false (success/fail)
     // cb - cb.

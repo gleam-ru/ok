@@ -69,7 +69,7 @@ module.exports.blueprints = {
     *                                                                          *
     ***************************************************************************/
 
-    rest: false,
+    rest: true,
 
     /***************************************************************************
     *                                                                          *
@@ -146,9 +146,9 @@ module.exports.blueprints = {
     *                                                                           *
     ****************************************************************************/
 
-    defaultLimit: 30,
+    defaultLimit: 999,
 
     // http://stackoverflow.com/questions/26921889/disabling-default-sails-js-routes
-    index: false,
+    // index: false,
 
 };

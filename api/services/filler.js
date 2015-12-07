@@ -12,8 +12,8 @@ me.process = function(cb) {
 function _language() {
     console.log('filler:_language');
     var languages = [
-        {code: 'ru', name: 'Русский'},
-        {code: 'en', name: 'English'},
+        {id: 1, code: 'en', name: 'English'},
+        {id: 2, code: 'ru', name: 'Русский'},
     ];
     return Q()
         .then(function() {
@@ -24,10 +24,11 @@ function _language() {
 function _blog() {
     console.log('filler:_blog');
     var blogs = [
-        {name: 'analytics'},
-        {name: 'reviews'},
-        {name: 'recommendations'},
-        {name: 'archive'},
+        {id: 1, name: 'no-category'},
+        {id: 2, name: 'analytics'},
+        {id: 3, name: 'reviews'},
+        {id: 4, name: 'recommendations'},
+        {id: 5, name: 'archive'},
     ];
     return Q()
         .then(function() {
