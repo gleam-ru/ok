@@ -5,7 +5,20 @@ me.process = function(cb) {
         _role(),
         _admin(),
         _blog(),
+        _language(),
     ])
+}
+
+function _language() {
+    console.log('filler:_language');
+    var languages = [
+        {code: 'ru', name: 'Русский'},
+        {code: 'en', name: 'English'},
+    ];
+    return Q()
+        .then(function() {
+            return Language.findOrCreate(languages, languages)
+        })
 }
 
 function _blog() {
