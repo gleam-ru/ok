@@ -104,7 +104,7 @@ module.exports = {
 
         Q()
             .then(function() {
-                return res.render('admin/create', data);
+                return res.render('blog/create', data);
             })
             .catch(function(err) {
                 return res.serverError(err);
@@ -181,7 +181,7 @@ module.exports = {
                 data.post.tags = _.map(post.tags, 'name').join(',');
             })
             .then(function() {
-                return res.render('admin/edit', data);
+                return res.render('blog/edit', data);
             })
             .catch(function(err) {
                 return res.serverError(err);

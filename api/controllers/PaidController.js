@@ -22,8 +22,8 @@ module.exports = {
                     image: 'pie.jpg',
                     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
                 }, {
-                    title: 'Active ideas',
-                    url: '/paid/ideas',
+                    title: 'Analytics',
+                    url: '/paid/analytics',
                     image: 'ideas.jpg',
                     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
                 }, {

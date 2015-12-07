@@ -1,33 +1,3 @@
-extends ../_layouts/white-subtitle
-include ../_mixins/pagination
-
-
-block append head
-  //- +globalVar('users', users)
-  //- +globalVar('roles', roles)
-  //- script(src='/ViewControllers/index.js')
-
-  style.
-    .mystyle-contents {margin-bottom: 30px;}
-    .blog-listing-full .blog-title a {
-      margin-bottom: 20px;
-      margin-right: 10px;
-      display: inline-block;
-      vertical-align: top;
-      }
-    .blog-listing-full .blog-title a.fn-edit {
-      margin-top: 1px;
-      }
-    .blog-listing-full .blog-date {margin: 20px 0 20px;}
-
-
-block append title
-  if hasRole(user, 'admin')
-    a#addPost(href='/create')
-      +iconButton('fa-plus')
-
-
-
 mixin author(post)
   if post
     - var author = post.author
@@ -80,15 +50,3 @@ mixin post(post)
               | !{post.text}
             a(href='/blog/get/#{post.id}')
               +revealButton('fa-arrow-right', 'More')
-
-
-block content
-  section.wow
-    .container
-      if posts && posts.length
-        for post in posts
-          +post(post)
-      else
-        .row
-          .blog-title here is no posts yet...
-      +pagination(pagination.current, pagination.total)

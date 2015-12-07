@@ -1,5 +1,6 @@
-extends ../_layouts/black-subtitle.jade
 //- blog-grid-3columns.html
+extends ../../_layouts/black-subtitle.jade
+include ../_stuff
 
 block append head
   //- +globalVar('users', users)
@@ -12,25 +13,33 @@ block append head
 
 
 
+block append title
+  if hasRole(user, 'admin')
+    a#addPost(href='/create')
+      +iconButton('fa-plus')
+
 
 mixin post(post)
   .col-md-4.col-sm-6.col-xs-6.blog-listing.wow.fadeInUp(data-wow-duration='300ms')
     .blog-title
-      a(href='#{post.url || "/"}') #{post.title || 'Noname'}
+      a(href=base+'/get/#{post.id}') #{post.title || 'Noname'}
         if (post.result)
           if post.result >= 0
             span.percent.green (+#{post.result}%)
           else
             span.percent.red (#{post.result}%)
+      if hasRole(user, 'admin')
+        a.fn-edit(href='/edit?id=#{post.id}')
+          +iconButton('fa-pencil')
     .mb-10
     .blog-details
-      .blog-short-description !{post.description || ''}
+      .blog-short-description !{post.text || ''}
 
 
 block content
   section.wow.fadeIn
     .container
       .row.blog-3col
-        for idea in ideas
-          +post(idea)
+        for post in posts
+          +post(post)
       //- +pagination()

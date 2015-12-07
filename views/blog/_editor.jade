@@ -10,7 +10,6 @@ block append head
   //- +globalVar('roles', roles)
   script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
   script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")
-  script(src='/ViewControllers/admin/edit.js')
   style.
     :focus {
       outline: none !important;
@@ -42,25 +41,17 @@ block content
   section.wow.fadeIn
     .container
       input#id.hidden(
-        value=post.id
+        value= post && post.id
         )
       input#name(
         placeholder='Post title'
-        value=post.title
+        value= post && post.title
         )
       input#tags(
         placeholder='type some tags'
-        value=post.tags
+        value= post && post.tags
         )
       #zone
-        | !{post.text}
+        | !{post && post.text}
       a#save(href='#')
         +revealButton('fa-save', 'Save')
-
-
-//- var editor = AlloyEditor.editable('editable');
-//- var nativeEditor = editor.get('nativeEditor');
-//- editor.get('nativeEditor').on('change', function(event) {
-//-     var currentContent = nativeEditor.getData();
-//- });
-

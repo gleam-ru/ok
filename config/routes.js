@@ -9,18 +9,19 @@ module.exports.routes = {
 //////////
 // Blog //
 //////////
-    'get  /blog'            : 'Blog',
-    'get  /blog/get/:id'    : 'Blog.get',
-    'get  /blog/tags/:tag'  : 'Blog.tag',
+    'get  /blog'            : 'Blog.default_list',
+    'get  /blog/get/:id'    : 'Blog.default_single',
 
 
 
 //////////
 // paid //
 //////////
-    'get  /paid'                 : 'Paid',
+    'get  /paid'                   : 'Paid',
+    'get  /paid/analytics'         : 'Blog.analytics_list',
+    'get  /paid/analytics/get/:id' : 'Blog.analytics_single',
+
     'get  /paid/pay'             : 'Paid.pay',
-    'get  /paid/ideas'           : 'Paid.ideas',
     'get  /paid/ideas/get/:id'   : 'Paid.idea',
     'get  /paid/archive'         : 'Paid.archive',
     'get  /paid/allocation'      : 'Paid.allocation',
