@@ -113,13 +113,13 @@ function getPostsByType(id) {
 
 
 // получает посты по тегу
-function getPostsByTag(id) {
-    if (!id) {
+function getPostsByTag(name) {
+    if (!name) {
         return Post.find().populateAll();
     }
     else {
         return Tag
-            .findOne({id: id})
+            .findOne({name: name})
             .populate('posts')
             .then(function(tag) {
                 return tag.posts;

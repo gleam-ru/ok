@@ -6,7 +6,7 @@ $(document).ready(function() {
             $('#save').on('click', function() {
                 cnt.mask();
                 var data = editor.save_ls();
-                $.post('/create', {
+                $.post('/api/update_post', {
                     msg: data,
                 })
                 .done(function(data) {

@@ -268,3 +268,18 @@ input.has-error {
     margin-left: 10px;
     display: inline-block;
     }
+
+
+
+.mystyle-contents {margin-bottom: 30px;}
+.blog-listing-full .blog-title a {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: top;
+  }
+.blog-listing-full .blog-title a.fn {
+  margin-top: 1px;
+  margin-right: 0px;
+  }
+.blog-listing-full .blog-date {margin: 20px 0 20px;}

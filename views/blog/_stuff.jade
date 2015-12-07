@@ -8,8 +8,11 @@ mixin headerButtons()
 //- кнопки для заголовка поста
 mixin titleButtons(post)
   if hasRole(user, 'admin')
-    a.fn-edit(href='/edit?id=#{post.id}')
+    a.fn.fn-edit(href='/edit?id=#{post.id}')
       +iconButton('fa-pencil')
+  if hasRole(user, 'admin')
+    a.fn(href='/create?parent=#{post.id}&types=#{types}')
+      +iconButton('fa-chain')
 
 
 
