@@ -113,24 +113,19 @@ module.exports = {
 
     post_POST: function(req, res) {
         var msg = req.param('msg');
-        console.debug(1)
 
         if (!msg || !msg.title || !req.user || !req.user.id) {
-            console.debug(2)
             return res.badRequest();
         }
 
         return Q()
             .then(function() {
-                console.debug(3)
                 return User.findOne({id: req.user.id});
             })
             .then(function(user) {
                 if (!user) {
-                    console.debug(4.0)
                     throw new Error('authorize first!');
                 }
-                console.debug(4.1)
                 msg.editor = user.id;
                 return Post.findOrCreate({id: msg.id}, {
                     author : user.id,
@@ -138,7 +133,6 @@ module.exports = {
                 })
             })
             .then(function(post) {
-                console.debug(5)
                 return post.update({
                     tags   : msg.tags,
                     text   : msg.snapshot,
@@ -146,12 +140,10 @@ module.exports = {
                 });
             })
             .then(function(post) {
-                console.debug(6)
                 res.send({id: post.id});
                 return res.ok();
             })
             .catch(function(err) {
-                console.debug(7)
                 console.error('post_POST err', err)
                 return res.serverError(err);
             })

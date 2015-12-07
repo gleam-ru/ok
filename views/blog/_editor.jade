@@ -10,7 +10,11 @@ block append head
   //- +globalVar('roles', roles)
   script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
   script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")
+  script(src='/Components/Editor.js')
   style.
+    body {
+      overflow: hidden;
+      }
     :focus {
       outline: none !important;
       outline-color: transparent;
@@ -37,21 +41,34 @@ block append head
       margin-left: 30px;
       }
 
+
 block content
   section.wow.fadeIn
     .container
-      input#id.hidden(
-        value= post && post.id
-        )
-      input#name(
-        placeholder='Post title'
-        value= post && post.title
-        )
-      input#tags(
-        placeholder='type some tags'
-        value= post && post.tags
-        )
-      #zone
-        | !{post && post.text}
-      a#save(href='#')
-        +revealButton('fa-save', 'Save')
+      .row
+        .col-md-2.no-padding.pr-10
+          select
+        .col-md-4.no-padding.pl-10.pr-10
+          select
+        .col-md-6.no-padding.pl-10
+          select
+      .row
+        input#id.hidden(
+          value= post && post.id
+          )
+      .row
+        input#name(
+          placeholder='Post title'
+          value= post && post.title
+          )
+      .row
+        input#tags(
+          placeholder='type some tags'
+          value= post && post.tags
+          )
+      .row
+        #zone
+          | !{post && post.text}
+      .row
+        a#save(href='#')
+          +revealButton('fa-save', 'Save')
