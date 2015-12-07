@@ -10,8 +10,8 @@ module.exports = {
     // страница с созданием поста
     create: function(req, res) {
         var data = {
-            pageTitle: 'New',
-            title: 'New',
+            pageTitle: 'Create',
+            title: 'Create',
             bc: [
                 {name: 'Home',  href: '/'},
             ],
