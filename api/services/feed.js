@@ -97,13 +97,13 @@ function getPostsByTypes(list) {
 
 
 // получает посты по типу
-function getPostsByType(name) {
-    if (!name) {
-        return Post.find({blog: undefined}).populateAll()
+function getPostsByType(id) {
+    if (!id) {
+        return Post.find().populateAll();
     }
     else {
         return Blog
-            .findOne({name: name})
+            .findOne({id: id})
             .populate('posts')
             .then(function(blog) {
                 return blog.posts;
@@ -113,13 +113,13 @@ function getPostsByType(name) {
 
 
 // получает посты по тегу
-function getPostsByTag(name) {
-    if (!name) {
+function getPostsByTag(id) {
+    if (!id) {
         return Post.find().populateAll();
     }
     else {
         return Tag
-            .findOne({name: name})
+            .findOne({id: id})
             .populate('posts')
             .then(function(tag) {
                 return tag.posts;

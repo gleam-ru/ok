@@ -10,6 +10,8 @@ var cheerio = require('cheerio');
 module.exports = {
 
     attributes: {
+        parent  : {model: 'Post'},
+
         author  : {model: 'User', required: true},
         editor  : {model: 'User'},
 
@@ -22,6 +24,7 @@ module.exports = {
         },
 
         blog    : {model: 'Blog', defaultsTo: 1},
+        language: {model: 'Language', defaultsTo: 1},
 
 
         // preview for feed

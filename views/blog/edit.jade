@@ -1,7 +1,7 @@
 extends ./_editor.jade
 
 block append head
-  //- +globalVar('users', users)
+  +globalVar('post', post)
   //- +globalVar('roles', roles)
   script(src='/ViewControllers/admin/edit.js')
   style.

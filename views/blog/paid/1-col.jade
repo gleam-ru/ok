@@ -23,9 +23,7 @@ block append head
 
 
 block append title
-  if hasRole(user, 'admin')
-    a#addPost(href='/create')
-      +iconButton('fa-plus')
+  +headerButtons()
 
 
 

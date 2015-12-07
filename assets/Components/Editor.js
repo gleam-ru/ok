@@ -43,7 +43,13 @@ window.initAlloy = function(config) {
                 me.tags.tagsinput('add', tag);
             })
             me.nativeEditor.setData(data.snapshot);
-            me.meta.set(data.meta);
+
+            var meta = getUrlParams();
+            me.meta.set(_.extend(data.meta, {
+                language : meta.language || 1,
+                blog     : meta.types    || 1,
+                post     : meta.parent   || '',
+            }));
             me.modified = false;
             // not working :(
             // nativeEditor.loadSnapshot(snapshot);
@@ -87,6 +93,19 @@ window.initAlloy = function(config) {
                     me.save_ls();
                 }
             }, me.config.savingInterval);
+        }
+        else {
+            var meta = {};
+            if (globalVars && globalVars.language) {
+                meta.language = globalVars.language
+            }
+            if (globalVars && globalVars.blog) {
+                meta.blog = globalVars.blog
+            }
+            if (globalVars && globalVars.parent) {
+                meta.parent = globalVars.parent
+            }
+            me.meta.set(meta);
         }
 
         return ok(me);
@@ -244,9 +263,9 @@ function initMeta() {
         debug: true,
         el: '#meta',
         data: {
-            language  : 1,
+            language  : '',
             languages : [],
-            blog      : 1,
+            blog      : '',
             blogs     : [],
             post      : '',
             posts     : [],
@@ -254,7 +273,7 @@ function initMeta() {
 
         ready: function() {
             var vm = this;
-            vm.set({});
+            // vm.set({});
         },
 
         watch: {
@@ -274,10 +293,13 @@ function initMeta() {
 
         methods: {
             get: function() {
+                var blog     = _.find(this.blogs,     {id: parseInt(this.blog)});
+                var post     = _.find(this.posts,     {id: parseInt(this.post)});
+                var language = _.find(this.languages, {id: parseInt(this.language)});
                 return {
-                    language : this.language,
-                    blog     : this.blog,
-                    post     : this.post,
+                    language : language && language.id,
+                    blog     : blog     && blog.id,
+                    post     : post     && post.id,
                 }
             },
 

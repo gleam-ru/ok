@@ -1,3 +1,19 @@
+//- кнопки для заголовка страницы
+mixin headerButtons()
+  if hasRole(user, 'admin')
+    a#addPost(href='/create?types=#{types}')
+      +iconButton('fa-plus')
+
+
+//- кнопки для заголовка поста
+mixin titleButtons(post)
+  if hasRole(user, 'admin')
+    a.fn-edit(href='/edit?id=#{post.id}')
+      +iconButton('fa-pencil')
+
+
+
+
 mixin author(post)
   if post
     - var author = post.author
@@ -30,9 +46,7 @@ mixin post(post)
           .blog-details
             .blog-title
               a(href='/blog/get/#{post.id}') #{post.title}
-              if hasRole(user, 'admin')
-                a.fn-edit(href='/edit?id=#{post.id}')
-                  +iconButton('fa-pencil')
+              +titleButtons(post)
             .blog-date.no-padding-top
               +tags(post.tags)
             //- div

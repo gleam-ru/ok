@@ -74,15 +74,18 @@ module.exports.routes = {
     'get  /admin/users/edit/:id'     : 'Admin.user',
     'post /admin/users'              : 'Admin.updateUserData',
     //---
-    'get  /create'     : 'Admin.create',
-    'get  /edit'       : 'Admin.edit',
+    'get  /create' : 'Blog.create',
+    'get  /edit'   : 'Blog.edit',
     //---
+
 
 
 /////////
 // API //
 /////////
     'post /api/update_post'       : 'API.post',
+
+
 
 //////////////
 // Settings //

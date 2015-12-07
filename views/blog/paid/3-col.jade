@@ -14,9 +14,7 @@ block append head
 
 
 block append title
-  if hasRole(user, 'admin')
-    a#addPost(href='/create')
-      +iconButton('fa-plus')
+  +headerButtons()
 
 
 mixin post(post)
@@ -28,9 +26,7 @@ mixin post(post)
             span.percent.green (+#{post.result}%)
           else
             span.percent.red (#{post.result}%)
-      if hasRole(user, 'admin')
-        a.fn-edit(href='/edit?id=#{post.id}')
-          +iconButton('fa-pencil')
+      +titleButtons(post)
     .mb-10
     .blog-details
       .blog-short-description !{post.text || ''}

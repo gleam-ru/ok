@@ -6,7 +6,9 @@ block prepend head
 
 
 block append head
-  //- +globalVar('languages', languages)
+  +globalVar('parent',   post && post.parent   && post.parent.id)
+  +globalVar('blog',     post && post.blog     && post.blog.id)
+  +globalVar('language', post && post.language && post.language.id)
   //- +globalVar('blogs', blogs)
   script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
   script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")

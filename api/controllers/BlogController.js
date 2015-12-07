@@ -6,9 +6,60 @@
  */
 
 module.exports = {
+
+    // страница с созданием поста
+    create: function(req, res) {
+        var data = {
+            pageTitle: 'New',
+            title: 'New',
+            bc: [
+                {name: 'Home',  href: '/'},
+            ],
+        }
+        Q()
+            .then(function() {
+                return res.render('blog/create', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+    },
+
+    // страница с редактированием поста
+    edit: function(req, res) {
+        var id = parseInt(req.param('id'))
+        if (!id) {
+            return res.notFound();
+        }
+        var data = {
+            pageTitle: 'Edit',
+            title: 'Edit',
+            bc: [
+                {name: 'Home',  href: '/'},
+            ],
+        }
+
+        Q()
+            .then(function() {
+                return Post.findOne({id: id}).populateAll();
+            })
+            .then(function(post) {
+                data.post = post.toJSON();
+                data.post.tags = _.map(post.tags, 'name').join(',');
+            })
+            .then(function() {
+                return res.render('blog/edit', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+    },
+
+
+
     default_list: function(req, res) {
         formatDataForList({
-            types : 'no-category',
+            types : [1],
             tags  : req.param('tags'),
             page  : req.param('page'),
         })
@@ -45,7 +96,7 @@ module.exports = {
                 {name: 'Paid', href: '/paid'},
                 {name: 'Analytics', href: '/paid/analytics'},
             ],
-            types : 'analytics',
+            types : [2],
             tags  : req.param('tags'),
             page  : req.param('page'),
             base: '/paid/analytics',
@@ -72,6 +123,8 @@ module.exports = {
         })
         .catch(res.serverError)
     },
+
+
 
 
 
