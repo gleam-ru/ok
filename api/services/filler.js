@@ -24,11 +24,11 @@ function _language() {
 function _blog() {
     console.log('filler:_blog');
     var blogs = [
-        {id: 1, name: 'no-category'},
-        {id: 2, name: 'analytics'},
-        {id: 3, name: 'reviews'},
-        {id: 4, name: 'recommendations'},
-        {id: 5, name: 'archive'},
+        {id: 1, access: 1, name: 'index'},
+        {id: 2, access: 3, name: 'analytics'},
+        {id: 3, access: 3, name: 'reviews'},
+        {id: 4, access: 3, name: 'recommendations'},
+        {id: 5, access: 3, name: 'archive'},
     ];
     return Q()
         .then(function() {
@@ -39,10 +39,10 @@ function _blog() {
 function _role() {
     console.log('filler:_role');
     var roles = [
-        {name: 'admin'},
-        {name: 'paid'},
-        {name: 'user'},
-        {name: 'ghost'},
+        {id: 1, name: 'ghost'},
+        {id: 2, name: 'user'},
+        {id: 3, name: 'paid'},
+        {id: 4, name: 'admin'},
     ];
     return Q()
         .then(function() {

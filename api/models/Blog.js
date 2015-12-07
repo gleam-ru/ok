@@ -8,8 +8,12 @@
 module.exports = {
 
     attributes: {
-        name  : {type: 'string', required: true, unique: true,},
-        posts : {
+        name   : {type: 'string', required: true, unique: true,},
+        access : {
+            model : 'Role',
+            defaultsTo: 4, // admin
+        },
+        posts  : {
             collection : 'Post',
             via        : 'blog',
         },
