@@ -14,6 +14,7 @@ module.exports = {
             title: 'Create',
             bc: [
                 {name: 'Home',  href: '/'},
+                {name: 'Create post',  href: '/create'},
             ],
         }
         Q()
@@ -36,6 +37,7 @@ module.exports = {
             title: 'Edit',
             bc: [
                 {name: 'Home',  href: '/'},
+                {name: 'Edit post',  href: '/edit'},
             ],
         }
 

@@ -183,16 +183,16 @@ function installMP() {
     window.mp.confirm = function(html, cb) {
         var popup = $('<div></div>');
         popup.addClass('white-popup');
-        popup.append('<h3>'+__('Need_conf')+'</h3>');
+        popup.append('<h2 class="mb-10">'+'Confirmation required!'+'</h2>');
         popup.append(html);
 
-        var btns = $('<div></div>');
+        var btns = $('<div class="mt-10"></div>');
             var ok = $(Jade.els.button('OK')).addClass('mr-10');
                 ok.bind('click', function() {
                     cb();
                     $.magnificPopup.close();
                 });
-            var cancel = $(Jade.els.button(__('Cancel')));
+            var cancel = $(Jade.els.button('Cancel'));
                 cancel.bind('click', function() {
                     $.magnificPopup.close();
                 });

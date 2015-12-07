@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-    post: function(req, res) {
+    post_update: function(req, res) {
         var msg = req.param('msg');
 
         if (!msg || !msg.title || !req.user || !req.user.id) {
@@ -61,6 +61,23 @@ module.exports = {
                 return res.serverError(err);
             })
     },
+
+    post_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+        if (!id) {
+            return res.badRequest();
+        }
+        else {
+            return Post
+                .findOne({id: id})
+                .then(function(post) {
+                    console.info('post destroyed:', post.id, post.title)
+                    return post.destroy();
+                })
+                .then(res.ok)
+                .catch(res.serverError)
+        }
+    }
 
 };
 

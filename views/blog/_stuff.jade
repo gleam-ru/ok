@@ -1,8 +1,18 @@
 //- кнопки для заголовка страницы
-mixin headerButtons()
+mixin headerButtons_list()
   if hasRole(user, 'admin')
     a#addPost(href='/create?types=#{types}')
       +iconButton('fa-plus')
+
+mixin headerButtons_single(post)
+  if hasRole(user, 'admin')
+    a#deletePost(href='/edit?id=#{post.id}')
+      +iconButton('fa-pencil')
+
+mixin headerButtons_editor(post)
+  if hasRole(user, 'admin')
+    a#deletePost(href='#')
+      +iconButton('fa-close')
 
 
 //- кнопки для заголовка поста

@@ -83,7 +83,8 @@ module.exports.routes = {
 /////////
 // API //
 /////////
-    'post /api/update_post'       : 'API.post',
+    'post /api/update_post'       : 'API.post_update',
+    'post /api/remove_post'       : 'API.post_remove',
 
 
 
