@@ -160,42 +160,4 @@ module.exports = {
     },
 
 
-
-    post_POST: function(req, res) {
-        var msg = req.param('msg');
-
-        if (!msg || !msg.title || !req.user || !req.user.id) {
-            return res.badRequest();
-        }
-
-        return Q()
-            .then(function() {
-                return User.findOne({id: req.user.id});
-            })
-            .then(function(user) {
-                if (!user) {
-                    throw new Error('authorize first!');
-                }
-                msg.editor = user.id;
-                return Post.findOrCreate({id: msg.id}, {
-                    author : user.id,
-                    title  : msg.title,
-                })
-            })
-            .then(function(post) {
-                return post.update({
-                    tags   : msg.tags,
-                    text   : msg.snapshot,
-                    title  : msg.title,
-                });
-            })
-            .then(function(post) {
-                res.send({id: post.id});
-                return res.ok();
-            })
-            .catch(function(err) {
-                console.error('post_POST err', err)
-                return res.serverError(err);
-            })
-    },
 };

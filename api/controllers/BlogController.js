@@ -8,9 +8,9 @@
 module.exports = {
     default_list: function(req, res) {
         formatDataForList({
-            type: undefined,
-            page: req.param('page'),
-            tags: req.param('tags'),
+            types : 'no-category',
+            tags  : req.param('tags'),
+            page  : req.param('page'),
         })
         .then(function(data) {
             return _.extend(data, {
@@ -45,9 +45,9 @@ module.exports = {
                 {name: 'Paid', href: '/paid'},
                 {name: 'Analytics', href: '/paid/analytics'},
             ],
-            type: undefined,
-            page: req.param('page'),
-            tags: req.param('tags'),
+            types : 'analytics',
+            tags  : req.param('tags'),
+            page  : req.param('page'),
             base: '/paid/analytics',
         })
         .then(function(data) {
@@ -99,9 +99,9 @@ function formatDataForList(data) {
         })
         .then(function() {
             return feed.get({
-                type: data.type,
-                page: data.page || 1,
-                tags: data.tags,
+                types : data.types,
+                tags  : data.tags,
+                page  : data.page || 1,
             });
         })
         .spread(function(posts, pagination) {

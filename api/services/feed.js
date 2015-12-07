@@ -92,9 +92,6 @@ function getPostsByTags(list) {
 function getPostsByTypes(list) {
     return Q
         .all(_.map(list, getPostsByType))
-        .then(function(posts) {
-            return posts
-        })
         .then(boolOr)
 }
 
@@ -103,9 +100,6 @@ function getPostsByTypes(list) {
 function getPostsByType(name) {
     if (!name) {
         return Post.find({blog: undefined}).populateAll()
-        .then(function(posts) {
-            return posts
-        });
     }
     else {
         return Blog

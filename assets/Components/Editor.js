@@ -12,6 +12,7 @@ window.initAlloy = function(config) {
         var me = {};
         me.config       = config;
         me.modified     = false;
+        me.id           = $('#id');
         me.name         = $('#name');
         me.tags         = initTags();
         me.editor       = initEditor();
@@ -21,6 +22,7 @@ window.initAlloy = function(config) {
         me.save_ls = function() {
             var snapshot = me.nativeEditor.getData();
             var data = {
+                id       : me.id.val(),
                 snapshot : snapshot,
                 title    : me.name.val(),
                 tags     : me.tags.tagsinput('items'),
@@ -90,32 +92,6 @@ window.initAlloy = function(config) {
         return ok(me);
     })
 }
-
-
-$('#save').on('click', function() {
-    cnt.mask();
-    var snapshot = nativeEditor.getData();
-    var data = {
-        id: $('#id').val(),
-        snapshot: snapshot,
-        title: $('#name').val(),
-        tags: $tags.tagsinput('items'),
-    };
-    $.post('/edit', {
-        msg: data,
-    })
-    .done(function(data) {
-        window.location.href = '/blog/get/'+data.id;
-    })
-    .fail(function(err) {
-        mp.alert('something went wrong...');
-        console.error(err);
-    })
-    .always(function() {
-        cnt.unmask();
-    })
-})
-
 
 
 function initTags() {
