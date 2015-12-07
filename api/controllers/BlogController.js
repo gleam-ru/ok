@@ -67,6 +67,7 @@ module.exports = {
             return _.extend(data, {
                 pageTitle : 'Blog',
                 title     : 'Blog',
+                base      : '/blog',
             })
         })
         .then(function(data) {
@@ -102,7 +103,7 @@ module.exports = {
             base: '/paid/analytics',
         })
         .then(function(data) {
-            return res.render('blog/paid/3-col', data)
+            return res.render('blog/paid/1-col', data)
         })
         .catch(res.serverError)
     },
@@ -110,7 +111,6 @@ module.exports = {
     analytics_single: function(req, res) {
         formatDataForSingle({
             id: req.param('id'),
-            base: '/paid/analytics',
             bc: [
                 {name: 'Home', href: '/'},
                 {name: 'Paid', href: '/paid'},

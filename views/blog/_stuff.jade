@@ -27,7 +27,7 @@ mixin author(post)
       .blog-date-right.no-padding-bottom #{moment(post.createdAt).format('DD MMMM YYYY')}
       .blog-date-right
         | Posted by 
-        a(href='profile/get/#{author.id}') #{author.name} #{author.surname}
+        a(href='/profile/get/#{author.id}') #{author.name} #{author.surname}
       .separator-line.bg-black.no-margin-lr.no-margin.xs-margin-bottom-ten
 
 mixin tags(tags)
@@ -36,7 +36,7 @@ mixin tags(tags)
     each tag in tags
       if !first
         | , 
-      a(href='blog?tags[]=#{tag.name}') #{tag.name}
+      a(href=base+'?tags[]=#{tag.name}') #{tag.name}
       - first = false;
 
 mixin post(post)
@@ -48,7 +48,7 @@ mixin post(post)
         .col-md-10.col-sm-10.col-xs-12.xs-padding-left
           .blog-details
             .blog-title
-              a(href='/blog/get/#{post.id}') #{post.title}
+              a(href=base+'/get/#{post.id}') #{post.title}
               +titleButtons(post)
             .blog-date.no-padding-top
               +tags(post.tags)
@@ -65,5 +65,5 @@ mixin post(post)
             .separator-line.bg-black.no-margin-lr.margin-four
             div.mystyle-contents
               | !{post.text}
-            a(href='/blog/get/#{post.id}')
+            a(href=base+'/get/#{post.id}')
               +revealButton('fa-arrow-right', 'More')
