@@ -6,7 +6,7 @@ mixin headerButtons_list()
 
 mixin headerButtons_single(post)
   if hasRole(user, 'admin')
-    a#deletePost(href='/edit?id=#{post.id}')
+    a#editPost(href='/edit?id=#{post.id}')
       +iconButton('fa-pencil')
 
 mixin headerButtons_editor(post)

@@ -13,8 +13,8 @@ module.exports.routes = {
     'get  /blog/get/:id'           : 'Blog.default_post',
     // //
     'get  /blog/f'                 : 'Blog.free_feed',
-    'get  /blog/f/:blog'           : 'Blog.paid_blog',
-    'get  /blog/f/:blog/get/:id'   : 'Blog.paid_post',
+    'get  /blog/f/:blog'           : 'Blog.free_blog',
+    'get  /blog/f/:blog/get/:id'   : 'Blog.free_post',
 
 
 

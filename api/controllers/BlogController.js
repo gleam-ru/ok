@@ -125,11 +125,11 @@ module.exports = {
                     types : [blog.id],
                     tags  : req.param('tags'),
                     page  : req.param('page'),
-                    base: '/blog/'+blog.name,
+                    base: '/blog/f/'+blog.name,
                 })
             })
             .then(function(data) {
-                return res.render('blog/blog/1-col', data)
+                return res.render('blog/free/1-col', data)
             })
             .catch(res.serverError)
     },
@@ -157,7 +157,7 @@ module.exports = {
                 })
             })
             .then(function(data) {
-                return res.render('blog/blog/single', data)
+                return res.render('blog/free/single', data)
             })
             .catch(res.serverError)
     },
@@ -195,7 +195,7 @@ module.exports = {
                     types : [blog.id],
                     tags  : req.param('tags'),
                     page  : req.param('page'),
-                    base: '/paid/'+blog.name,
+                    base: '/paid/f/'+blog.name,
                 })
             })
             .then(function(data) {
