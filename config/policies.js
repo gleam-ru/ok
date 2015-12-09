@@ -14,9 +14,10 @@ module.exports.policies = {
     //     '*' : ['redirect', 'authenticated'],
     // },
 
-    // SettingsController: {
-    //     '*' : ['redirect', 'authenticated'],
-    // },
+    PaidController: {
+        '*'   : ['rememberMe', 'isPaid'],
+        'pay' : []
+    },
 
     // // Облигации, работа с фильрами
     // BondsController: {
