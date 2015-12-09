@@ -14,27 +14,29 @@ module.exports = {
                 {name: 'Home', href: '/'},
                 {name: 'Paid', href: '/paid'},
             ],
+        };
 
-            tiles: [
-                {
-                    title: 'Assets allocation',
-                    url: '/paid/allocation',
-                    image: 'pie.jpg',
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-                }, {
-                    title: 'Analytics',
-                    url: '/paid/analytics',
-                    image: 'ideas.jpg',
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-                }, {
-                    title: 'Archive',
-                    url: '/paid/archive',
-                    image: 'archive.jpg',
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-                }
-            ],
-        }
-        return Q()
+        return Q.all([
+                Blog.find({access: {'>': 1}}),
+                Portfolio.find(),
+            ])
+            .spread(function(blogs, portfolios) {
+                data.portfolios = _.map(portfolios, function(portfolio) {
+                    return {
+                        title       : portfolio.name,
+                        url         : '/paid/p/'+portfolio.name,
+                        description : portfolio.description,
+                    }
+                })
+                data.blogs = _.map(blogs, function(blog) {
+                    return {
+                        title       : blog.name,
+                        url         : '/paid/f/'+blog.name,
+                        image       : blog.img,
+                        description : blog.description,
+                    }
+                })
+            })
             .then(function() {
                 return res.render('paid', data)
             })

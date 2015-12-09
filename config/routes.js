@@ -22,14 +22,18 @@ module.exports.routes = {
 // paid //
 //////////
     'get  /paid'                   : 'Paid',
+    'get  /paid/pay'               : 'Paid.pay',
+    // //
     'get  /paid/f'                 : 'Blog.paid_feed',
     'get  /paid/f/:blog'           : 'Blog.paid_blog',
     'get  /paid/f/:blog/get/:id'   : 'Blog.paid_post',
     // //
-    'get  /paid/pay'             : 'Paid.pay',
-    'get  /paid/ideas/get/:id'   : 'Paid.idea',
-    'get  /paid/archive'         : 'Paid.archive',
-    'get  /paid/allocation'      : 'Paid.allocation',
+    'get  /paid/p'                 : 'Portfolio.feed',
+    'get  /paid/p/get/:id'         : 'Portfolio.single',
+    // //
+    'get  /paid/ideas/get/:id'     : 'Paid.idea',
+    'get  /paid/archive'           : 'Paid.archive',
+    'get  /paid/allocation'        : 'Paid.allocation',
 
 
 

@@ -5,6 +5,7 @@ me.process = function(cb) {
         _role(),
         _admin(),
         _blog(),
+        _portfolio(),
         _language(),
     ])
 }
@@ -21,15 +22,28 @@ function _language() {
         })
 }
 
+function _portfolio() {
+    console.log('filler:_portfolio');
+    var portfolios = [
+        {name: 'cost'},
+        {name: 'income'},
+        {name: 'aggressive'},
+        {name: 'conservative'},
+    ];
+    return Q()
+        .then(function() {
+            return Portfolio.findOrCreate(portfolios, portfolios)
+        })
+}
+
 function _blog() {
     console.log('filler:_blog');
     var blogs = [
         {id: 1,   access: 1, name: 'index'},
 
-        {id: 101, access: 3, name: 'analytics'},
-        {id: 102, access: 3, name: 'reviews'},
-        {id: 103, access: 3, name: 'recommendations'},
-        {id: 104, access: 3, name: 'portfolios'},
+        {id: 102, access: 3, img: 'archive.jpg', name: 'reviews'},
+        {id: 103, access: 3, img: 'ideas.jpg',   name: 'recommendations'},
+        {id: 104, access: 3, img: 'pie.jpg',     name: 'portfolios'},
 
         {id: 999, access: 1, name: 'archive'},
     ];
