@@ -59,9 +59,12 @@ module.exports = {
 
 
 
-    default_list: function(req, res) {
+    // /blog
+    // показ дефолтных фидов (index, archive)
+    //
+    default_blog: function(req, res) {
         formatDataForList({
-            types : [1],
+            types : [1, 999],
             tags  : req.param('tags'),
             page  : req.param('page'),
         })
@@ -78,7 +81,8 @@ module.exports = {
         .catch(res.serverError)
     },
 
-    default_single: function(req, res) {
+    // /blog/get/1
+    default_post: function(req, res) {
         formatDataForSingle({
             id: req.param('id'),
         })
@@ -90,45 +94,143 @@ module.exports = {
 
 
 
-    analytics_list: function(req, res) {
-        formatDataForList({
-            pageTitle: 'Analytics',
-            title: 'Analytics',
-            bc: [
-                {name: 'Home', href: '/'},
-                {name: 'Paid', href: '/paid'},
-                {name: 'Analytics', href: '/paid/analytics'},
-            ],
-            types : [2],
-            tags  : req.param('tags'),
-            page  : req.param('page'),
-            base: '/paid/analytics',
-        })
-        .then(function(data) {
-            return res.render('blog/paid/1-col', data)
-        })
-        .catch(res.serverError)
+    // /blog/f/name
+    // показ бесплатного блога с именем name
+    //
+    // /blog/f
+    free_feed: function(req, res) {
+        return res.redirect('/blog');
     },
 
-    analytics_single: function(req, res) {
-        formatDataForSingle({
-            id: req.param('id'),
-            bc: [
-                {name: 'Home', href: '/'},
-                {name: 'Paid', href: '/paid'},
-                {name: 'Analytics', href: '/paid/analytics'},
-                {name: 'Post', href: '/paid/analytics/get/'+req.param('id')},
-            ],
-        })
-        .then(function(data) {
-            return res.render('blog/paid/single', data)
-        })
-        .catch(res.serverError)
+    // /blog/f/index
+    free_blog: function(req, res) {
+        var blog = req.param('blog');
+
+        return Q()
+            .then(function() {
+                return Blog.findOne({name: blog});
+            })
+            .then(function(blog) {
+                if (!blog) {
+                    throw new Error(404);
+                }
+                return formatDataForList({
+                    pageTitle : blog.name,
+                    title     : blog.name,
+                    bc: [
+                        {name: 'Home',    href: '/'},
+                        {name: 'Blog',    href: '/blog'},
+                        {name: blog.name, href: '/blog/f/'+blog.name},
+                    ],
+                    types : [blog.id],
+                    tags  : req.param('tags'),
+                    page  : req.param('page'),
+                    base: '/blog/'+blog.name,
+                })
+            })
+            .then(function(data) {
+                return res.render('blog/blog/1-col', data)
+            })
+            .catch(res.serverError)
+    },
+
+    // /blog/f/index/get/1
+    free_post: function(req, res) {
+        var blog = req.param('blog');
+
+        return Q()
+            .then(function() {
+                return Blog.findOne({name: blog});
+            })
+            .then(function(blog) {
+                if (!blog) {
+                    throw new Error(404);
+                }
+                return formatDataForSingle({
+                    id: req.param('id'),
+                    bc: [
+                        {name: 'Home',    href: '/'},
+                        {name: 'Blog',    href: '/blog'},
+                        {name: blog.name, href: '/blog/f/'+blog.name},
+                        {name: 'Post',    href: '/blog/f/'+blog.name+'/get/'+req.param('id')},
+                    ],
+                })
+            })
+            .then(function(data) {
+                return res.render('blog/blog/single', data)
+            })
+            .catch(res.serverError)
     },
 
 
 
+    // /paid/f/name
+    // показ платного блога с именем name
+    //
+    // /paid/f
+    paid_feed: function(req, res) {
+        return res.redirect('/paid');
+    },
 
+    // /paid/f/analytics
+    paid_blog: function(req, res) {
+        var blog = req.param('blog');
+
+        return Q()
+            .then(function() {
+                return Blog.findOne({name: blog});
+            })
+            .then(function(blog) {
+                if (!blog) {
+                    throw new Error(404);
+                }
+                return formatDataForList({
+                    pageTitle : blog.name,
+                    title     : blog.name,
+                    bc: [
+                        {name: 'Home',    href: '/'},
+                        {name: 'Paid',    href: '/paid'},
+                        {name: blog.name, href: '/paid/f/'+blog.name},
+                    ],
+                    types : [blog.id],
+                    tags  : req.param('tags'),
+                    page  : req.param('page'),
+                    base: '/paid/'+blog.name,
+                })
+            })
+            .then(function(data) {
+                return res.render('blog/paid/1-col', data)
+            })
+            .catch(res.serverError)
+    },
+
+    // /paid/f/analytics/get/1
+    paid_post: function(req, res) {
+        var blog = req.param('blog');
+
+        return Q()
+            .then(function() {
+                return Blog.findOne({name: blog});
+            })
+            .then(function(blog) {
+                if (!blog) {
+                    throw new Error(404);
+                }
+                return formatDataForSingle({
+                    id: req.param('id'),
+                    bc: [
+                        {name: 'Home',    href: '/'},
+                        {name: 'Paid',    href: '/paid'},
+                        {name: blog.name, href: '/paid/f/'+blog.name},
+                        {name: 'Post',    href: '/paid/f/'+blog.name+'/get/'+req.param('id')},
+                    ],
+                })
+            })
+            .then(function(data) {
+                return res.render('blog/paid/single', data)
+            })
+            .catch(res.serverError)
+    },
 
 };
 

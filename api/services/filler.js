@@ -24,11 +24,14 @@ function _language() {
 function _blog() {
     console.log('filler:_blog');
     var blogs = [
-        {id: 1, access: 1, name: 'index'},
-        {id: 2, access: 3, name: 'analytics'},
-        {id: 3, access: 3, name: 'reviews'},
-        {id: 4, access: 3, name: 'recommendations'},
-        {id: 5, access: 3, name: 'archive'},
+        {id: 1,   access: 1, name: 'index'},
+
+        {id: 101, access: 3, name: 'analytics'},
+        {id: 102, access: 3, name: 'reviews'},
+        {id: 103, access: 3, name: 'recommendations'},
+        {id: 104, access: 3, name: 'portfolios'},
+
+        {id: 999, access: 1, name: 'archive'},
     ];
     return Q()
         .then(function() {

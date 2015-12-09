@@ -9,8 +9,12 @@ module.exports.routes = {
 //////////
 // Blog //
 //////////
-    'get  /blog'            : 'Blog.default_list',
-    'get  /blog/get/:id'    : 'Blog.default_single',
+    'get  /blog'                   : 'Blog.default_blog',
+    'get  /blog/get/:id'           : 'Blog.default_post',
+    // //
+    'get  /blog/f'                 : 'Blog.free_feed',
+    'get  /blog/f/:blog'           : 'Blog.paid_blog',
+    'get  /blog/f/:blog/get/:id'   : 'Blog.paid_post',
 
 
 
@@ -18,13 +22,16 @@ module.exports.routes = {
 // paid //
 //////////
     'get  /paid'                   : 'Paid',
-    'get  /paid/analytics'         : 'Blog.analytics_list',
-    'get  /paid/analytics/get/:id' : 'Blog.analytics_single',
-
+    'get  /paid/f'                 : 'Blog.paid_feed',
+    'get  /paid/f/:blog'           : 'Blog.paid_blog',
+    'get  /paid/f/:blog/get/:id'   : 'Blog.paid_post',
+    // //
     'get  /paid/pay'             : 'Paid.pay',
     'get  /paid/ideas/get/:id'   : 'Paid.idea',
     'get  /paid/archive'         : 'Paid.archive',
     'get  /paid/allocation'      : 'Paid.allocation',
+
+
 
 
 
