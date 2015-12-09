@@ -1,0 +1,21 @@
+extends ../_layouts/black-title.jade
+include ./_stuff
+
+
+block prepend head
+
+
+block append head
+  //- +globalVar('blogs', blogs)
+  style.
+
+
+block append title
+  +headerButtons_editor(post)
+
+block content
+  section.wow.fadeIn
+    .container
+    .row
+      a#save(href='#')
+        +revealButton('fa-save', 'Save')

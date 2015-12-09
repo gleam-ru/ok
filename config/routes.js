@@ -29,7 +29,7 @@ module.exports.routes = {
     'get  /paid/f/:blog/get/:id'   : 'Blog.paid_post',
     // //
     'get  /paid/p'                 : 'Portfolio.feed',
-    'get  /paid/p/get/:id'         : 'Portfolio.single',
+    'get  /paid/p/:name'           : 'Portfolio.single',
     // //
     'get  /paid/ideas/get/:id'     : 'Paid.idea',
     'get  /paid/archive'           : 'Paid.archive',

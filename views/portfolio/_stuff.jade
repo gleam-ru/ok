@@ -1,0 +1,49 @@
+//- кнопки для заголовка страницы
+mixin headerButtons_list()
+  if hasRole(user, 'admin')
+    a#addPost(href='/admin/p/create')
+      +iconButton('fa-plus')
+
+mixin headerButtons_single(item)
+  if hasRole(user, 'admin')
+    a#editItem(href='/admin/p/edit?id=#{item.id}')
+      +iconButton('fa-pencil')
+
+mixin headerButtons_editor(item)
+  if hasRole(user, 'admin')
+    a#deleteItem(href='#')
+      +iconButton('fa-close')
+
+
+//- кнопки для заголовка поста
+mixin titleButtons(item)
+  if hasRole(user, 'admin')
+    a.fn.fn-edit(href='/admin/p/edit?id=#{item.id}')
+      +iconButton('fa-pencil')
+
+
+
+mixin item(item)
+  if item
+    .row
+      .blog-listing.blog-listing-classic.blog-listing-full.wow.fadeIn
+        .col-md-12.col-sm-12.col-xs-12.xs-padding-left
+          .blog-details
+            .blog-title
+              a(href=base+'/#{item.name}') #{item.name}
+              +titleButtons(item)
+            //- div
+              a.blog-like(href='#')
+                i.fa.fa-heart-o
+                | Likes
+              a.blog-share(href='#')
+                i.fa.fa-share-alt
+                | Share
+              a.comment(href='#')
+                i.fa.fa-comment-o
+                | 3 comment(s)
+            .separator-line.bg-black.no-margin-lr.margin-four
+            div.mystyle-contents
+              | !{item.text}
+            a(href=base+'/#{item.name}')
+              +revealButton('fa-arrow-right', 'More')

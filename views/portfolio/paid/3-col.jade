@@ -1,0 +1,52 @@
+//- blog-grid-3columns.html
+extends ../../_layouts/black-subtitle.jade
+include ../_stuff
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+  style.
+    .blog-title > a {
+      display: inline-block;
+      font-size: 25px;
+      line-height: 30px;
+      vertical-align: middle;
+      margin: 0px 10px 0px 0px;
+      height: 32px;
+      }
+    .percent {
+      line-height: 30px;
+      font-size: 27px;
+      vertical-align: middle;
+      margin-right: 10px;
+      }
+    .percent:after { content: '';}
+
+
+
+block append title
+  +headerButtons_list()
+
+
+mixin item(item)
+  .col-md-4.col-sm-6.col-xs-6.blog-listing.wow.fadeInUp(data-wow-duration='300ms')
+    .blog-title
+      a(href=base+'/#{item.name}') #{item.name || 'Noname'}
+      if (item.result)
+        if item.result >= 0
+          span(title='Last week result').percent.green (+#{item.result}%)
+        else
+          span(title='Last week result').percent.red (#{item.result}%)
+      +titleButtons(item)
+    .mb-10
+    .blog-details
+      .blog-short-description !{item.text || ''}
+
+
+block content
+  section.wow.fadeIn
+    .container
+      .row.blog-3col
+        for portfolio in portfolios
+          +item(portfolio)

@@ -106,7 +106,7 @@ function getPostsByType(id) {
             .findOne({id: id})
             .populate('posts')
             .then(function(blog) {
-                return blog.posts;
+                return blog ? blog.posts : [];
             });
     }
 }
@@ -122,7 +122,7 @@ function getPostsByTag(name) {
             .findOne({name: name})
             .populate('posts')
             .then(function(tag) {
-                return tag.posts;
+                return tag ? tag.posts : [];
             });
     }
 }

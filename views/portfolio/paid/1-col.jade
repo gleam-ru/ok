@@ -1,0 +1,25 @@
+extends ../../_layouts/black-subtitle
+include ../../_mixins/pagination
+include ../_stuff
+
+
+block append head
+  //- +globalVar('users', users)
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/index.js')
+
+
+block append title
+  +headerButtons_list()
+
+
+
+block content
+  section.wow
+    .container
+      if portfolios && portfolios.length
+        for portfolio in portfolios
+          +item(portfolio)
+      else
+        .row
+          .blog-title here is no posts yet...
