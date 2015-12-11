@@ -96,7 +96,14 @@ module.exports.routes = {
 /////////
     'post /api/update_post'       : 'API.post_update',
     'post /api/remove_post'       : 'API.post_remove',
+    // //
+    'post /api/subscribe'         : 'API.subscribe',
 
+
+////////////
+// Static //
+////////////
+    'get  /landing' : 'Static.landing',
 
 
 //////////////

@@ -1,0 +1,94 @@
+extends ./_layouts/no-header.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- script(src='/ViewControllers/index.js')
+  style.
+    section.full-screen.no-padding.fill.xs-no-background {
+      background-image:url('images/coming-soon.jpg');
+      }
+    .coming-soon-logo img {
+      max-width: 370px;
+      }
+    .coming-soon-row {
+      background: rgba(255,255,255, 0.7);
+      padding: 20px 0px;
+      border-top: solid 3px #4BA036;
+      border-bottom: solid 2px #4BA036;
+      }
+    .notify-me-main {
+      border-top: solid 1px #4BA036;
+      }
+    
+
+block content
+  section.full-screen.no-padding.fill.xs-no-background
+    .container-fluid.full-screen.position-relative.no-padding
+      .slider-typography.xs-position-inherit
+        .slider-text-middle-main
+          .slider-text-top
+            // logo
+            .coming-soon-logo
+              img.logo-style-1(src='/images/logo-flat-medium.png', alt='')
+            // end logo
+            .coming-soon-row
+              p.coming-soon-title.text-uppercase.black-text
+                | While working for a 
+                b salary
+                |, it is impossible to become 
+                b rich
+                br
+                | Never too late to start a 
+                b career
+                |  as an 
+                b investor
+                br
+                br
+                | We'll 
+                b help 
+                | you!
+                b  subscribe
+                | !
+              // time
+              #counter-underconstruction.black-text
+              // end time
+      .notify-me-main
+        .container
+          .row
+            .col-md-12.col-sm-12.text-center
+              span.notify-me-text.text-uppercase
+                strong.black-text Our website is under construction.
+                br
+                | We'll be here soon with our new awesome site, subscribe to be notified.
+          .row
+            .col-md-6.col-sm-12.text-center.center-col
+              form#notifymeform(
+                action='/api/subscribe'
+                method='post'
+                )
+                #success.no-margin-lr
+                input#email.form-control.email-add(
+                  type='text'
+                  placeholder='Enter your email address or mobile phone'
+                  name='email'
+                  )
+                button.btn.btn-black.btn-small.no-margin(
+                  name='notifyme-button'
+                  )
+                  span Get Notified
+          .row.coming-soon-footer
+            // social icon
+            .col-md-12.text-center.margin-five.no-margin-bottom.footer-social
+              //- a(target='_blank', href='https://www.facebook.com/')
+              //-   i.fa.fa-facebook
+              //- a(target='_blank', href='https://twitter.com/')
+              //-   i.fa.fa-twitter
+              //- a(target='_blank', href='https://plus.google.com/')
+              //-   i.fa.fa-google-plus
+              //- a(target='_blank', href='https://dribbble.com/')
+              //-   i.fa.fa-dribbble
+              //- a(target='_blank', href='https://www.youtube.com/')
+              //-   i.fa.fa-youtube
+              //- a(target='_blank', href='https://www.linkedin.com/')
+              //-   i.fa.fa-linkedin
+            // end social icon

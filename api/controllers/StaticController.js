@@ -20,7 +20,19 @@ module.exports = {
             .then(function() {
                 return res.render('about', data)
             })
-    }
+    },
+
+    landing: function(req, res) {
+        var data = {
+            pageTitle: 'Rumex',
+            title: 'Rumex',
+            bc: [
+                {name: 'Home', href: '/'},
+                {name: 'Landing', href: '/landing'},
+            ]
+        };
+        return res.render('landing', data);
+    },
 
 };
 

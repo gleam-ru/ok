@@ -77,6 +77,13 @@ module.exports = {
                 .then(res.ok)
                 .catch(res.serverError)
         }
+    },
+
+
+    subscribe: function(req, res) {
+        var credentials = req.param('email');
+        console.info('subscription:', credentials);
+        return res.redirect('/landing');
     }
 
 };
