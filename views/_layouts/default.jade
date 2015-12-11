@@ -19,7 +19,7 @@ html(style='height: auto;')
       block pageTitle
         | #{pageTitle ? pageTitle + ' - ' : ''}
         | OK
-  body
+  body#body
     block navigation
       nav.navbar.navbar-default.navbar-fixed-top.nav-transparent.overlay-nav.sticky-nav.nav-white.nav-dark-transparent(role='navigation')
         .container

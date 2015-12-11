@@ -87,6 +87,35 @@ function installGlobals() {
         //this will reload the page, it's likely better to store this until finished
         document.location.search = kvp.join('&');
     }
+
+    // http://www.javascriptkit.com/javatutors/loadjavascriptcss.shtml
+    window.loadFile = function(filename, filetype) {
+        if (!filetype) {
+            var splitted = filename.split('.');
+            filetype = splitted[splitted.length - 1];
+        }
+        if (filetype == "js") { //if filename is a external JavaScript file
+            var fileref = document.createElement('script')
+            fileref.setAttribute("type", "text/javascript")
+            fileref.setAttribute("src", filename)
+        }
+        else if (filetype == "css") { //if filename is an external CSS file
+            var fileref = document.createElement("link")
+            fileref.setAttribute("rel", "stylesheet")
+            fileref.setAttribute("type", "text/css")
+            fileref.setAttribute("href", filename)
+        }
+        if (typeof fileref != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(fileref)
+        }
+    }
+
+    window._require = function(scripts, cb) {
+        var next = _.after(scripts.length, cb);
+        _.each(scripts, function(s) {
+            $.getScript(s, next);
+        });
+    }
 }
 
 

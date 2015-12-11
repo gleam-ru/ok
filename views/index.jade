@@ -2,13 +2,13 @@ extends ./_layouts/no-title.jade
 
 block append head
   //- +globalVar('users', users)
-  //- +globalVar('roles', roles)
-  //- script(src='/ViewControllers/index.js')
+  +globalVar('tags', tags)
+  script(src='/ViewControllers/index.js')
   style.
 
 
 block content
-  section.page-title.parallax3.parallax-fix.page-title-large
+  //- section.page-title.parallax3.parallax-fix.page-title-large
     .opacity-medium.bg-black
     img.parallax-background-img(src="images/parallax-img20.jpg" alt="")
     .container
@@ -20,4 +20,9 @@ block content
 
   section.wow.fadeIn
     .container
+      #vue
+        tags-input(
+          :raw='raw.tags'
+          )
+    //- .container
       | asdd

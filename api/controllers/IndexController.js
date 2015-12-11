@@ -14,17 +14,10 @@ module.exports = {
         }
         Q()
             .then(function() {
-                return User
-                    .find()
-                    .populateAll()
+                return Tag.find()
             })
-            .then(function(users) {
-                data.users = users;
-                return Role
-                    .find()
-            })
-            .then(function(roles) {
-                data.roles = roles;
+            .then(function(tags) {
+                data.tags = tags;
             })
             .then(function() {
                 return res.render('index', data);
