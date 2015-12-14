@@ -13,6 +13,35 @@ $(document).ready(function() {
         return false;
     })
 
+    System.config({
+        baseURL: '/',
+    });
+
+    System.importAll = function(hash) {
+        var hash = _.clone(hash);
+        var results = {};
+        return Promise.resolve()
+            .then(function() {
+                var raw = _.clone(hash._raw);
+                delete hash._raw;
+                return Promise.all(_.map(raw, function(src) {
+                    return loadFile(src);
+                }))
+            })
+            .then(function() {
+                return Promise.all(_.map(hash, function(src, name) {
+                    return System
+                        .import(src)
+                        .then(function(imported) {
+                            results[name] = imported;
+                        })
+                }))
+            })
+            .then(function() {
+                return results;
+            })
+            ;
+    }
 
     // // tooltipster
     // $.fn.tooltipster('setDefaults', {
@@ -94,27 +123,26 @@ function installGlobals() {
             var splitted = filename.split('.');
             filetype = splitted[splitted.length - 1];
         }
-        if (filetype == "js") { //if filename is a external JavaScript file
-            var fileref = document.createElement('script')
-            fileref.setAttribute("type", "text/javascript")
-            fileref.setAttribute("src", filename)
-        }
-        else if (filetype == "css") { //if filename is an external CSS file
-            var fileref = document.createElement("link")
-            fileref.setAttribute("rel", "stylesheet")
-            fileref.setAttribute("type", "text/css")
-            fileref.setAttribute("href", filename)
-        }
-        if (typeof fileref != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(fileref)
-        }
-    }
-
-    window._require = function(scripts, cb) {
-        var next = _.after(scripts.length, cb);
-        _.each(scripts, function(s) {
-            $.getScript(s, next);
-        });
+        return Promise.resolve()
+            .then(function() {
+                if (filetype == "js") {
+                    return new Promise(function(resolve, reject) {
+                        $.getScript(filename)
+                            .done(resolve)
+                            .fail(reject)
+                    });
+                }
+                else if (filetype == "css") {
+                    var fileref = document.createElement("link");
+                    fileref.setAttribute("rel", "stylesheet");
+                    fileref.setAttribute("type", "text/css");
+                    fileref.setAttribute("href", filename);
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+                else {
+                    throw new Error('unknown file type');
+                }
+            })
     }
 }
 
