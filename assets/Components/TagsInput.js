@@ -1,71 +1,59 @@
-var me =  Vue.extend({
-    template: '<input v-model="input" placeholder="Type some tags">',
-    props: ['raw'],
-    data: function() {
+module.exports = function(resolve) {
+    System.importAll({
+        _raw: [
+            '/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
+            '/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css',
+        ]
+    })
+    .then(function() {
         return {
-            input: '',
-            tags: [],
+            template: '<input placeholder="Type some tags">',
+            props: ['tags'],
+            methods: {
+                add: function(tag) {
+                    this.tags.push(tag);
+                    this.$input.tagsinput('add', tag);
+                },
+                remove: function(tag) {
+                    var idx = this.tags.indexOf(tag);
+                    var removed;
+                    if (idx !== -1) {
+                        removed = this.tags.splice(idx, 1);
+                        this.$input.tagsinput('remove', tag);
+                    }
+                    return removed;
+                },
+                restore: function(tags) {
+                    this.tags = tags;
+                    this.$input.tagsinput('removeAll');
+                    _.each(this.tags, this.add);
+                },
+                get: function() {
+                    return this.tags;
+                },
+            },
+            ready: function() {
+                var vm = this;
+
+                vm.$input = $(vm.$el);
+                vm.$input.val(vm.tags ? vm.tags.join(',') : '')
+                vm.$input.tagsinput({
+                    confirmKeys: [9, 13, 44],
+                    trimValue: true,
+                })
+                vm.$input.on('itemAdded', function(event) {
+                    console.log('itemAdded');
+                    var item = event.item;
+                    vm.tags.push(item);
+                });
+                vm.$input.on('itemRemoved', function(event) {
+                    console.log('itemRemoved');
+                    var item = event.item;
+                    _.remove(vm.tags, item);
+                });
+            }
         }
-    },
-    methods: {
-        add: function(tag) {
-            this.tags.push(tag);
-            this.$input.tagsinput('add', tag.name);
-        },
-        remove: function(tag) {
-            _.remove(this.tags, tag);
-            this.$input.tagsinput('remove', tag.name);
-        },
-        restore: function(tags) {
-            this.tags = tags;
-            this.$input.tagsinput('removeAll');
-            _.each(this.tags, this.add);
-        },
-        get: function() {
-            return this.tags;
-        },
-
-        notify: function() {
-            this.$dispatch('tagsChanged', this.tags);
-        },
-    },
-    ready: function() {
-        var vm = this;
-
-        _.each(vm.raw && vm.raw.split(','), function(tag) {
-            vm.tags.push({name: tag});
-        });
-        vm.input = _.map(vm.tags, 'name').join(',')
-
-        System.importAll({
-            _raw: [
-                '/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
-                '/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css',
-            ]
-        })
-        .then(function() {
-            vm.$input = $(vm.$el);
-            vm.$input.tagsinput({
-                confirmKeys: [9, 13, 44],
-                trimValue: true,
-            })
-            vm.$input.on('itemAdded', function(event) {
-                console.log('itemAdded');
-                var item = {name: event.item};
-                vm.tags.push(item);
-                vm.notify();
-            });
-            vm.$input.on('itemRemoved', function(event) {
-                console.log('itemRemoved');
-                var item = {name: event.item};
-                _.remove(vm.tags, item);
-                vm.notify();
-            });
-        })
-
-        vm.notify();
-    }
-})
-
-
-module.exports = me;
+    })
+    .then(resolve)
+    ;
+}

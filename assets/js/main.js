@@ -265,4 +265,19 @@ function installMP() {
             modal: true
         });
     }
+
+    // catch в промисах
+    window.mp.err = function(err) {
+        console.error(err);
+        debugger
+        var popup = $('<div></div>');
+        popup.addClass('white-popup');
+        popup.append('<p>Something went wrong. Please, contact Administrator!</p>');
+        $.magnificPopup.open({
+            items: {
+                src: popup,
+                type: 'inline'
+            }
+        });
+    }
 }
