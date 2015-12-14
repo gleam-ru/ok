@@ -5,8 +5,8 @@ module.exports = function(grunt) {
             ignorePath: "../../..",
             exclude: [
                 'Chart.js',
-                'bootstrap-tagsinput.js',
-                'bootstrap-tagsinput.css',
+                'bootstrap-treeview.*',
+                'bootstrap-tagsinput.*',
                 'alloy-editor-all-min.js',
                 'alloy-editor-ocean-min.css',
                 // 'vue.js',

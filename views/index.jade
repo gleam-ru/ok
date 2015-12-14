@@ -3,6 +3,7 @@ extends ./_layouts/no-title.jade
 block append head
   //- +globalVar('users', users)
   +globalVar('tags', tags)
+  +globalVar('tree', tree)
   script(src='/ViewControllers/index.js')
   style.
 
@@ -21,8 +22,13 @@ block content
   section.wow.fadeIn
     .container
       #vue
-        tags-input(
+        //- tags-input(
           :tags='tags'
+          )
+        parent-selector(
+          :tree='parents',
+          :blog.sync='blog',
+          :post.sync='post',
           )
     //- .container
       | asdd

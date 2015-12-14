@@ -23,6 +23,8 @@
     "jquery.cookie": "jquery-cookie#~1.4.1",
     "alloyeditor": "~0.7.0",
     "bootstrap-tagsinput": "~0.7.1",
-    "system.js": "~0.19.6"
+    "system.js": "~0.19.6",
+    "bootstrap-treeview": "~1.2.0",
+    "bootstrap": "~3.3.6"
   }
 }
