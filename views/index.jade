@@ -4,7 +4,10 @@ block append head
   //- +globalVar('users', users)
   +globalVar('tags', tags)
   +globalVar('tree', tree)
+  +globalVar('text', post.text)
   script(src='/ViewControllers/index.js')
+  //- script.
+    ALLOYEDITOR_BASEPATH = '/bower_components/alloyeditor/dist/alloy-editor/';
   style.
 
 
@@ -21,14 +24,18 @@ block content
 
   section.wow.fadeIn
     .container
+      #zone1
       #vue
         //- tags-input(
           :tags='tags'
           )
-        parent-selector(
+        //- parent-selector(
           :tree='parents',
-          :blog.sync='blog',
-          :post.sync='post',
+          :blog.sync='owner.blog',
+          :post.sync='owner.post',
+          )
+        text-editor(
+          :text.sync='text'
           )
     //- .container
       | asdd

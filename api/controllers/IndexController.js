@@ -38,6 +38,10 @@ module.exports = {
                 });
 
                 data.tree = tree;
+                return Post.findOne({id: 2});
+            })
+            .then(function(post) {
+                data.post = post;
             })
             .then(function() {
                 return res.render('index', data);
