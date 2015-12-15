@@ -15,7 +15,6 @@
     "moment": "~2.10.6",
     "lodash": "~3.10.1",
     "magnific-popup": "~1.0.0",
-    "vue": "~1.0.8",
     "jquery": "~2.1.4",
     "chosen": "~1.4.2",
     "font-awesome": "~4.5.0",
@@ -25,6 +24,7 @@
     "bootstrap-tagsinput": "~0.7.1",
     "system.js": "~0.19.6",
     "bootstrap-treeview": "~1.2.0",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "vue": "~1.0.11"
   }
 }

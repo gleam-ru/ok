@@ -11,7 +11,7 @@ module.exports = function(resolve) {
         return {
             template: [
                 '<div v-el:editor class="vi-textEditor">',
-                    '{{{text}}}',
+                    // '{{{text}}}',
                 '</div>',
             ].join(''),
             props: ['text'],
@@ -150,11 +150,11 @@ module.exports = function(resolve) {
                 });
                 vm._editor = editor.get('nativeEditor');
 
-
-                vm._editor.on('dataReady', function() {
+                vm._editor.setData(vm.text, function() {
                     // чтобы скролл не появлялсо он лоад
                     editor._mainUI._setUIHidden(document.activeElement)
                 });
+
                 vm._editor.on('change', Vue.filter('debounce')(function() {
                     vm.text = vm.get();
                 }), 100);
