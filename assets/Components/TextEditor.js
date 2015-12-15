@@ -10,7 +10,7 @@ module.exports = function(resolve) {
     .then(function() {
         return {
             template: [
-                '<div v-el:editor id="#zone" class="vi-textEditor">',
+                '<div v-el:editor class="vi-textEditor">',
                     '{{{text}}}',
                 '</div>',
             ].join(''),

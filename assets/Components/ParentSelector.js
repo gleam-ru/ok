@@ -9,7 +9,7 @@ module.exports = function(resolve) {
         return {
             template: [
                 '<div class="vi-parentSelector">',
-                    '<a @click=toggleSelector><div class="btn button social-icon vi-iconButton"><i class="fa fa-folder"></i></div></a>',
+                    '<a><div class="btn button social-icon vi-iconButton"><i @click=toggleSelector class="fa fa-folder"></i></div></a>',
                     '<span>{{text}}</span>',
                     '<div v-el:popup v-show=mpIsVisible class="white-popup" style="max-width: 60vw; height: 80vh;">',
                         '<h4>Select parent</h4>',
@@ -151,6 +151,7 @@ module.exports = function(resolve) {
                     expandIcon   : 'fa fa-chevron-right',
                     collapseIcon : 'fa fa-chevron-down',
                     emptyIcon    : 'fa fa-transparent',
+                    selectedBackColor : '#000',
                 });
 
                 vm._tree = $tree.treeview(true);

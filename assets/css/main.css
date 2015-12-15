@@ -215,11 +215,17 @@ ul.no-dots>li {list-style: none;}
 
 
 /* editor */
-.ae-ui .ae-toolbar-add {
+#body .ae-ui .ae-toolbar-add {
     /*left: 50px !important;*/
     background-color: #29353D;
     border-color: #29353D;
     color: #FFFFFF;
+    }
+#ckimgrsz * {
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
     }
 
 
@@ -290,20 +296,61 @@ input.has-error {
 .blog-listing-full .blog-date {margin: 20px 0 20px;}
 
 
-.vi-parentSelector {
-    line-height: 32px;
-    position: relative;
+
+
+
+.vi-postEditor {
     }
-    .vi-parentSelector>a {
-        position: absolute;
-        left: 0px;
-        top: 0px;
+    .vi-postEditor :focus {
+        outline: none !important;
+        outline-color: transparent;
+        outline-style: none;
+        -webkit-appearance: none;
         }
-    .vi-parentSelector>span {
-        border: solid 1px #666;
-        border-left: none !important;
-        margin-left: 32px;
+    .vi-postEditor select.languages {
+        min-height: 43px;
+        }
+    .vi-postEditor .vi-parentSelector {
+        line-height: 41px;
+        position: relative;
         padding-left: 20px;
-        line-height: 30px;
-        display: block;
+        padding-right: 0px;
         }
+        .vi-postEditor .vi-parentSelector>span {
+            border: solid 1px #dfdfdf;
+            line-height: 41px;
+            padding-left: 50px;
+            display: block;
+            }
+        .vi-postEditor .vi-parentSelector>a {
+            position: absolute;
+            left: 20px;
+            top: 0px;
+            }
+            .vi-postEditor .vi-parentSelector>a .vi-iconButton {
+                opacity: 0.3;
+                }
+                .vi-postEditor .vi-parentSelector>a .vi-iconButton .fa {
+                    width: 40px;
+                    height: 41px !important;
+                    }
+    .vi-postEditor .vi-textEditor {
+        border: solid 1px #dfdfdf;
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 100%; height: 100%;
+        min-height: 100px;
+        overflow: hidden;
+        }
+
+
+.vi-textEditor ul li {
+    list-style: initial;
+    margin-left: 30px;
+    }
+.vi-textEditor img {
+    margin: 10px;
+    }
+.vi-textEditor p {
+    margin-bottom: 10px;
+    }

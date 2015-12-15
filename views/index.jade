@@ -26,16 +26,15 @@ block content
     .container
       #zone1
       #vue
-        //- tags-input(
-          :tags='tags'
-          )
-        //- parent-selector(
-          :tree='parents',
-          :blog.sync='owner.blog',
-          :post.sync='owner.post',
-          )
-        text-editor(
-          :text.sync='text'
+        post-editor(
+          :languages="languages",
+          :language="language",
+          :parents="parents",
+          :blog="blog",
+          :post="post",
+          :title="title",
+          :tags="tags",
+          :text="text",
           )
     //- .container
       | asdd
