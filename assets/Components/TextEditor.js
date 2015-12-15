@@ -20,6 +20,11 @@ module.exports = function(resolve) {
                 };
             },
             watch: {
+                text: function() {
+                    console.log('text changed')
+                    var vm = this;
+                    vm._editor.setData(vm.text);
+                }
             },
             methods: {
                 get: function() {

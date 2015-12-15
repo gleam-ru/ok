@@ -7,8 +7,13 @@ module.exports = function(resolve) {
     })
     .then(function() {
         return {
-            template: '<input placeholder="Type some tags">',
+            template: '<input value="raw" placeholder="Type some tags">',
             props: ['tags'],
+            watch: {
+                tags: function() {
+                    this.sync();
+                },
+            },
             methods: {
                 add: function(tag) {
                     this.tags.push(tag);
@@ -23,17 +28,22 @@ module.exports = function(resolve) {
                     }
                     return removed;
                 },
-                restore: function(tags) {
-                    this.tags = tags;
-                    this.$input.tagsinput('removeAll');
-                    _.each(this.tags, this.add);
+                sync: function(tags) {
+                    var vm = this;
+                    vm.$input.tagsinput('removeAll');
+                    _.each(vm.tags, function(tag) {
+                        vm.$input.tagsinput('add', tag);
+                    });
                 },
-                get: function() {
-                    return this.tags;
-                },
+            },
+            computed: {
+                raw: function() {
+                    return this.tags.join();
+                }
             },
             ready: function() {
                 var vm = this;
+                window.ti = this;
 
                 vm.$input = $(vm.$el);
                 vm.$input.val(vm.tags ? vm.tags.join(',') : '')
@@ -42,9 +52,11 @@ module.exports = function(resolve) {
                     trimValue: true,
                 })
                 vm.$input.on('itemAdded', function(event) {
-                    console.log('itemAdded');
                     var item = event.item;
-                    vm.tags.push(item);
+                    if (vm.tags.indexOf(item) === -1) {
+                        console.log('itemAdded');
+                        vm.tags.push(item);
+                    }
                 });
                 vm.$input.on('itemRemoved', function(event) {
                     console.log('itemRemoved');

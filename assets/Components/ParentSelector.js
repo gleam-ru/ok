@@ -24,6 +24,7 @@ module.exports = function(resolve) {
                     filter: '',
                     text: '',
                     mpIsVisible: false,
+                    nodeId: '',
                 };
             },
             watch: {
@@ -50,9 +51,22 @@ module.exports = function(resolve) {
                         tree.disableNode(unrelated, {silent: true});
                     }
                 },
+                blog: function() {
+                    var vm = this;
+                    vm.selectNode({
+                        b_id : vm.blog,
+                        id   : vm.post,
+                    })
+                },
+                post: function() {
+                    var vm = this;
+                    vm.selectNode({
+                        b_id : vm.blog,
+                        id   : vm.post,
+                    })
+                },
             },
             methods: {
-
                 formatNode: function(node) {
                     if (!node) return;
                     var vm = this;
@@ -88,10 +102,14 @@ module.exports = function(resolve) {
                     else {
                         console.log('deselect');
                     }
-                    vm.afterNodeSelected(node);
+                    if (vm.nodeId !== node.nodeId) {
+                        vm.afterNodeSelected(node);
+                    }
                 },
                 afterNodeSelected: function(node) {
+                    console.log('ans')
                     var vm = this;
+                    vm.nodeId = node.nodeId;
                     if (node) {
                         var tree = vm._tree;
                         var post = node.id;

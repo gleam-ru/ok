@@ -78,42 +78,43 @@ module.exports = function(resolve) {
                 'tags',
                 'text',
 
-                'storeAs',
+                'lstorage',
             ],
-            data: function() {
-                return {
-                    isModified: false,
-                }
-            },
             watch: {
                 language: function() {
                     console.log('language mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
                 blog: function() {
                     console.log('blog mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
                 post: function() {
                     console.log('post mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
                 title: function() {
                     console.log('title mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
                 tags: function() {
                     console.log('tags mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
                 text: function() {
                     console.log('text mod');
-                    this.isModified = true;
+                    this.save_ls();
                 },
             },
             methods: {
                 save: function() {
                     this.$emit('save');
+                },
+                clear_ls: function() {
+                    var vm = this;
+                    if (vm.lstorage) {
+                        localStorage.setItem(vm.lstorage, '{}');
+                    }
                 },
                 // save state to local storage
                 save_ls: function() {
@@ -127,19 +128,40 @@ module.exports = function(resolve) {
                         tags     : vm.tags,
                         text     : vm.text,
                     };
-                    if (!vm.modified) {
-                        return state;
+                    if (vm.lstorage) {
+                        console.log('saving_ls', vm.isModified, state);
+                        localStorage.setItem(vm.lstorage, JSON.stringify(state));
                     }
-                    console.log('saving_ls', state);
+                    return state;
+                },
+                resotre_ls: function() {
+                    var vm = this;
+                    var state = JSON.parse(localStorage.getItem(vm.lstorage) || '{}');
+                    if (state.language) {
+                        vm.language = state.language;
+                    }
+                    if (state.blog || state.post) {
+                        vm.blog = state.blog;
+                        vm.post = state.post;
+                    }
+                    if (state.title) {
+                        vm.title = state.title;
+                    }
+                    if (state.tags && state.tags.length) {
+                        vm.tags = state.tags;
+                    }
+                    if (state.text) {
+                        vm.text = state.text;
+                    }
+                    console.log('restored', state);
+                    return state;
                 },
             },
             ready: function() {
                 var vm = this;
-                window.pe = this;
+                window.pe = vm;
 
-                if (vm.storeAs) {
-                    setInterval(vm.save_ls.bind(vm), 3000)
-                }
+                vm.resotre_ls();
             }
         }
     })
