@@ -328,7 +328,7 @@ input.has-error {
             top: 0px;
             }
             .vi-postEditor .vi-parentSelector>a .vi-iconButton {
-                opacity: 0.3;
+                opacity: 0.5;
                 }
                 .vi-postEditor .vi-parentSelector>a .vi-iconButton .fa {
                     width: 40px;

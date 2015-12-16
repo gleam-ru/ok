@@ -92,8 +92,15 @@ module.exports = function(resolve) {
                     }
                     return result;
                 },
-                selectNode: function(params) {
+                selectNode: function(_params) {
                     var vm = this;
+                    var params = {};
+                    if (_params.b_id) {
+                        params.b_id = _params.b_id;
+                    }
+                    if (_params.id) {
+                        params.id = _params.id;
+                    }
                     var flat = vm._tree.getUnchecked();
                     var node = _.find(flat, params);
                     if (node) {
@@ -102,14 +109,13 @@ module.exports = function(resolve) {
                     else {
                         console.log('deselect');
                     }
-                    if (vm.nodeId !== node.nodeId) {
+                    if (vm.nodeId !== (node && node.nodeId)) {
                         vm.afterNodeSelected(node);
                     }
                 },
                 afterNodeSelected: function(node) {
                     console.log('ans')
                     var vm = this;
-                    vm.nodeId = node.nodeId;
                     if (node) {
                         var tree = vm._tree;
                         var post = node.id;
@@ -120,15 +126,17 @@ module.exports = function(resolve) {
                             text = node.text+' / '+text;
                             blog = node.b_id;
                         }
-                        vm.post = post;
-                        vm.blog = blog;
-                        vm.text = text;
+                        vm.nodeId = node.nodeId;
+                        vm.post   = post;
+                        vm.blog   = blog;
+                        vm.text   = text;
                         console.log(vm.blog, vm.post, vm.text)
                     }
                     else {
-                        vm.post = '';
-                        vm.blog = '';
-                        vm.text = '';
+                        vm.nodeId = undefined;
+                        vm.post   = '';
+                        vm.blog   = '';
+                        vm.text   = '';
                     }
                 },
 

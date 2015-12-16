@@ -5,6 +5,57 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+
+
+
+// comment me
+function getMeta() {
+    return Q.all([
+        Language.find(),
+        Blog.find(),
+        Post.find(),
+    ])
+    .spread(function(languages, blogs, posts) {
+        var tree = {id: 0, name: 'root', children: []};
+        tree.children = _.map(blogs, function(b) {
+            return {
+                isBlog    : true,
+                id        : undefined,
+                b_id      : b.id,
+                name      : b.name,
+                children  : formatChildren(posts, _.filter(posts, function(p) {
+                    return (p.blog === b.id && !p.parent);
+                })),
+            }
+        });
+        return {
+            tree: tree,
+            languages: _.map(languages, function(l) {
+                return {
+                    id: l.id,
+                    name: l.code,
+                }
+            }),
+        }
+    })
+
+    function formatChildren(all, children) {
+        children = _.sortBy(children || [], 'createdAt');
+        return _(children)
+            .map(function(item) {
+                return {
+                    id       : item.id,
+                    b_id     : item.blog,
+                    name     : item.title,
+                    children : formatChildren(all, _.filter(all, {parent: item.id})),
+                }
+            })
+            .value()
+            ;
+    }
+}
+
+
 module.exports = {
 
     // страница с созданием поста
@@ -17,13 +68,18 @@ module.exports = {
                 {name: 'Create post',  href: '/create'},
             ],
         }
-        Q()
-            .then(function() {
-                return res.render('blog/create', data);
-            })
-            .catch(function(err) {
-                return res.serverError(err);
-            })
+
+    return Q()
+        .then(getMeta)
+        .then(function(meta) {
+            _.extend(data, meta);
+        })
+        .then(function() {
+            return res.render('blog/create', data);
+        })
+        .catch(function(err) {
+            return res.serverError(err);
+        })
     },
 
     // страница с редактированием поста
@@ -41,13 +97,16 @@ module.exports = {
             ],
         }
 
-        Q()
+        return Q()
+            .then(getMeta)
+            .then(function(meta) {
+                _.extend(data, meta);
+            })
             .then(function() {
                 return Post.findOne({id: id}).populateAll();
             })
             .then(function(post) {
                 data.post = post.toJSON();
-                data.post.tags = _.map(post.tags, 'name').join(',');
             })
             .then(function() {
                 return res.render('blog/edit', data);
