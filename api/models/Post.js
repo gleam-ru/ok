@@ -64,7 +64,12 @@ module.exports = {
                     data.tags = _.map(data.tags, function(tag) {
                         return {name: tag};
                     })
-                    return Tag.findOrCreate(data.tags, data.tags);
+                    if (!data.tags.length) {
+                        return [];
+                    }
+                    else {
+                        return Tag.findOrCreate(data.tags, data.tags);
+                    }
                 })
                 // merge tags with post
                 .then(function(tags) {
@@ -120,6 +125,10 @@ module.exports = {
                 // merge post with other data
                 .then(function() {
                     data.text = $.html();
+                    if (me.id == data.parent) {
+                        console.warn('tried to create recursive post!')
+                        throw new Error('recursive parent!');
+                    }
                     _.extend(me, data);
                 })
                 // save post
@@ -127,6 +136,50 @@ module.exports = {
                     return me.save()
                 })
         },
+
+
+
+    },
+
+
+    // destroys post with its children
+    destroyWithChildren: function(params) {
+        var Post = this;
+        return Q.resolve()
+            .then(function() {
+                return Post.find(params);
+            })
+            .then(function(posts) {
+                if (!posts || !Array.isArray(posts) || posts.length === 0) {
+                    return Q();
+                }
+                else {
+                    return Q.all(_.map(posts, function(post) {
+                        return Q()
+                            .then(function() {
+                                return Post.find({parent: post.id});
+                            })
+                            .then(function(children) {
+                                var beforeDestroy = Q();
+                                if (!children || !Array.isArray(children) || children.length === 0) {
+                                    // пост не является ни чьим родителем
+                                }
+                                else {
+                                    // пост - родитель
+                                    beforeDestroy = Q.all(_.map(children, function(child) {
+                                        return Post.destroyWithChildren({id: child.id});
+                                    }))
+                                }
+                                return Q()
+                                    .then(beforeDestroy)
+                                    .then(function() {
+                                        console.debug('destroy', post.id, post.title);
+                                        return post.destroy();
+                                    });
+                            });
+                        }));
+                }
+            })
     }
 
 };

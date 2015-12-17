@@ -81,7 +81,7 @@ $(document).ready(function() {
             ready: function() {
                 var vm = this;
                 $('#deletePost').on('click', function() {
-                    mp.confirm('This post will be deleted. Process?', function() {
+                    mp.confirm('This post and all its children will be deleted. Process?', function() {
                         cnt.mask();
                         $.post('/api/remove_post', {
                             id: vm.id,

@@ -9,7 +9,7 @@ $(document).ready(function() {
             blog     : 1,
             post     : undefined,
             language : 1,
-            tags     : [],
+            tags     : '',
         }, getUrlParams());
         window.vm = new Vue({
             el: '#vue',
@@ -43,7 +43,7 @@ $(document).ready(function() {
                 blog      : defaults.blog || (globalVars.post.blog && globalVars.post.blog.id),
                 post      : defaults.post || (globalVars.post.parent && globalVars.post.parent.id),
 
-                tags      : defaults.tags.concat(_.map(globalVars.post.tags, 'name')),
+                tags      : defaults.tags.split(',').concat(_.map(globalVars.post.tags, 'name')),
 
                 title     : globalVars.post.title,
 

@@ -70,10 +70,9 @@ module.exports = {
         }
         else {
             return Post
-                .findOne({id: id})
-                .then(function(post) {
-                    console.info('post destroyed:', post.id, post.title)
-                    return post.destroy();
+                .destroyWithChildren({id: id})
+                .then(function() {
+                    console.info('postsa are destroyed')
                 })
                 .then(res.ok)
                 .catch(res.serverError)
