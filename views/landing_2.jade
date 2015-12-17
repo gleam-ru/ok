@@ -1,0 +1,103 @@
+extends ./_layouts/no-header.jade
+
+block append head
+  //- +globalVar('users', users)
+  //- script(src='/ViewControllers/index.js')
+  style.
+    .landing {
+    font-family: Arial;
+    width: 100%;
+    }
+    .landing .row.logo-row {
+      background: #459432;
+      min-height: 300px;
+      border-bottom: solid 1px #459432;
+      background-image: url('/images/bull.png');
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+      }
+      .landing .row.logo-row .slogan-1 {
+        font-size: 40px;
+        line-height: 50px;
+        margin-top: 20px;
+        color: #fff;
+        }
+    .landing .row.slogan-row {
+      background: #69E04C;
+      min-height: 140px;
+      border-bottom: solid 1px #459432;
+      }
+    .landing .row.slogan-row .slogan {
+      font-size: 30px;
+      line-height: 30px;
+      max-width: 900px;
+      text-align: center;
+      margin: 30px auto;
+      color: #27541D;
+      }
+    .landing .row.subscribe-row {
+      border-bottom: solid 1px #459432;
+      background-image: url('/images/mans.png');
+      background-size: cover;
+      background-position: left;
+      background-repeat: no-repeat;
+      }
+      .landing .row.subscribe-row #form {
+        background: #fff;
+        border: solid 1px #459432;
+        padding: 20px;
+        margin: 40px 20px;
+        }
+        .landing .row.subscribe-row #form p {
+          color: #ccc;
+          }
+        .landing .row.subscribe-row #form button:hover {
+          background-color: #fff;
+          color: #27541D;
+          }
+        .landing .row.subscribe-row #form button {
+          background-color: #27541D;
+          border-color: #27541D;
+          color: #fff;
+          }
+    .landing .row.about-row {
+      background: #27541D;
+      min-height: 90px;
+      }
+      .landing .row.about-row .logos {
+        }
+      .landing .row.about-row .about {
+        padding: 10px 20px;
+        color: #ccc;
+        }
+
+
+block content
+  .container.landing.full-width
+    .row.logo-row
+      //- .bull
+        img.logo-style-1(src='/images/bull.png', alt='')
+      .col-md-4
+        img.logo-style-1(src='/images/logo-white-medium.png', alt='')
+      .col-md-8
+        p.uppercase.slogan-1 Трейдинг и инвестиции уже сегодня!
+    .row.slogan-row
+      .slogan
+        p.uppercase Работая за зарплату, стать богатым невозможно! 
+        p.uppercase Никогда не поздно начать карьеру инвестора!
+    .row.subscribe-row
+      .col-md-7
+      .col-md-5
+        form#form(action='/test.php' method='POST')
+          p Оставьте свои данные и мы вам перезвоним!
+          input(type='text' name='name'  placeholder='Как к Вам обращаться')
+          input(type='text' name='email' placeholder='Контактный email')
+          input(type='text' name='phone' placeholder='Контактный телефон')
+          button.highlight-button-dark.btn.btn-small.button.xs-margin-bottom-five Стать клиентом
+    .row.about-row
+      .col-md-3.logos
+        img(src='/images/logo-flat-medium.png', alt='')
+      .col-md-8.about
+        p 
+          | Международная финансовая компания RuMex на территории Российской Федерации является сертифицированным членом Комиссии по регулированию отношений участников финансовых рынков (КРОУФР), а также участником Центра регулирования внебиржевых финансовых инструментов и технологий (ЦРФИН)

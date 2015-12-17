@@ -104,6 +104,7 @@ module.exports.routes = {
 // Static //
 ////////////
     'get  /landing' : 'Static.landing',
+    'get  /landing_old' : 'Static.landing_old',
 
 
 //////////////

@@ -28,6 +28,18 @@ module.exports = {
             title: 'Rumex',
             bc: [
                 {name: 'Home', href: '/'},
+                {name: 'Landing', href: '/landing_2'},
+            ]
+        };
+        return res.render('landing_2', data);
+    },
+
+    landing_old: function(req, res) {
+        var data = {
+            pageTitle: 'Rumex',
+            title: 'Rumex',
+            bc: [
+                {name: 'Home', href: '/'},
                 {name: 'Landing', href: '/landing'},
             ]
         };
