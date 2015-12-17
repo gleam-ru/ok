@@ -137,19 +137,19 @@ module.exports = function(resolve) {
                 resotre_ls: function() {
                     var vm = this;
                     var state = JSON.parse(localStorage.getItem(vm.lstorage) || '{}');
-                    if (state.language) {
-                        vm.language = state.language;
-                    }
-                    if (state.blog || state.post) {
-                        vm.blog = state.blog;
-                        vm.post = state.post;
-                    }
-                    if (state.title) {
-                        vm.title = state.title;
-                    }
-                    if (state.tags && state.tags.length) {
-                        vm.tags = state.tags;
-                    }
+                    // if (state.language) {
+                    //     vm.language = state.language;
+                    // }
+                    // if (state.blog || state.post) {
+                    //     vm.blog = state.blog;
+                    //     vm.post = state.post;
+                    // }
+                    // if (state.title) {
+                    //     vm.title = state.title;
+                    // }
+                    // if (state.tags && state.tags.length) {
+                    //     vm.tags = state.tags;
+                    // }
                     if (state.text) {
                         vm.text = state.text;
                     }

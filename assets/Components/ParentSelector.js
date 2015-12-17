@@ -14,7 +14,7 @@ module.exports = function(resolve) {
                     '<div v-el:popup v-show=mpIsVisible class="white-popup" style="max-width: 60vw; height: 80vh;">',
                         '<h4>Select parent</h4>',
                         '<input v-model="filter">',
-                        '<div v-el:tree class="fn-treeview"></div>',
+                        '<div v-el:tree class="fn-treeview vi-treeview"></div>',
                     '</div>',
                 '</div>',
             ].join(''),
@@ -96,10 +96,10 @@ module.exports = function(resolve) {
                     var vm = this;
                     var params = {};
                     if (_params.b_id) {
-                        params.b_id = _params.b_id;
+                        params.b_id = parseInt(_params.b_id);
                     }
                     if (_params.id) {
-                        params.id = _params.id;
+                        params.id = parseInt(_params.id);
                     }
                     var flat = vm._tree.getUnchecked();
                     var node = _.find(flat, params);
@@ -169,7 +169,6 @@ module.exports = function(resolve) {
             ready: function() {
                 var vm = this;
                 window.ps = vm;
-
                 var $tree = $(vm.$els.tree);
                 $tree.treeview({
                     data         : vm.tree ? vm.tree.nodes : [],

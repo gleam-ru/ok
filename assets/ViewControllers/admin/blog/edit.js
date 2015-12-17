@@ -29,13 +29,13 @@ $(document).ready(function() {
                     ':tags.sync="tags"',
                     ':text.sync="text"',
 
-                    ':lstorage="lstorage"',
-
                     '@save="save"',
                     '>',
                 '</post-editor>',
             ].join(' '),
             data: {
+                id        : defaults.id,
+
                 languages : globalVars.languages,
                 language  : (globalVars.post.language && globalVars.post.language.id) || defaults.language,
 
@@ -48,13 +48,13 @@ $(document).ready(function() {
                 title     : globalVars.post.title,
 
                 text      : globalVars.post.text,
-
             },
             methods: {
                 save: function() {
                     var vm = this;
                     cnt.mask();
                     var data = {
+                        id        : vm.id,
                         language  : vm.language,
                         blog      : vm.blog,
                         post      : vm.post,
@@ -80,6 +80,24 @@ $(document).ready(function() {
             },
             ready: function() {
                 var vm = this;
+                $('#deletePost').on('click', function() {
+                    mp.confirm('This post will be deleted. Process?', function() {
+                        cnt.mask();
+                        $.post('/api/remove_post', {
+                            id: vm.id,
+                        })
+                        .done(function(data) {
+                            window.location.href = '/';
+                        })
+                        .fail(function(err) {
+                            mp.alert('something went wrong...');
+                            console.error(err);
+                        })
+                        .always(function() {
+                            cnt.unmask();
+                        })
+                    })
+                })
             }
         })
     })

@@ -230,9 +230,17 @@ ul.no-dots>li {list-style: none;}
 
 
 /* bootstrap treeview */
-.fn-treeview .node-disabled {
-    display: none;
+.vi-treeview {
+    max-height: calc(100% - 85px);
+    overflow-y: auto;
+    border-bottom: solid 1px #DDD;
     }
+    .vi-treeview > .list-group {
+        margin-bottom: 0px;
+        }
+    .vi-treeview .node-disabled {
+        display: none;
+        }
 
 
 
@@ -269,6 +277,9 @@ input.has-error {
     background-color: rgba(0,0,0, 0.6);
     cursor: pointer;
     }
+    .vi-iconButton.btn {
+        margin-right: 0px;
+        }
 
 
 .page-title .title  {

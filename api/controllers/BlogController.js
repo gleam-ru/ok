@@ -69,17 +69,17 @@ module.exports = {
             ],
         }
 
-    return Q()
-        .then(getMeta)
-        .then(function(meta) {
-            _.extend(data, meta);
-        })
-        .then(function() {
-            return res.render('blog/create', data);
-        })
-        .catch(function(err) {
-            return res.serverError(err);
-        })
+        return Q()
+            .then(getMeta)
+            .then(function(meta) {
+                _.extend(data, meta);
+            })
+            .then(function() {
+                return res.render('blog/create', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
     },
 
     // страница с редактированием поста
@@ -132,6 +132,7 @@ module.exports = {
                 pageTitle : 'Blog',
                 title     : 'Blog',
                 base      : '/blog',
+                blog      : 1,
             })
         })
         .then(function(data) {
@@ -184,7 +185,8 @@ module.exports = {
                     types : [blog.id],
                     tags  : req.param('tags'),
                     page  : req.param('page'),
-                    base: '/blog/f/'+blog.name,
+                    base  : '/blog/f/'+blog.name,
+                    blog  : blog.id,
                 })
             })
             .then(function(data) {
@@ -254,7 +256,8 @@ module.exports = {
                     types : [blog.id],
                     tags  : req.param('tags'),
                     page  : req.param('page'),
-                    base: '/paid/f/'+blog.name,
+                    base  : '/paid/f/'+blog.name,
+                    blog  : blog.id,
                 })
             })
             .then(function(data) {
