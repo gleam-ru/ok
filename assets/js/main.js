@@ -13,6 +13,35 @@ $(document).ready(function() {
         return false;
     })
 
+    System.config({
+        baseURL: '/',
+    });
+
+    System.importAll = function(hash) {
+        var hash = _.clone(hash);
+        var results = {};
+        return Promise.resolve()
+            .then(function() {
+                var raw = _.clone(hash._raw);
+                delete hash._raw;
+                return Promise.all(_.map(raw, function(src) {
+                    return loadFile(src);
+                }))
+            })
+            .then(function() {
+                return Promise.all(_.map(hash, function(src, name) {
+                    return System
+                        .import(src)
+                        .then(function(imported) {
+                            results[name] = imported;
+                        })
+                }))
+            })
+            .then(function() {
+                return results;
+            })
+            ;
+    }
 
     // // tooltipster
     // $.fn.tooltipster('setDefaults', {
@@ -54,7 +83,7 @@ function installGlobals() {
     window.getUrlParams = function() {
         var vars = {},
             hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        var hashes = decodeURIComponent(window.location.href.slice(window.location.href.indexOf('?') + 1)).split('&');
         for (var i = 0; i < hashes.length; i++) {
             hash = hashes[i].split('=');
             vars[hash[0]] = hash[1];
@@ -86,6 +115,34 @@ function installGlobals() {
 
         //this will reload the page, it's likely better to store this until finished
         document.location.search = kvp.join('&');
+    }
+
+    // http://www.javascriptkit.com/javatutors/loadjavascriptcss.shtml
+    window.loadFile = function(filename, filetype) {
+        if (!filetype) {
+            var splitted = filename.split('.');
+            filetype = splitted[splitted.length - 1];
+        }
+        return Promise.resolve()
+            .then(function() {
+                if (filetype == "js") {
+                    return new Promise(function(resolve, reject) {
+                        $.getScript(filename)
+                            .done(resolve)
+                            .fail(reject)
+                    });
+                }
+                else if (filetype == "css") {
+                    var fileref = document.createElement("link");
+                    fileref.setAttribute("rel", "stylesheet");
+                    fileref.setAttribute("type", "text/css");
+                    fileref.setAttribute("href", filename);
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+                else {
+                    throw new Error('unknown file type');
+                }
+            })
     }
 }
 
@@ -206,6 +263,21 @@ function installMP() {
                 type: 'inline'
             },
             modal: true
+        });
+    }
+
+    // catch в промисах
+    window.mp.err = function(err) {
+        console.error(err);
+        debugger
+        var popup = $('<div></div>');
+        popup.addClass('white-popup');
+        popup.append('<p>Something went wrong. Please, contact Administrator!</p>');
+        $.magnificPopup.open({
+            items: {
+                src: popup,
+                type: 'inline'
+            }
         });
     }
 }

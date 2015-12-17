@@ -8,94 +8,15 @@ block prepend head
 
 
 block append head
-  +globalVar('parent',   post && post.parent   && post.parent.id)
-  +globalVar('blog',     post && post.blog     && post.blog.id)
-  +globalVar('language', post && post.language && post.language.id)
-  //- +globalVar('blogs', blogs)
-  script(src="/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js")
-  script(src="/bower_components/alloyeditor/dist/alloy-editor/alloy-editor-all-min.js")
-  script(src='/Components/Editor.js')
+  +globalVar('post', post || {})
+  +globalVar('languages', languages || [])
+  +globalVar('tree', tree || {})
   style.
-    body {
-      overflow: hidden;
-      }
-    #meta select {
-      min-height: 43px;
-      }
-    :focus {
-      outline: none !important;
-      outline-color: transparent;
-      outline-style: none;
-      -webkit-appearance: none;
-      }
-    #zone {
-      margin-bottom: 10px;
-      padding: 10px;
-      width: 100%; height: 100%;
-      border: solid 1px rgba(0,0,0, 0.2);
-      min-height: 100px;
-      overflow: hidden;
-      }
-    #ckimgrsz * {
-      transition: none;
-      -moz-transition: none;
-      -webkit-transition: none;
-      -o-transition: none;
-      }
-    #zone ul li {
-      list-style: initial;
-      margin-left: 30px;
-      }
 
 
 block append title
-  +headerButtons_editor(post)
 
 block content
   section.wow.fadeIn
     .container
-      .row#meta
-        .col-md-2.no-padding.pr-10
-          select#language(
-            v-model='language'
-            )
-            option(
-              v-for='language in languages'
-              value='{{language.id}}'
-              ) {{language.name}}
-        .col-md-4.no-padding.pl-10.pr-10
-          select#blog(
-            v-model='blog'
-            )
-            option(
-              v-for='blog in blogs'
-              value='{{blog.id}}'
-              ) {{blog.name}}
-        .col-md-6.no-padding.pl-10
-          select#post(
-            v-model='post'
-            )
-            option(
-              v-for='post in posts'
-              value='{{post.id}}'
-              ) {{post.name}}
-      .row
-        input#id.hidden(
-          value= post && post.id
-          )
-      .row
-        input#name(
-          placeholder='Post title'
-          value= post && post.title
-          )
-      .row
-        input#tags(
-          placeholder='type some tags'
-          value= post && post.tags
-          )
-      .row
-        #zone
-          | !{post && post.text}
-      .row
-        a#save(href='#')
-          +revealButton('fa-save', 'Save')
+      #vue

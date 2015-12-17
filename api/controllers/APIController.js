@@ -8,7 +8,8 @@
 module.exports = {
     post_update: function(req, res) {
         var msg = req.param('msg');
-
+        console.debug(msg)
+        console.debug(req.user)
         if (!msg || !msg.title || !req.user || !req.user.id) {
             return res.badRequest();
         }
@@ -28,13 +29,13 @@ module.exports = {
                 })
             })
             .then(function(post) {
-                if (!msg.meta) {
+                if (!msg.language && !msg.blog && !msg.post) {
                     return post;
                 }
                 return Q.all([
-                        Language.findOne({id: msg.meta.language}),
-                        Blog.findOne({id: msg.meta.blog}),
-                        msg.meta.post ? Post.findOne({id: msg.meta.post}) : undefined,
+                        Language.findOne({id: msg.language}),
+                        Blog.findOne({id: msg.blog}),
+                        msg.post ? Post.findOne({id: msg.post}) : undefined,
                     ])
                     .spread(function(language, blog, parent) {
                         post.language = language.id;
@@ -48,7 +49,7 @@ module.exports = {
             .then(function(post) {
                 return post.update({
                     tags   : msg.tags,
-                    text   : msg.snapshot,
+                    text   : msg.text,
                     title  : msg.title,
                 });
             })
@@ -69,10 +70,9 @@ module.exports = {
         }
         else {
             return Post
-                .findOne({id: id})
-                .then(function(post) {
-                    console.info('post destroyed:', post.id, post.title)
-                    return post.destroy();
+                .destroyWithChildren({id: id})
+                .then(function() {
+                    console.info('postsa are destroyed')
                 })
                 .then(res.ok)
                 .catch(res.serverError)

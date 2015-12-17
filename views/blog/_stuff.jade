@@ -1,27 +1,30 @@
 //- кнопки для заголовка страницы
 mixin headerButtons_list()
   if hasRole(user, 'admin')
-    a#addPost(href='/create?types=#{types}')
+    a#addPost(href='/create?blog=#{blog}')
       +iconButton('fa-plus')
 
 mixin headerButtons_single(post)
   if hasRole(user, 'admin')
     a#editPost(href='/edit?id=#{post.id}')
       +iconButton('fa-pencil')
+  if hasRole(user, 'admin')
+    a.fn(href='/create?post=#{post.id}&blog=#{post.blog && post.blog.id}')
+      +iconButton('fa-chain')
 
 mixin headerButtons_editor(post)
   if hasRole(user, 'admin')
     a#deletePost(href='#')
-      +iconButton('fa-close')
+      +iconButton('fa-trash')
 
 
 //- кнопки для заголовка поста
 mixin titleButtons(post)
-  if hasRole(user, 'admin')
+  //- if hasRole(user, 'admin')
     a.fn.fn-edit(href='/edit?id=#{post.id}')
       +iconButton('fa-pencil')
-  if hasRole(user, 'admin')
-    a.fn(href='/create?parent=#{post.id}&types=#{types}')
+  //- if hasRole(user, 'admin')
+    a.fn(href='/create?post=#{post.id}&blog=#{blog}')
       +iconButton('fa-chain')
 
 
