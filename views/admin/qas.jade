@@ -1,0 +1,41 @@
+extends ../_layouts/black-title.jade
+
+block append head
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/admin/users.js')
+  style.
+    #table {
+      width: 100%;
+      }
+      #table tr:not(:first-child) {
+        border-top: solid 1px #ddd;
+        }
+      #table tr th,
+      #table tr td {
+        padding: 10px 20px;
+        }
+    
+
+
+block content
+  section
+    .container
+      if (qas && qas.length)
+        - var i = 1;
+        table#table
+          tr
+            th #
+            th Date
+            th Author
+            th Email
+            th Text
+            each qa in qas
+              tr
+                td #{i++}
+                td #{moment(qa.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                td #{qa.author}
+                td #{qa.email}
+                td #{qa.text}
+      else
+        p no messages yet...          
+

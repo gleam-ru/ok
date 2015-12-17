@@ -17,9 +17,27 @@ block content
             strong.black-text Ask a question
       .row
         .col-md-7.col-sm-10.text-center.center-col
-          form#qa
-            input(type='text', placeholder='Your Name', required='', name='name')
-            input(type='text', placeholder='Your Email', required='', name='email')
-            textarea(placeholder='Your Message', name='comment')
+          form#qa(
+            action='/qa'
+            method='post'
+            )
+            input(
+              type='text'
+              placeholder='Your Name'
+              required=''
+              name='name'
+              value="#{user.surname ? user.surname+' ' : ''}#{user.name || ''}"
+              )
+            input(
+              type='text'
+              placeholder='Your Email'
+              required=''
+              name='email'
+              value="#{user.email || ''}"
+              )
+            textarea(
+              placeholder='Your Message'
+              name='text'
+              )
             span.required *Please complete all fields correctly
             button.btn.btn-black.no-margin-bottom.btn-small(type='submit') Submit

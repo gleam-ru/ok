@@ -12,7 +12,38 @@ module.exports = {
         }
         return Q()
             .then(function() {
+                return QA.find();
+            })
+            .then(function(qa) {
+                data.qas = qa.length;
+            })
+            .then(function() {
                 return res.render('admin', data)
+            })
+    },
+
+    qas: function (req, res) {
+        var data = {
+            pageTitle: 'Admin - QAs',
+            title: 'Admin - QAs',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'QAs',   href: '/admin/qa'},
+            ],
+        }
+        return Q()
+            .then(function() {
+                return QA.find();
+            })
+            .then(function(qas) {
+                data.qas = _(qas)
+                    .sortBy('createdAt')
+                    .reverse()
+                    .value()
+            })
+            .then(function() {
+                return res.render('admin/qas', data)
             })
     },
 
