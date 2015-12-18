@@ -27,3 +27,15 @@ mixin textInput(title)
 mixin iconButton(icon)
   .btn.button.social-icon.vi-iconButton
     i.fa(class='#{icon}')
+
+      
+mixin separator()
+  .wide-separator-line.bg-mid-gray.no-margin-lr.margin-one
+
+mixin smallSeparator()
+  .separator-line.bg-black.no-margin-lr.margin-one
+
+mixin revealButton(icon, text)
+  span.btn.button-reveal.button
+    i.fa(class=icon)
+    span #{text}
