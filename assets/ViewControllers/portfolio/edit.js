@@ -6,6 +6,7 @@ $(document).ready(function() {
         ]
     })
     .then(function(imported) {
+        Vue.config.debug = true;
         window.vm = new Vue({
             el: '#vue',
             components: {
@@ -23,7 +24,9 @@ $(document).ready(function() {
                         '</assets-group>',
                         '<div class="row" @click="addassets">'+Jade.els.iconButton('fa-plus')+'</div>',
                     '</div>',
-                    '<pie-chart class="col-md-6">',
+                    '<pie-chart class="col-md-6"',
+                        ':piedata="piedata"',
+                        '>',
                     '</pie-chart>',
                 '</div>',
             ].join(' '),
@@ -45,7 +48,28 @@ $(document).ready(function() {
                         ],
                     }
                 ],
-
+            },
+            computed: {
+                piedata: function() {
+                    var data = [];
+                    _.each(this.assets, function(group) {
+                        var parent = {
+                            name: group.name,
+                            value: 0,
+                            items: [],
+                        };
+                        _.each(group.tickers, function(row) {
+                            var child = {
+                                name: row.k,
+                                value: parseFloat(row.v) || 0,
+                            }
+                            parent.value += child.value;
+                            parent.items.push(child);
+                        })
+                        data.push(parent);
+                    })
+                    return data;
+                },
             },
             methods: {
                 dropassets: function(idx) {

@@ -365,3 +365,14 @@ input.has-error {
 .vi-textEditor p {
     margin-bottom: 10px;
     }
+
+
+
+.vi-my-chart {
+    position: relative;
+    }
+.vi-my-chart.fixed {
+    position: fixed;
+    right: 0px;
+    top: 110px;
+    }
