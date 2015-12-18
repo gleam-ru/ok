@@ -12,18 +12,20 @@ $(document).ready(function() {
             },
             template: [
                 '<assets-group',
-                    ':assets.sync="assets"',
+                    ':name.sync="name"',
+                    ':shares.sync="shares"',
                     // '@drop="droprow($index)"',
                     '>',
                 '</assets-group>',
                 // '<div class="row" @click="addrow">'+Jade.els.iconButton('fa-plus')+'</div>',
             ].join(' '),
             data: {
-                assets: [
+                shares: [
                     {k: 'gazp', v: 138},
                     {k: 'rasp', v: 105},
                     {k: 'mltr', v: 130},
                 ],
+                name: 'Shares',
             },
             methods: {
             },
