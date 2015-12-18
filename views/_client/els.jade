@@ -22,3 +22,8 @@ mixin textInput(title)
   - title = title || '';
   .input-item
     input(type='text', placeholder=title)
+
+    
+mixin iconButton(icon)
+  .btn.button.social-icon.vi-iconButton
+    i.fa(class='#{icon}')

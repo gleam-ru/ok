@@ -35,6 +35,7 @@ module.exports = {
             .then(function() {
                 return res.render('portfolio/paid/3-col', data)
             })
+            .catch(res.serverError)
     },
 
     single: function(req, res) {
@@ -95,7 +96,43 @@ module.exports = {
             .then(function() {
                 return res.render('portfolio/paid/single', data)
             })
-    }
+            .catch(res.serverError)
+    },
+
+
+    edit: function(req, res) {
+        var id = parseInt(req.param('id'));
+
+        var data = {
+            pageTitle : '',
+            title     : '',
+            bc: [
+                {name: 'Home',       href: '/'},
+                {name: 'Paid',       href: '/paid'},
+                {name: 'Portfolios', href: '/paid/p'},
+            ],
+            base: '/paid/p',
+        }
+        return Q()
+            .then(function() {
+                return Portfolio.findOne({id: id});
+            })
+            .then(function(portfolio) {
+                if (!portfolio) {
+                    throw new Error(404);
+                }
+                data.pageTitle = '"'+portfolio.name+'" portfolio';
+                data.title     = '"'+portfolio.name+'" portfolio';
+                data.portfolio = portfolio.toJSON();
+                data.bc.push({name: 'p', href: '/paid/p/'+portfolio.name});
+            })
+            .then(function() {
+                return res.render('portfolio/edit', data)
+            })
+            .catch(res.serverError)
+
+
+    },
 
 };
 
