@@ -6,7 +6,7 @@ mixin headerButtons_list()
 
 mixin headerButtons_single(item)
   if hasRole(user, 'admin')
-    a#editItem(href='/create?tags=protfolio,#{item.name}')
+    a#editItem(href='/create?tags=protfolio,#{item.name}&blog=104')
       +iconButton('fa-comment')
   if hasRole(user, 'admin')
     a#editItem(href='/admin/p/edit?id=#{item.id}')

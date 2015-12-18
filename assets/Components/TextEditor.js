@@ -20,15 +20,17 @@ module.exports = function(resolve) {
                 };
             },
             watch: {
-                text: function() {
-                    console.log('text changed')
-                    var vm = this;
-                    vm._editor.setData(vm.text);
-                }
+                // text: function() {
+                //     console.log('text changed')
+                // }
             },
             methods: {
                 get: function() {
                     return this._editor.getData();
+                },
+                set: function(text) {
+                    var vm = this;
+                    vm._editor.setData(text || vm.text);
                 },
             },
             ready: function() {

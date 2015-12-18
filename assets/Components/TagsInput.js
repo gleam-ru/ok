@@ -48,7 +48,7 @@ module.exports = function(resolve) {
                 vm.$input = $(vm.$el);
                 vm.$input.val(vm.tags ? vm.tags.join(',') : '')
                 vm.$input.tagsinput({
-                    confirmKeys: [9, 13, 44],
+                    confirmKeys: [13, 44],
                     trimValue: true,
                 })
                 vm.$input.on('itemAdded', function(event) {
@@ -61,7 +61,7 @@ module.exports = function(resolve) {
                 vm.$input.on('itemRemoved', function(event) {
                     console.log('itemRemoved');
                     var item = event.item;
-                    _.remove(vm.tags, item);
+                    vm.remove(item);
                 });
             }
         }
