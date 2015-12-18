@@ -1,6 +1,7 @@
 $(document).ready(function() {
     System.importAll({
         ag: '/Components/portfolio/AssetsGroup.js',
+        pc: '/Components/portfolio/PieChart.js',
         _raw: [
         ]
     })
@@ -9,15 +10,22 @@ $(document).ready(function() {
             el: '#vue',
             components: {
                 'assets-group': imported.ag,
+                'pie-chart': imported.pc,
             },
             template: [
-                '<assets-group v-for="ag in assets"',
-                    ':name.sync="ag.name"',
-                    ':tickers.sync="ag.tickers"',
-                    '@drop="dropassets($index)"',
-                    '>',
-                '</assets-group>',
-                '<div class="row" @click="addassets">'+Jade.els.iconButton('fa-plus')+'</div>',
+                '<div class="row">',
+                    '<div class="col-md-6">',
+                        '<assets-group v-for="ag in assets"',
+                            ':name.sync="ag.name"',
+                            ':tickers.sync="ag.tickers"',
+                            '@drop="dropassets($index)"',
+                            '>',
+                        '</assets-group>',
+                        '<div class="row" @click="addassets">'+Jade.els.iconButton('fa-plus')+'</div>',
+                    '</div>',
+                    '<pie-chart class="col-md-6">',
+                    '</pie-chart>',
+                '</div>',
             ].join(' '),
             data: {
                 assets: [
