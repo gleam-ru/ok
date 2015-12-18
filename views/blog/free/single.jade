@@ -6,19 +6,52 @@ block append head
   //- +globalVar('roles', roles)
   //- script(src='/ViewControllers/index.js')
   style.
+    .vi-series {
+      text-transform: uppercase;
+      color: #aaa;
+      }
+      p.vi-parent-post {
+        margin: 10px 0px 0px 0px;
+        }
+      .vi-neighbors {
+        margin: 5px 0px 10px 20px;
+        }
+      .vi-children {
+        margin: 0px 0px 0px 20px;
+        }
 
 
 block append title
   +headerButtons_single(post)
 
-block content
+mixin series(post)
+  .container.vi-series
+    +smallSeparator()
+    if (post.parent)
+      p.vi-parent-post
+        | Series: 
+        a(href='#{feedUrl}/get/#{post.parent.id}') #{post.parent.title}
+    ul.vi-neighbors
+      each neighbor in post.neighbors
+        if neighbor.id == post.id
+          li.vi-neighbor-post
+            span #{neighbor.title}
+            ul.vi-children
+              each child in post.children
+                li.vi-child-post
+                  a(href='#{feedUrl}/get/#{child.id}') #{child.title}
+        else
+          li.vi-neighbor-post
+            a(href='#{feedUrl}/get/#{neighbor.id}') #{neighbor.title}
 
+block content
   section.wow.fadeIn.blog-details-text
     .container
       .row
         .col-md-12.col-sm-10.center-col
           //- post details text
           //- p.text-large
-            | #{post.title}
+            | #{post.parent}
           p
             | !{post.text}
+    +series(post)

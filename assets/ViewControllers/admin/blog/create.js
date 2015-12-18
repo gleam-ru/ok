@@ -43,7 +43,7 @@ $(document).ready(function() {
                 blog      : defaults.blog || (globalVars.post.blog && globalVars.post.blog.id),
                 post      : defaults.post || (globalVars.post.parent && globalVars.post.parent.id),
 
-                tags      : defaults.tags.split(',').concat(_.map(globalVars.post.tags, 'name')),
+                tags      : (defaults.tags ? defaults.tags.split(',') : []).concat(_.map(globalVars.post.tags, 'name')),
 
                 title     : globalVars.post.title,
 

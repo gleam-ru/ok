@@ -8,7 +8,10 @@
 
 
 
-// comment me
+// используется для получения
+// "метаданных" (вспомогательных данных для работы PostEditor-а)
+// таких как - список всех языков, блогов и "дерева" постов
+//
 function getMeta() {
     return Q.all([
         Language.find(),
@@ -145,6 +148,7 @@ module.exports = {
     default_post: function(req, res) {
         formatDataForSingle({
             id: req.param('id'),
+            feedUrl: '/blog',
         })
         .then(function(data) {
             return res.render('blog/free/single', data)
@@ -215,6 +219,7 @@ module.exports = {
                         {name: blog.name, href: '/blog/f/'+blog.name},
                         {name: 'Post',    href: '/blog/f/'+blog.name+'/get/'+req.param('id')},
                     ],
+                    feedUrl: '/blog/f/'+blog.name,
                 })
             })
             .then(function(data) {
@@ -286,6 +291,7 @@ module.exports = {
                         {name: blog.name, href: '/paid/f/'+blog.name},
                         {name: 'Post',    href: '/paid/f/'+blog.name+'/get/'+req.param('id')},
                     ],
+                    feedUrl: '/paid/f/'+blog.name,
                 })
             })
             .then(function(data) {
@@ -348,14 +354,15 @@ function formatDataForSingle(data) {
                     {name: 'Post', href: '/blog/get/'+data.id},
                 ],
                 pagination: {},
+                feedUrl: '/blog/',
             }, data)
         })
         .then(function() {
-            return Post.findOne({id: data.id}).populateAll();
+            return Post.getFormattedOne({id: data.id});
         })
         .then(function(post) {
-            data.post  = post.toJSON();
-            data.title = data.post.title;
+            data.post      = post;
+            data.title     = data.post.title;
             data.pageTitle = data.post.title;
         })
         .then(function() {

@@ -64,6 +64,7 @@ module.exports = {
                     data.tags = _.map(data.tags, function(tag) {
                         return {name: tag};
                     })
+                    console.debug(data.tags)
                     if (!data.tags.length) {
                         return [];
                     }
@@ -178,6 +179,55 @@ module.exports = {
                                     });
                             });
                         }));
+                }
+            })
+    },
+
+
+    // получает примерно такое:
+    // _.extend(post, {
+    //     neighbors: [n, n, post, n,...],
+    //     children: [c, c, c,...],
+    // })
+    getFormattedOne: function(params) {
+        var Post = this;
+        var accum = {};
+        var result = {
+            parent: undefined,
+            children: [],
+            neighbors: [],
+        };
+        return Post
+            .findOne(params)
+            .populateAll()
+            .then(function(post) {
+                accum.post = post;
+                result = post.toJSON();
+                return Post.find({parent: post.id});
+            })
+            .then(function(children) {
+                result.children = children;
+                return accum.post;
+            })
+            .then(function(post) {
+                if (!post.parent) {
+                    return Q()
+                        .then(function() {
+                            return _.extend(result, {
+                                neighbors: [result],
+                            });
+                        })
+                }
+                else {
+                    return Q()
+                        .then(function() {
+                            return Post.find({parent: post.parent.id});
+                        })
+                        .then(function(neighbors) {
+                            return _.extend(result, {
+                                neighbors: neighbors,
+                            });
+                        })
                 }
             })
     }

@@ -108,7 +108,11 @@ module.exports = function(resolve) {
             },
             methods: {
                 save: function() {
-                    this.$emit('save');
+                    var vm = this;
+                    if (!vm.text || !vm.title) {
+                        mp.alert('Title and text are required!')
+                    }
+                    vm.$emit('save');
                 },
                 clear_ls: function() {
                     var vm = this;
