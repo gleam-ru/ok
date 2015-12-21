@@ -376,3 +376,43 @@ input.has-error {
     right: 0px;
     top: 110px;
     }
+
+
+
+.vi-assets {
+    transition: all .3s;
+    }
+    .vi-assets .vi-ag.hovered {
+        border-color: rgba(183, 28, 41, 0.41);
+        }
+    .vi-assets .vi-ag {
+        border: solid 1px transparent;
+        margin-bottom: 5px;
+        }
+        .vi-assets .vi-ag .vi-group-name {
+            margin-top: 5px;
+            }
+    .vi-assets input {
+        line-height: 20px;
+        height: 20px;
+        margin-bottom: 0px;
+        }
+        .vi-assets .vi-ag-row.hovered {
+            border-color: rgba(183, 28, 41, 0.41);
+            }
+        .vi-assets .vi-ag-row {
+            border: solid 1px transparent;
+            padding: 5px 15px;
+            height: 32px;
+            }
+    .vi-assets .vi-iconButton {
+        line-height: 20px;
+        height: 20px;
+        width: 20px;
+        font-size: 12px;
+        }
+        .vi-assets .vi-iconButton .fa {
+            height: 18px !important;
+            padding-left: 2px;
+            }
+/*.vi-assets vi-group-name{*/

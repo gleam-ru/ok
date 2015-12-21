@@ -6,16 +6,24 @@ module.exports = function(resolve) {
     .then(function() {
         return {
             template: [
-                '<div class="row">',
-                    '<input class="col-md-5" type="text" v-model="k"  placeholder="Name">',
-                    '<input class="col-md-5" type="text" v-model="v" placeholder="Value">',
-                    '<div class="col-md-2" @click="drop">'+Jade.els.iconButton('fa-trash')+'</div>',
+                '<div class="col-md-12 vi-ag-row">',
+                    '<input class="col-md-5 col-md-offset-1" type="text" v-model="k" placeholder="Name">',
+                    '<input class="col-md-4 col-md-offset-1" type="text" v-model="v" placeholder="Value">',
+                    '<div class="col-md-1">',
+                        '<span @click="drop" @mouseenter="dropentered" @mouseleave="dropleaved">'+Jade.els.iconButton('fa-trash')+'</span>',
+                    '</div>',
                 '</div>',
             ].join(' '),
             props: ['k', 'v'],
             methods: {
                 drop: function() {
                     this.$emit('drop');
+                },
+                dropentered: function(e) {
+                    $(this.$el).addClass('hovered')
+                },
+                dropleaved: function(e) {
+                    $(this.$el).removeClass('hovered')
                 },
             },
             ready: function() {

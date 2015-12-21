@@ -9,7 +9,7 @@ module.exports = function(resolve) {
         var Highcharts = imported.Highcharts;
         return {
             template: [
-                '<div id="fn-my-chart" class="vi-my-chart" style="min-height: 500px;">',
+                '<div class="vi-my-chart" style="min-height: 500px;">',
                 '</div',
             ].join(' '),
             props: ['piedata'],
