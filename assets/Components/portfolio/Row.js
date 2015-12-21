@@ -8,7 +8,7 @@ module.exports = function(resolve) {
             template: [
                 '<div class="col-md-12 vi-ag-row">',
                     '<input class="col-md-5 col-md-offset-1" type="text" v-model="k" placeholder="Name">',
-                    '<input class="col-md-4 col-md-offset-1" type="text" v-model="v" placeholder="Value">',
+                    '<input class="col-md-3 col-md-offset-1" type="text" v-model="v" placeholder="Value">',
                     '<div class="col-md-1">',
                         '<span @click="drop" @mouseenter="dropentered" @mouseleave="dropleaved">'+Jade.els.iconButton('fa-trash')+'</span>',
                     '</div>',

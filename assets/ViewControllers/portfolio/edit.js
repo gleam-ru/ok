@@ -14,6 +14,18 @@ $(document).ready(function() {
                 'pie-chart': imported.pc,
             },
             template: [
+                '<h4 class="row mb-10">',
+                    'Portfolio description',
+                '</h4>',
+                '<div class="row">',
+                    '<textarea v-model="description" placeholder="Portfolio description"></textarea>',
+                '</div>',
+                '<h4 class="row mb-10 vi-assets-editor-header">',
+                    'Portfolio assets',
+                    '<span @click="addassets" class="ml-10" style="vertical-align: sub;">',
+                        Jade.els.iconButton('fa-plus'),
+                    '</span>',
+                '</h4>',
                 '<div class="row">',
                     '<div class="col-md-4 vi-assets">',
                         '<assets-group v-for="ag in assets"',
@@ -22,34 +34,39 @@ $(document).ready(function() {
                             '@drop="dropassets($index)"',
                             '>',
                         '</assets-group>',
-                        '<div class="row">',
-                            '<span @click="addassets">'+Jade.els.iconButton('fa-plus')+'</span>',
-                        '</div>',
                     '</div>',
                     '<pie-chart class="col-md-7 col-md-offset-1"',
                         ':piedata="piedata"',
                         '>',
                     '</pie-chart>',
                 '</div>',
+                '<div class="row">',
+                    '<span @click="save">',
+                        Jade.els.revealButton('fa-save', 'Save'),
+                    '</span>',
+                '</div>',
             ].join(' '),
             data: {
-                assets: [
-                    {
-                        name: 'Bonds',
-                        tickers: [
-                            {k: 'bond_1', v: 138},
-                            {k: 'bond_2', v: 105},
-                            {k: 'bond_3', v: 130},
-                        ],
-                    }, {
-                        name: 'Shares',
-                        tickers: [
-                            {k: 'gazp', v: 138},
-                            {k: 'rasp', v: 105},
-                            {k: 'mltr', v: 130},
-                        ],
-                    }
-                ],
+                id          : globalVars.portfolio.id,
+                description : globalVars.portfolio.description,
+                assets      : globalVars.portfolio.assets,
+                // assets: [
+                //     {
+                //         name: 'Bonds',
+                //         tickers: [
+                //             {k: 'bond_1', v: 138},
+                //             {k: 'bond_2', v: 105},
+                //             {k: 'bond_3', v: 130},
+                //         ],
+                //     }, {
+                //         name: 'Shares',
+                //         tickers: [
+                //             {k: 'gazp', v: 138},
+                //             {k: 'rasp', v: 105},
+                //             {k: 'mltr', v: 130},
+                //         ],
+                //     }
+                // ],
             },
             computed: {
                 piedata: function() {
@@ -70,7 +87,7 @@ $(document).ready(function() {
                         })
                         data.push(parent);
                     })
-                    return data;
+                    return data.reverse();
                 },
             },
             methods: {
@@ -78,14 +95,54 @@ $(document).ready(function() {
                     this.assets.splice(idx, 1);
                 },
                 addassets: function() {
-                    this.assets.push({
+                    this.assets.unshift({
                         name: '',
                         tickers: [],
                     });
                 },
+                save: function() {
+                    var vm = this;
+                    cnt.mask();
+                    $.post('/api/update_portfolio', {
+                        msg: {
+                            id: vm.id,
+                            assets: vm.assets,
+                            description: vm.description,
+                        }
+                    })
+                    .done(function(data) {
+                        window.location.href = '/paid/p/'+data.name;
+                    })
+                    .fail(function(err) {
+                        console.error(err);
+                        mp.alert('smth went wrong...');
+                    })
+                    .always(function() {
+                        cnt.unmask();
+                    })
+                },
             },
             ready: function() {
                 var vm = this;
+
+                $('#deleteItem').on('click', function() {
+                    mp.confirm('Resoring is not possible. Continue?', function() {
+                        cnt.mask();
+                        $.post('/api/remove_portfolio', {
+                            id: vm.id,
+                        })
+                        .done(function() {
+                            window.location.href = '/paid/p';
+                        })
+                        .fail(function(err) {
+                            console.error(err);
+                            mp.alert('smth went wrong...');
+                        })
+                        .always(function() {
+                            cnt.unmask();
+                        })
+                    })
+                })
             }
         })
     })

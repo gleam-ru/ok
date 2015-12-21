@@ -145,6 +145,12 @@ ul.no-dots>li {list-style: none;}
  *  @modules
  */
 
+/* bootstrap */
+.btn {
+    cursor: pointer;
+    }
+
+
 /* bootstrap tagsinput */
 #body .bootstrap-tagsinput {
     display: block;
@@ -381,6 +387,8 @@ input.has-error {
 
 .vi-assets {
     transition: all .3s;
+    margin-bottom: 30px;
+    margin-left: 0px;
     }
     .vi-assets .vi-ag.hovered {
         border-color: rgba(183, 28, 41, 0.41);
@@ -405,13 +413,16 @@ input.has-error {
             padding: 5px 15px;
             height: 32px;
             }
-    .vi-assets .vi-iconButton {
+    .vi-assets .vi-iconButton,
+    .vi-assets-editor-header > span {
+        display: inline-block;
         line-height: 20px;
         height: 20px;
         width: 20px;
         font-size: 12px;
         }
-        .vi-assets .vi-iconButton .fa {
+        .vi-assets .vi-iconButton .fa,
+        .vi-assets-editor-header .fa {
             height: 18px !important;
             padding-left: 2px;
             }

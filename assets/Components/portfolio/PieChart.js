@@ -82,12 +82,7 @@ module.exports = function(resolve) {
                             type: 'pie',
                         },
                         title: {
-                            text: 'Portfolio'
-                        },
-                        yAxis: {
-                            title: {
-                                text: 'Total percent market share'
-                            }
+                            text: '',
                         },
                         plotOptions: {
                             pie: {
@@ -106,15 +101,15 @@ module.exports = function(resolve) {
                 window._pie = this;
                 vm.redraw();
                 var _el = $(this.$el);
-                $(window).scroll(function() {
-                    var scroll = $(window).scrollTop();
-                    if (scroll > 140) {
-                        _el.addClass('fixed');
-                    }
-                    else {
-                        _el.removeClass('fixed');
-                    }
-                });
+                // $(window).scroll(function() {
+                //     var scroll = $(window).scrollTop();
+                //     if (scroll > 140) {
+                //         _el.addClass('fixed');
+                //     }
+                //     else {
+                //         _el.removeClass('fixed');
+                //     }
+                // });
             }
         }
     })

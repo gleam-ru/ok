@@ -80,6 +80,46 @@ module.exports = {
     },
 
 
+
+
+    portfolio_update: function(req, res) {
+        var msg = req.param('msg');
+        console.debug(msg)
+        return Portfolio
+            .findOne({id: msg.id})
+            .then(function(portfolio) {
+                if (!portfolio) {
+                    throw new Error(404);
+                }
+                portfolio.description = msg.description;
+                portfolio.assets      = msg.assets;
+                return portfolio.save();
+            })
+            .then(function(portfolio) {
+                res.send({id: portfolio.id, name: portfolio.name});
+                return res.ok();
+            })
+            .catch(res.serverError)
+    },
+
+    portfolio_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+        if (!id) {
+            return res.badRequest();
+        }
+        else {
+            return Portfolio
+                .findOne({id: id})
+                .then(function(portfolio) {
+                    // portfolio.destroy();
+                    console.info('portfolio_remove', portfolio.toJSON());
+                })
+                .then(res.ok)
+                .catch(res.serverError)
+        }
+    },
+
+
     subscribe: function(req, res) {
         var credentials = req.param('email');
         console.info('subscription:', credentials);

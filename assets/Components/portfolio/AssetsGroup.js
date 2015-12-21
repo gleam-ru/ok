@@ -28,7 +28,7 @@ module.exports = function(resolve) {
                             '<span @click="addrow">'+Jade.els.iconButton('fa-plus')+'</span>',
                         '</div>',
                     '</div>',
-                    '<div class="col-md-12 no-padding">',
+                    '<div class="col-md-12 no-padding vi-separator">',
                         Jade.els.separator(),
                     '</div>',
                 '</div>',
