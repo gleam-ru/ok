@@ -1,6 +1,11 @@
 extends ./_editor.jade
 
 block append head
-  //- +globalVar('roles', roles)
-  script(src='/ViewControllers/admin/portfolio/edit.js')
+  +globalVar('portfolio', portfolio)
+  script(src='/ViewControllers/portfolio/edit.js')
   style.
+
+block content
+  section.wow.fadeIn
+    .container
+      #vue

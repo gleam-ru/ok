@@ -16,6 +16,10 @@ module.exports = {
             })
             .then(function(qa) {
                 data.qas = qa.length;
+                return Request.find({type: 'pay_request'});
+            })
+            .then(function(pay_requests) {
+                data.pay_requests = pay_requests.length;
             })
             .then(function() {
                 return res.render('admin', data)
@@ -44,6 +48,31 @@ module.exports = {
             })
             .then(function() {
                 return res.render('admin/qas', data)
+            })
+    },
+
+    pay_requests: function (req, res) {
+        var data = {
+            pageTitle: 'Admin - Pay requests',
+            title: 'Admin - Pay requests',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'Pay requests', href: '/admin/pay_requests'},
+            ],
+        }
+        return Q()
+            .then(function() {
+                return Request.find({type: 'pay_request'});
+            })
+            .then(function(requests) {
+                data.pay_requests = _(requests)
+                    .sortBy('createdAt')
+                    .reverse()
+                    .value()
+            })
+            .then(function() {
+                return res.render('admin/pay_requests', data)
             })
     },
 

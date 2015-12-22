@@ -6,8 +6,7 @@ include ../_stuff
 block append head
   +globalVar('parts', portfolio.assets)
   //- +globalVar('roles', roles)
-  script(src="/bower_components/Chart.js/Chart.js")
-  script(src='/ViewControllers/paid/allocation.js')
+  script(src='/ViewControllers/portfolio/single.js')
   style.
     #parts {width: 400px !important; height: 400px !important;}
     .tab-style1 {padding-top: 30px;}
@@ -19,37 +18,41 @@ block append title
   +headerButtons_single(portfolio)
 
 
-mixin progressBarItem(item)
+mixin progressBarItem(item, total)
   .progress-bar-sub
     .progress-name
-      strong #{item.name}
-      |  #{item.value}%
+      strong #{(100 * item.v / total).toFixed(2)}%
+      |  - #{item.k}
     .progress
-      .progress-bar(role='progressbar', aria-valuenow='#{item.value}', aria-valuemin='0', aria-valuemax='100', style='width: #{item.value}%;')
+      .progress-bar(
+        role='progressbar'
+        aria-valuenow='#{item.v / total}'
+        aria-valuemin='0'
+        aria-valuemax='#{total}'
+        style='width: #{100 * item.v / total}%;'
+        )
+
+
+mixin assetsGroup(ag)
+  - var total = _.reduce(ag.tickers, function(sum, t) {return parseInt(sum || 0) + parseInt(t.v || 0);});
+  .asset-group.margin-seven
+    h4.row.uppercase #{ag.name}
+    .progress-bar-main
+      each t in ag.tickers
+        +progressBarItem(t, total)
 
 
 
 block content
   .container
     .row
-      .tab-style1
-        .row
-          .col-md-12.col-sm-12
-            ul.nav.nav-tabs.nav-tabs-light.text-left
-              li.active
-                a(href='#tab_sec1', data-toggle='tab') Table
-              li#chartTab
-                a(href='#tab_sec2', data-toggle='tab') Chart
-              li
-                a(href='#more', data-toggle='tab') Last posts
-        .tab-content
-          #tab_sec1.tab-pane.fade.in.active
-            .progress-bar-main
-              each part in portfolio.assets
-                +progressBarItem(part)
-          #tab_sec2.tab-pane.fade.in
-            canvas#parts
-          #more.tab-pane.fade.in
-            p //TODO: last blog posts (/paid/f/portfolio?tag=portfolio.name)
-            a(href='/paid/f/portfolios?tags[]=#{portfolio.name}')
-              +revealButton('fa-history', 'portfolio feed')
+      .col-md-4
+        .progress-bar-main
+          each ag in portfolio.assets
+            +assetsGroup(ag)
+      .col-md-8
+        #pieChart.margin-five
+
+    .row.margin-four
+      a(href='/paid/f/portfolios?tags=#{portfolio.name}')
+        +revealButton('fa-arrow-right', 'Portfolio feed')

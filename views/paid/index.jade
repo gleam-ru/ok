@@ -4,9 +4,25 @@ extends ../_layouts/black-subtitle.jade
 block append head
   //- +globalVar('users', users)
   //- +globalVar('roles', roles)
-  //- script(src='/ViewControllers/index.js')
+  script(src='/ViewControllers/paid/index.js')
   style.
     .blog-image {height: 180px; position: relative;}
+    #createPortfolio:hover {
+      opacity: 1;
+      }
+    #createPortfolio {
+      min-height: 100px;
+      line-height: 100px;
+      border: dotted;
+      opacity: 0.4;
+      text-align: center;
+      cursor: pointer
+      }
+      #createPortfolio i {
+        font-size: 80px;
+        vertical-align: middle;
+        padding: 40px 0px;
+        }
 
 
 
@@ -38,6 +54,9 @@ block content
       .row.blog-3col
         for portfolio in portfolios
           +portfolio(portfolio)
+        if hasRole(user, 'admin')
+          #createPortfolio.col-md-4.col-sm-6.col-xs-6.blog-listing
+            i.fa.fa-plus
       h2 Feeds
       +separator()
       .row.blog-3col

@@ -80,6 +80,103 @@ module.exports = {
     },
 
 
+
+
+    portfolio_create: function(req, res) {
+        var msg = req.param('msg');
+        console.debug(msg)
+        return Portfolio
+            .findOne({name: msg.name})
+            .then(function(portfolio) {
+                if (portfolio) {
+                    throw new Error('Portfolio with name "'+msg.name+'" already exists!');
+                }
+                return Portfolio.create({
+                    name: msg.name,
+                })
+            })
+            .then(function(portfolio) {
+                res.send({id: portfolio.id, name: portfolio.name});
+                return res.ok();
+            })
+            .catch(res.serverError)
+    },
+
+    portfolio_update: function(req, res) {
+        var msg = req.param('msg');
+        return Portfolio
+            .findOne({id: msg.id})
+            .then(function(portfolio) {
+                if (!portfolio) {
+                    throw new Error(404);
+                }
+                portfolio.description = msg.description;
+                portfolio.assets      = msg.assets;
+                return portfolio.save();
+            })
+            .then(function(portfolio) {
+                res.send({id: portfolio.id, name: portfolio.name});
+                return res.ok();
+            })
+            .catch(res.serverError)
+    },
+
+    portfolio_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+        if (!id) {
+            return res.badRequest();
+        }
+        else {
+            return Portfolio
+                .findOne({id: id})
+                .then(function(portfolio) {
+                    portfolio.destroy();
+                    console.info('portfolio_remove', portfolio.toJSON());
+                })
+                .then(res.ok)
+                .catch(res.serverError)
+        }
+    },
+
+
+    pay_request_create: function(req, res) {
+        var msg = req.param('msg');
+        if (!msg) {
+            return res.badRequest();
+        }
+
+        Request.create({
+            type         : 'pay_request',
+            author_name  : msg.name,
+            author_email : msg.email,
+            author_phone : msg.phone,
+            data         : msg.rate,
+        })
+        .then(function(created) {
+            return res.ok();
+        })
+        .catch(res.serverError)
+    },
+
+
+    pay_request_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+
+        Request.findOne({
+            id: id,
+        })
+        .then(function(found) {
+            if (!found) {
+                return res.notFound();
+            }
+            console.debug('pay_request_remove', found.toJSON());
+            found.destroy();
+            return res.ok();
+        })
+        .catch(res.serverError)
+    },
+
+
     subscribe: function(req, res) {
         var credentials = req.param('email');
         console.info('subscription:', credentials);

@@ -1,0 +1,46 @@
+extends ../_layouts/black-title.jade
+
+block append head
+  //- +globalVar('roles', roles)
+  script(src='/ViewControllers/admin/pay_requests.js')
+  style.
+    #table {
+      width: 100%;
+      }
+      #table tr:not(:first-child) {
+        border-top: solid 1px #ddd;
+        }
+      #table tr th,
+      #table tr td {
+        padding: 10px 20px;
+        }
+    
+
+
+block content
+  section
+    .container
+      if (pay_requests && pay_requests.length)
+        - var i = 1;
+        table#table
+          tr
+            th #
+            th Date
+            th Name
+            th Phone
+            th Email
+            th Rate
+            each r in pay_requests
+              tr
+                td #{i++}
+                td #{moment(r.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                td #{r.author_name}
+                td #{r.author_phone}
+                td #{r.author_email}
+                td #{r.data.name}
+                td
+                  a.fn-remove-request(data-id='#{r.id}')
+                    +iconButton('fa-close')
+      else
+        p no requests yet...
+

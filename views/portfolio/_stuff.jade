@@ -1,7 +1,7 @@
 //- кнопки для заголовка страницы
 mixin headerButtons_list()
   if hasRole(user, 'admin')
-    a#addPost(href='/admin/p/create')
+    a#createPortfolio
       +iconButton('fa-plus')
 
 mixin headerButtons_single(item)
@@ -9,7 +9,7 @@ mixin headerButtons_single(item)
     a#editItem(href='/create?tags=protfolio,#{item.name}&blog=104')
       +iconButton('fa-comment')
   if hasRole(user, 'admin')
-    a#editItem(href='/admin/p/edit?id=#{item.id}')
+    a#editItem(href='/paid/p/edit/#{item.id}')
       +iconButton('fa-pencil')
 
 mixin headerButtons_editor(item)
@@ -21,7 +21,7 @@ mixin headerButtons_editor(item)
 //- кнопки для заголовка поста
 mixin titleButtons(item)
   if hasRole(user, 'admin')
-    a.fn.fn-edit(href='/admin/p/edit?id=#{item.id}')
+    a.fn.fn-edit(href='/paid/p/edit/#{item.id}')
       +iconButton('fa-pencil')
 
 

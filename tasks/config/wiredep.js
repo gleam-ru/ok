@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         task: {
             ignorePath: "../../..",
             exclude: [
-                'Chart.js',
+                'highcharts',
                 'bootstrap-treeview.*',
                 'bootstrap-tagsinput.*',
                 'alloy-editor-all-min.js',
