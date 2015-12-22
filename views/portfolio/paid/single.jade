@@ -34,7 +34,7 @@ mixin progressBarItem(item, total)
 
 
 mixin assetsGroup(ag)
-  - var total = _.reduce(ag.tickers, function(sum, t) {return parseInt(sum || 0) + parseInt(t.v || 0);});
+  - var total = _.reduce(ag.tickers, function(sum, t) {return parseInt(sum || 0) + parseInt(t.v || 0);}, 0);
   .asset-group.margin-seven
     h4.row.uppercase #{ag.name}
     .progress-bar-main
