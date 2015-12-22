@@ -2,7 +2,6 @@ module.exports = function(resolve) {
     System.importAll({
         Highcharts: '/bower_components/highcharts/lib/highcharts.js',
         _raw: [
-
         ]
     })
     .then(function(imported) {
@@ -19,6 +18,7 @@ module.exports = function(resolve) {
                 }
             },
             methods: {
+                // этот метод также используется в /vc/portfolio/single.js
                 getSeries: function() {
                     var vm = this;
                     var piedata = vm.piedata;
