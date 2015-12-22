@@ -139,6 +139,25 @@ module.exports = {
     },
 
 
+    pay_request: function(req, res) {
+        var msg = req.param('msg');
+        if (!msg) {
+            return res.badRequest();
+        }
+
+        Request.create({
+            author_name  : msg.name,
+            author_email : msg.email,
+            author_phone : msg.phone,
+            data         : msg.rate,
+        })
+        .then(function(created) {
+            return res.ok();
+        })
+        .catch(res.serverError)
+    },
+
+
     subscribe: function(req, res) {
         var credentials = req.param('email');
         console.info('subscription:', credentials);
