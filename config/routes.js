@@ -34,7 +34,6 @@ module.exports.routes = {
     // //
     'get  /paid/ideas/get/:id'     : 'Paid.idea',
     'get  /paid/archive'           : 'Paid.archive',
-    'get  /paid/allocation'        : 'Paid.allocation',
 
 
 

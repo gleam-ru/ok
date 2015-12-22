@@ -18,7 +18,6 @@
     "jquery": "~2.1.4",
     "chosen": "~1.4.2",
     "font-awesome": "~4.5.0",
-    "Chart.js": "~1.0.2",
     "jquery.cookie": "jquery-cookie#~1.4.1",
     "alloyeditor": "~0.7.0",
     "bootstrap-tagsinput": "~0.7.1",
