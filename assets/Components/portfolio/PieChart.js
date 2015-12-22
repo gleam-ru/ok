@@ -100,7 +100,7 @@ module.exports = function(resolve) {
                 var vm = this;
                 window._pie = this;
                 vm.redraw();
-                var _el = $(this.$el);
+                // var _el = $(vm.$el);
                 // $(window).scroll(function() {
                 //     var scroll = $(window).scrollTop();
                 //     if (scroll > 140) {
