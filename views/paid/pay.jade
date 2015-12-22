@@ -2,6 +2,8 @@ extends ../_layouts/default.jade
 //- blog-grid-3columns.html
 
 block append head
+  +globalVar('user', user)
+  +globalVar('rates', rates)
   script(src='/ViewControllers/paid/pay.js')
   style.
     #rates .margin-ten:last-child {display: none;}
@@ -10,7 +12,6 @@ mixin _separator()
   .margin-ten
     +separator()
 
-- var i = 1;
 mixin tile(item)
   .clearfix
     .col-md-6.col-sm-12.no-padding-left.position-relative
@@ -18,7 +19,7 @@ mixin tile(item)
       .separator-line.bg-black.no-margin-lr
       p.text-large.black-text.letter-spacing-2.no-margin-bottom #{item.name}
       span.text-uppercase.letter-spacing-1 #{item.description}
-      a.highlight-button-black-border.btn.btn-medium(href='#') Buy now
+      a.highlight-button-black-border.btn.btn-medium.fn-buy-now(data-id='#{item.id}') Buy now
       if (item.hot)
         //- span.urgent-job.white-text.text-uppercase.letter-spacing-1.font-weight-600 Hot
     .col-md-6.col-sm-12.no-padding-left
@@ -48,20 +49,19 @@ block content
             #success.no-margin-lr
             .form-group.no-margin-bottom
               label.text-uppercase Your Name
-              input#name.input-round.med-input(type='text', name='name')
+              input#name.input-round.med-input(type='text', name='name', value='#{(user.surname && user.name) ? user.surname+" "+user.name : ""}')
+            .form-group.no-margin-bottom
+              label.text-uppercase Phone
+              input#phone.input-round.med-input(type='text', name='phone', value='#{user.phone || ""}')
             .form-group.no-margin-bottom
               label.text-uppercase Email
-              input#email.input-round.med-input(type='text', name='email')
+              input#email.input-round.med-input(type='text', name='email', value='#{user.email || ""}')
             .form-group.no-margin-bottom
               label.text-uppercase Position
               .select-style.input-round.med-input
                 select#selectposition(name='selectposition')
-                  option(value='') Select rate
                   for rate in rates
                     option(value='#{rate.id}') #{rate.name}
-            .form-group.no-margin-bottom
-              label.text-uppercase Message
-              textarea#comment.input-round.med-input(name='comment')
             .form-group.no-margin-bottom
               span.required.margin-three *Please complete all fields correctly
               button#careers-button.highlight-button-dark.btn.btn-small.button.xs-margin-bottom-five(type='submit') Submit

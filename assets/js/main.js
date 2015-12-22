@@ -273,7 +273,7 @@ function installMP() {
         var popup = $('<div></div>');
         popup.addClass('white-popup');
         popup.append('<p>Something went wrong. More about error:</p>');
-        popup.append('<pre class="error">'+err+'</p>');
+        popup.append('<pre class="error">'+err.statusText+'</p>');
         popup.append('<p>Please, contact Administrator!</p>');
         $.magnificPopup.open({
             items: {
