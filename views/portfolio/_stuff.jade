@@ -1,7 +1,7 @@
 //- кнопки для заголовка страницы
 mixin headerButtons_list()
   if hasRole(user, 'admin')
-    a#addPost(href='/paid/p/create')
+    a#createPortfolio
       +iconButton('fa-plus')
 
 mixin headerButtons_single(item)

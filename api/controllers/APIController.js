@@ -82,9 +82,28 @@ module.exports = {
 
 
 
-    portfolio_update: function(req, res) {
+    portfolio_create: function(req, res) {
         var msg = req.param('msg');
         console.debug(msg)
+        return Portfolio
+            .findOne({name: msg.name})
+            .then(function(portfolio) {
+                if (portfolio) {
+                    throw new Error('Portfolio with name "'+msg.name+'" already exists!');
+                }
+                return Portfolio.create({
+                    name: msg.name,
+                })
+            })
+            .then(function(portfolio) {
+                res.send({id: portfolio.id, name: portfolio.name});
+                return res.ok();
+            })
+            .catch(res.serverError)
+    },
+
+    portfolio_update: function(req, res) {
+        var msg = req.param('msg');
         return Portfolio
             .findOne({id: msg.id})
             .then(function(portfolio) {
@@ -111,7 +130,7 @@ module.exports = {
             return Portfolio
                 .findOne({id: id})
                 .then(function(portfolio) {
-                    // portfolio.destroy();
+                    portfolio.destroy();
                     console.info('portfolio_remove', portfolio.toJSON());
                 })
                 .then(res.ok)

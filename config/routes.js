@@ -100,6 +100,7 @@ module.exports.routes = {
     'post /api/update_post'       : 'API.post_update',
     'post /api/remove_post'       : 'API.post_remove',
     // //
+    'post /api/create_portfolio'  : 'API.portfolio_create',
     'post /api/update_portfolio'  : 'API.portfolio_update',
     'post /api/remove_portfolio'  : 'API.portfolio_remove',
     // //
