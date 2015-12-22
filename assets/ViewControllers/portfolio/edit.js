@@ -126,27 +126,30 @@ $(document).ready(function() {
             },
             ready: function() {
                 var vm = this;
-
-                $('#deleteItem').on('click', function() {
-                    mp.confirm('Resoring is not possible. Continue?', function() {
-                        cnt.mask();
-                        $.post('/api/remove_portfolio', {
-                            id: vm.id,
-                        })
-                        .done(function() {
-                            window.location.href = '/paid/p';
-                        })
-                        .fail(function(err) {
-                            console.error(err);
-                            mp.alert('smth went wrong...');
-                        })
-                        .always(function() {
-                            cnt.unmask();
-                        })
-                    })
-                })
             }
         })
     })
+
+
+
+    $('#deleteItem').on('click', function() {
+        mp.confirm('Resoring is not possible. Continue?', function() {
+            cnt.mask();
+            $.post('/api/remove_portfolio', {
+                id: vm.id,
+            })
+            .done(function() {
+                window.location.href = '/paid/p';
+            })
+            .fail(function(err) {
+                console.error(err);
+                mp.alert('smth went wrong...');
+            })
+            .always(function() {
+                cnt.unmask();
+            })
+        })
+    })
+
 
 });
