@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 function post(msg) {
     cnt.mask();
-    $.post('/api/pay', {
+    $.post('/api/create_pay_request', {
         msg: msg
     })
     .done(function() {

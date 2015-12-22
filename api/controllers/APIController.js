@@ -139,19 +139,38 @@ module.exports = {
     },
 
 
-    pay_request: function(req, res) {
+    pay_request_create: function(req, res) {
         var msg = req.param('msg');
         if (!msg) {
             return res.badRequest();
         }
 
         Request.create({
+            type         : 'pay_request',
             author_name  : msg.name,
             author_email : msg.email,
             author_phone : msg.phone,
             data         : msg.rate,
         })
         .then(function(created) {
+            return res.ok();
+        })
+        .catch(res.serverError)
+    },
+
+
+    pay_request_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+
+        Request.findOne({
+            id: id,
+        })
+        .then(function(found) {
+            if (!found) {
+                return res.notFound();
+            }
+            console.debug('pay_request_remove', found.toJSON());
+            found.destroy();
             return res.ok();
         })
         .catch(res.serverError)

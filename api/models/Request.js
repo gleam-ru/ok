@@ -8,6 +8,8 @@
 module.exports = {
 
     attributes: {
+        type          : {type: 'text', required: true},
+
         author_name   : {type: 'text'},
         author_phone  : {type: 'text'},
         author_email  : {type: 'text'},
