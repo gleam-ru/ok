@@ -82,6 +82,7 @@ module.exports = {
 
 
 
+
     portfolio_create: function(req, res) {
         var msg = req.param('msg');
         console.debug(msg)
@@ -139,6 +140,58 @@ module.exports = {
     },
 
 
+
+
+
+    qa_create: function(req, res) {
+        var name = req.param('name');
+        var email = req.param('email');
+        var text = req.param('text');
+
+        return Q()
+            .then(function() {
+                if (!name || !email || !text) {
+                    throw new Error('Please complete all fields correctly!');
+                }
+            })
+            .then(function() {
+                return QA.create({
+                    author: name,
+                    email: email,
+                    text: text,
+                });
+            })
+            .then(function() {
+                flashes.info(req, 'Your message has been sent');
+                return res.redirect('/qa');
+            })
+            .catch(function(err) {
+                flashes.error(req, err);
+                return res.redirect(req.get('referer'));
+            })
+    },
+
+    qa_remove: function(req, res) {
+        var id = parseInt(req.param('id'));
+
+        QA.findOne({
+            id: id,
+        })
+        .then(function(found) {
+            if (!found) {
+                return res.notFound();
+            }
+            console.debug('qa_remove', found.toJSON());
+            found.destroy();
+            return res.ok();
+        })
+        .catch(res.serverError)
+    },
+
+
+
+
+
     pay_request_create: function(req, res) {
         var msg = req.param('msg');
         if (!msg) {
@@ -158,7 +211,6 @@ module.exports = {
         .catch(res.serverError)
     },
 
-
     pay_request_remove: function(req, res) {
         var id = parseInt(req.param('id'));
 
@@ -177,11 +229,14 @@ module.exports = {
     },
 
 
+
+
+
     subscribe: function(req, res) {
         var credentials = req.param('email');
         console.info('subscription:', credentials);
         return res.redirect('/landing');
-    }
+    },
 
 };
 

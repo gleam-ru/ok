@@ -17,7 +17,7 @@ module.exports = function(resolve) {
                             '<span @click="drop" @mouseenter="dropentered" @mouseleave="dropleaved">'+Jade.els.iconButton('fa-trash')+'</span>',
                         '</div>',
                     '</div>',
-                    '<kv-row v-for="row in tickers"',
+                    '<kv-row v-for="row in tickers" track-by="$index"',
                         ':k.sync="row.k"',
                         ':v.sync="row.v"',
                         '@drop="droprow($index)"',

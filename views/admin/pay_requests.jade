@@ -38,7 +38,7 @@ block content
                 td #{r.author_phone}
                 td #{r.author_email}
                 td #{r.data.name}
-                td
+                td(style="min-width: 80px;")
                   a.fn-remove-request(data-id='#{r.id}')
                     +iconButton('fa-close')
       else

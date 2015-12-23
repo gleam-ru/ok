@@ -50,7 +50,6 @@ module.exports.routes = {
 // QA //
 ////////
     'get  /qa'      : 'QA',
-    'post /qa'      : 'QA.posted',
 
 
 
@@ -107,6 +106,9 @@ module.exports.routes = {
     // //
     'post /api/create_pay_request' : 'API.pay_request_create',
     'post /api/remove_pay_request' : 'API.pay_request_remove',
+    // //
+    'post /api/create_qa'          : 'API.qa_create',
+    'post /api/remove_qa'          : 'API.qa_remove',
     // //
     'post /api/subscribe'          : 'API.subscribe',
 

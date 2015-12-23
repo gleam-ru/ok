@@ -29,7 +29,7 @@ $(document).ready(function() {
                     '</h4>',
                     '<div class="row">',
                         '<div class="col-md-4 vi-assets">',
-                            '<assets-group v-for="ag in assets"',
+                            '<assets-group v-for="ag in assets" track-by="$index"',
                                 ':name.sync="ag.name"',
                                 ':tickers.sync="ag.tickers"',
                                 '@drop="dropassets($index)"',

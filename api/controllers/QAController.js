@@ -21,34 +21,4 @@ module.exports = {
             })
     },
 
-    posted: function(req, res) {
-        var name = req.param('name');
-        var email = req.param('email');
-        var text = req.param('text');
-
-
-        return Q()
-            .then(function() {
-                if (!name || !email || !text) {
-                    throw new Error('Please complete all fields correctly!');
-                }
-            })
-            .then(function() {
-                return QA.create({
-                    author: name,
-                    email: email,
-                    text: text,
-                });
-            })
-            .then(function() {
-                flashes.info(req, 'Your message has been sent');
-                return res.redirect('/qa');
-            })
-            .catch(function(err) {
-                flashes.error(req, err);
-                return res.redirect(req.get('referer'));
-            })
-    }
-
 };
-
