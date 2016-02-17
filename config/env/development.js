@@ -24,7 +24,7 @@ module.exports = {
         connection: 'localhostMysql',
     },
 
-    port: 1338,
+    port: 8000,
 
     log: {
         level: 'silly',
