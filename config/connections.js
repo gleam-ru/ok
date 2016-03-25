@@ -33,6 +33,14 @@ module.exports.connections = {
         database: 'ok_db',
     },
 
+    remoteMysql: {
+        adapter: 'sails-mysql',
+        host: 'localhost',
+        user: 'root',
+        password: 'BZ06rwHTuvt',
+        database: 'ok_db',
+    },
+
 
 
     //  ╔╦╗╔═╗╔╗╔╔═╗╔═╗
