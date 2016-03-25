@@ -41,8 +41,8 @@ module.exports.bootstrap = function(cb) {
     if (sails.config.dev) {
         return Q()
             .then(filler.process())
-            .then(cache.init())
-            .then(cron.init())
+            // .then(cache.init())
+            // .then(cron.init())
             .nodeify(cb);
     }
     else {
