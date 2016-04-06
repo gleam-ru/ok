@@ -238,5 +238,35 @@ module.exports = {
         return res.redirect('/landing');
     },
 
+
+
+
+
+    update_contract: function(req, res) {
+        var contract = req.param('msg');
+
+        return Q()
+            .then(function() {
+                if (contract.id) {
+                    return Contract.findOne({id: parseInt(contract.id)});
+                }
+                else {
+                    return Contract.create();
+                }
+            })
+            .then(function(created) {
+                delete contract.id;
+                _.extend(created, contract);
+                return created.save();
+            })
+            .then(function() {
+                return res.ok();
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+            ;
+    }
+
 };
 

@@ -1,0 +1,51 @@
+extends ../_layouts/black-title.jade
+
+block append head
+  //- +globalVar('roles', roles)
+  //- script(src='/ViewControllers/admin/pay_requests.js')
+  style.
+    #table {
+      width: 100%;
+      }
+      #table tr:not(:first-child) {
+        border-top: solid 1px #ddd;
+        }
+      #table tr th,
+      #table tr td {
+        padding: 10px 20px;
+        }
+    
+
+
+block content
+  section
+    .container
+      if (contracts && contracts.length)
+        - var i = 1;
+        table#table
+          tr
+            th #
+            th Date
+            th Name
+            th Number
+            th Sum
+            th Curr
+            th Type
+            each c in contracts
+              tr
+                td #{i++}
+                td #{moment(c.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
+                td #{c.name}
+                td #{c.num}
+                td #{c.sum}
+                td #{c.currency ? '₽' : '$'}
+                td #{c.transaction ? 'Card' : 'Bank'}
+                td(style="min-width: 80px;")
+                  a(href='/admin/contracts/get/#{c.id}')
+                    +iconButton('fa-link')
+                td(style="min-width: 80px;")
+                  a(href='/admin/contracts/get/#{c.id}')
+                    +iconButton('fa-download')
+      else
+        p no contracts yet...
+

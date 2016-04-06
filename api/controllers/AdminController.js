@@ -9,7 +9,7 @@ module.exports = {
     index: function (req, res) {
         var data = {
             pageTitle: 'Admin',
-        }
+        };
         return Q()
             .then(function() {
                 return QA.find();
@@ -20,10 +20,15 @@ module.exports = {
             })
             .then(function(pay_requests) {
                 data.pay_requests = pay_requests.length;
+                return Contract.find();
+            })
+            .then(function(contracts) {
+                data.contracts = contracts.length;
             })
             .then(function() {
-                return res.render('admin', data)
+                return res.render('admin', data);
             })
+            ;
     },
 
     qas: function (req, res) {
@@ -35,7 +40,7 @@ module.exports = {
                 {name: 'Admin', href: '/admin'},
                 {name: 'QAs',   href: '/admin/qa'},
             ],
-        }
+        };
         return Q()
             .then(function() {
                 return QA.find();
@@ -45,10 +50,12 @@ module.exports = {
                     .sortBy('createdAt')
                     .reverse()
                     .value()
+                    ;
             })
             .then(function() {
-                return res.render('admin/qas', data)
+                return res.render('admin/qas', data);
             })
+            ;
     },
 
     pay_requests: function (req, res) {
@@ -60,7 +67,7 @@ module.exports = {
                 {name: 'Admin', href: '/admin'},
                 {name: 'Pay requests', href: '/admin/pay_requests'},
             ],
-        }
+        };
         return Q()
             .then(function() {
                 return Request.find({type: 'pay_request'});
@@ -70,10 +77,12 @@ module.exports = {
                     .sortBy('createdAt')
                     .reverse()
                     .value()
+                    ;
             })
             .then(function() {
-                return res.render('admin/pay_requests', data)
+                return res.render('admin/pay_requests', data);
             })
+            ;
     },
 
 
@@ -99,7 +108,7 @@ module.exports = {
                 email: 'No-Email',
                 photo: 'team-member11.jpg',
             }),
-        }
+        };
         return Q()
             .then(function() {
                 return User
@@ -108,10 +117,12 @@ module.exports = {
                     .then(function(user) {
                         _.extend(data.profile, user);
                     })
+                    ;
             })
             .then(function() {
-                return res.render('profile/edit', data)
+                return res.render('profile/edit', data);
             })
+            ;
     },
 
 
@@ -124,16 +135,17 @@ module.exports = {
                 {name: 'Admin', href: '/admin'},
                 {name: 'Users', href: '/admin/users'},
             ],
-        }
+        };
 
         Q()
             .then(function() {
                 return Role
                     .find()
                     .then(function(roles) {
-                        _.remove(roles, {name: 'ghost'})
+                        _.remove(roles, {name: 'ghost'});
                         data.roles = roles;
                     })
+                    ;
             })
             .then(function() {
                 return User
@@ -142,6 +154,7 @@ module.exports = {
                     .then(function(users) {
                         data.users = users;
                     })
+                    ;
             })
             .then(function() {
                 return res.render('admin/users', data);
@@ -149,6 +162,66 @@ module.exports = {
             .catch(function(err) {
                 return res.serverError(err);
             })
+            ;
     },
+
+
+    contracts: function(req, res) {
+        var data = {
+            pageTitle: 'All contracts',
+            title: 'All contracts',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'Contracts', href: '/admin/contracts'},
+            ],
+        };
+
+        Q()
+            .then(function() {
+                return Contract.find();
+            })
+            .then(function(contracts) {
+                data.contracts = contracts;
+            })
+            .then(function() {
+                return res.render('admin/contracts', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+            ;
+    },
+
+    single_contract: function(req, res) {
+        var id = parseInt(req.param('id'));
+
+        var data = {
+            pageTitle: 'Contract',
+            title: 'Contract',
+            bc: [
+                {name: 'Home',  href: '/'},
+                {name: 'Admin', href: '/admin'},
+                {name: 'Contracts', href: '/admin/contracts'},
+                {name: 'Contract', href: '/admin/contracts/get/'+id},
+            ],
+        };
+
+        Q()
+            .then(function() {
+                return Contract.findOne({id: id});
+            })
+            .then(function(contract) {
+                data.contract = contract;
+            })
+            .then(function() {
+                return res.render('admin/contract', data);
+            })
+            .catch(function(err) {
+                return res.serverError(err);
+            })
+            ;
+
+    }
 
 };

@@ -104,7 +104,7 @@ module.exports = {
         var old_pass = req.param('pass0');
         var new_pass = req.param('pass1');
 
-        var referer = req.get('referer')
+        var referer = req.get('referer');
 
         Q()
             .then(function() {
@@ -158,5 +158,35 @@ module.exports = {
                 flashes.error(req, err);
                 return res.redirect(referer);
             })
+            ;
     },
+
+    // страница с заполнением договора и подписью
+    contract: function(req, res) {
+        var referer = req.get('referer');
+        var data = {
+            pageTitle: 'Contract',
+            title: 'Contract',
+            bc: [
+                {name: 'Home', href: '/'},
+                {name: 'Profile', href: '/profile'},
+                {name: 'Contract', href: '/profile/contract'},
+            ],
+
+            profile: _.extend({}, req.user),
+            contract: {},
+        };
+
+        return Q()
+            .then(function() {
+                return res.render('profile/contract', data);
+            })
+            .catch(function(err) {
+                console.error(err.stack);
+                flashes.error(req, err);
+                return res.redirect(referer);
+            })
+            ;
+    },
+
 };

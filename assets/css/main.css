@@ -431,3 +431,66 @@ input.has-error {
             padding-left: 2px;
             }
 /*.vi-assets vi-group-name{*/
+
+
+
+
+
+
+
+.contract {
+    border: solid 1px #888;
+    box-shadow: 3px 3px 4px 1px #aaa;
+    padding: 140px 50px 40px 50px;
+    width: 1000px;
+    background: url('/images/pdfbg.png');
+    background-size: cover;
+    background-position: 50% 0;
+    background-repeat-x: no-repeat;
+    height: 1410px;
+    }
+    .contract h2 {
+        font-size: 25px;
+        margin-bottom: 30px;
+        text-transform: none;
+        text-align: center;
+        font-weight: bold;
+        }
+    .contract input[type=radio] {
+        margin: 0px 10px 0px 0px;
+        width: 3em;
+        height: 3em;
+        vertical-align: middle;
+        }
+    .contract input {
+        margin: 0px;
+        padding: 0px 10px;
+        opacity: 1;
+        }
+    .contract .signature {
+        position: relative;
+        }
+        .contract .signature #savecontract {
+            }
+        .contract .signature #resetsignature {
+            top: 0px;
+            right: 17px;
+            position: absolute;
+            cursor: pointer;
+            opacity: 0.7;
+            }
+            .contract .signature #resetsignature:hover {
+                opacity: 1;
+                }
+    .contract .row {
+        line-height: 30px;
+        vertical-align: middle;
+        margin-bottom: 20px;
+        }
+        .contract .row p {
+            line-height: 1.5;
+            font-size: 15px;
+            }
+        .contract .row.big {
+            font-size: 20px;
+            }

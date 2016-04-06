@@ -61,7 +61,8 @@ module.exports.routes = {
     'get  /profile/settings'  : 'Profile.edit',
     // --
     'post /profile/update'    : 'Profile.update',
-
+    // --
+    'get  /profile/contract'  : 'Profile.contract',
 
 
 //////////
@@ -91,6 +92,9 @@ module.exports.routes = {
     'get  /create' : 'Blog.create',
     'get  /edit'   : 'Blog.edit',
     // //
+    'get  /admin/contracts'           : 'Admin.contracts',
+    'get  /admin/contracts/get/:id'   : 'Admin.single_contract',
+    // //
 
 
 
@@ -111,6 +115,9 @@ module.exports.routes = {
     'post /api/remove_qa'          : 'API.qa_remove',
     // //
     'post /api/subscribe'          : 'API.subscribe',
+    // //
+    'post /api/contract'           : 'API.update_contract',
+
 
 
 ////////////
