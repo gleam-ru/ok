@@ -1,10 +1,10 @@
-extends ../_layouts/default.jade
+extends ../_layouts/no-page.jade
 //- blog-grid-3columns.html
 
 block append head
   //- +globalVar('users', users)
   +globalVar('contract', contract)
-  script(src='/ViewControllers/admin/contract.js')
+  script(src='/ViewControllers/contract/account_application_static.js')
   style.
 
 
@@ -12,9 +12,4 @@ block flashes
 block content
   section(style='padding-top: 40px; padding-bottom: 40px;')
     .container.disable-all.contract
-      include ../_parts/contract
-
-
-
-
-        
+      include ./account_application

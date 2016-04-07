@@ -10,20 +10,19 @@ module.exports = {
         var data = {
             pageTitle: 'Admin',
         };
-        return Q()
-            .then(function() {
-                return QA.find();
-            })
-            .then(function(qa) {
-                data.qas = qa.length;
-                return Request.find({type: 'pay_request'});
-            })
-            .then(function(pay_requests) {
-                data.pay_requests = pay_requests.length;
-                return Contract.find();
-            })
-            .then(function(contracts) {
-                data.contracts = contracts.length;
+        return Q.all([
+                QA.find(),
+                Request.find({type: 'pay_request'}),
+                Contract.find({type: 'accout_application'}),
+                Contract.find({type: 'credit_line'}),
+            ])
+            .spread(function(qa, pay_request, contract_1, contract_2) {
+                _.extend(data, {
+                    qas: qa.length,
+                    pay_requests: pay_request.length,
+                    accout_applications: contract_1.length,
+                    credit_lines: contract_2.length,
+                });
             })
             .then(function() {
                 return res.render('admin', data);
@@ -164,64 +163,5 @@ module.exports = {
             })
             ;
     },
-
-
-    contracts: function(req, res) {
-        var data = {
-            pageTitle: 'All contracts',
-            title: 'All contracts',
-            bc: [
-                {name: 'Home',  href: '/'},
-                {name: 'Admin', href: '/admin'},
-                {name: 'Contracts', href: '/admin/contracts'},
-            ],
-        };
-
-        Q()
-            .then(function() {
-                return Contract.find();
-            })
-            .then(function(contracts) {
-                data.contracts = contracts;
-            })
-            .then(function() {
-                return res.render('admin/contracts', data);
-            })
-            .catch(function(err) {
-                return res.serverError(err);
-            })
-            ;
-    },
-
-    single_contract: function(req, res) {
-        var id = parseInt(req.param('id'));
-
-        var data = {
-            pageTitle: 'Contract',
-            title: 'Contract',
-            bc: [
-                {name: 'Home',  href: '/'},
-                {name: 'Admin', href: '/admin'},
-                {name: 'Contracts', href: '/admin/contracts'},
-                {name: 'Contract', href: '/admin/contracts/get/'+id},
-            ],
-        };
-
-        Q()
-            .then(function() {
-                return Contract.findOne({id: id});
-            })
-            .then(function(contract) {
-                data.contract = contract;
-            })
-            .then(function() {
-                return res.render('admin/contract', data);
-            })
-            .catch(function(err) {
-                return res.serverError(err);
-            })
-            ;
-
-    }
 
 };

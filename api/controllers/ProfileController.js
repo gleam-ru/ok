@@ -161,32 +161,4 @@ module.exports = {
             ;
     },
 
-    // страница с заполнением договора и подписью
-    contract: function(req, res) {
-        var referer = req.get('referer');
-        var data = {
-            pageTitle: 'Contract',
-            title: 'Contract',
-            bc: [
-                {name: 'Home', href: '/'},
-                {name: 'Profile', href: '/profile'},
-                {name: 'Contract', href: '/profile/contract'},
-            ],
-
-            profile: _.extend({}, req.user),
-            contract: {},
-        };
-
-        return Q()
-            .then(function() {
-                return res.render('profile/contract', data);
-            })
-            .catch(function(err) {
-                console.error(err.stack);
-                flashes.error(req, err);
-                return res.redirect(referer);
-            })
-            ;
-    },
-
 };

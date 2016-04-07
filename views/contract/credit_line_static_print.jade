@@ -1,0 +1,15 @@
+extends ../_layouts/no-page.jade
+//- blog-grid-3columns.html
+
+block append head
+  //- +globalVar('users', users)
+  +globalVar('contract', contract)
+  script(src='/ViewControllers/contract/credit_line_static.js')
+  style.
+
+
+block flashes
+block content
+  section(style='padding-top: 40px; padding-bottom: 40px;')
+    .container.disable-all.contract
+      include ./credit_line

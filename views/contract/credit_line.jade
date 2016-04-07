@@ -1,0 +1,100 @@
+h2 Запрос кредитной линии для пополнения торгового счета
+.row
+  .col-xs-2 ФИО
+  .col-xs-10
+    input(v-model='name', value='#{contract.data.name}')
+.row
+  .col-xs-2 Номер счета
+  .col-xs-10
+    input(v-model='number', value='#{contract.data.number}')
+.row
+  .col-xs-2 Для
+  .col-xs-10
+    b RUMEX INTERNATIONAL LTD
+.row.no-margin-bottom
+  .col-xs-12
+    p Клиент обращается с запросом к
+      b  RUMEX INTERNATIONAL LTD
+      | , чтобы открыть кредитную линию на сумму, указанную ниже, до осуществления денежного перевода на счет в
+      b  0515071507702
+      |  в 
+      b  EMIRATES NBD BANK
+      | , и на это же имя в
+      b  RUMEX INTERNATIONAL LTD
+      | .
+h2.no-margin-top Реквизиты
+.row
+  .col-xs-2 Сумма
+  .col-xs-10
+    label
+      input(v-model='sum', value='#{contract.data.sum}')
+.row
+  .col-xs-2 Валюта
+  .col-xs-5
+    label
+      input(type='radio', v-model='currency', value='usd', checked=(contract.data.currency === "usd"))
+      | Доллары США
+  .col-xs-5
+    label
+      input(type='radio', v-model='currency', value='rub', checked=(contract.data.currency === "rub"))
+      | Рубли
+.row
+  .col-xs-2 Вид перевода
+  .col-xs-5
+    label
+      input(type='radio', v-model='transaction', value='bank', checked=(contract.data.transaction === "bank"))
+      | Банковский перевод
+  .col-xs-5
+    label
+      input(type='radio', v-model='transaction', value='card', checked=(contract.data.transaction === "card"))
+      | Перевод с карты
+.row
+  .col-xs-2 Дата перевода
+  .col-xs-10
+    input(type='date', v-model='transactionDate', value='#{contract.data.transactionDate || moment().format("YYYY-MM-DD")}')
+
+.row.no-margin-bottom
+  .col-xs-12
+    p 
+      | Эта сумма будет храниться на моем счету
+      b  RUMEX INTERNATIONAL LTD
+      | , и я буду использовать её в качестве залога для выполнения операций на внебиржевом (OTC) рынке. Этот залог регулируется контрактом, подписанным с
+      b  RUMEX INTERNATIONAL LTD
+      | .
+    p
+      | Я понимаю, что до тех пор, пока перевод не осуществлён и не получено разрешение от
+      b  RUMEX INTERNATIONAL LTD
+      |  о снятии средств, вывод средств со счета невозможен. Я беру на себя всю ответственность за перечисление денег на счет
+      b  RUMEX INTERNATIONAL LTD
+      | . Я понимаю, что
+      b  RUMEX INTERNATIONAL LTD
+      |  оставляет за собой право отменить операции, осуществляемые на моем счету, в случае несоблюдения данного обязательства. Я освобождаю
+      b  RUMEX INTERNATIONAL LTD
+      |  от ответственности за расходы и жалобы в случае неуплаты кредитной линии.
+    p
+      | Я принимаю условие, что срок действия этой доверительной линии лимитирован, и что в даты, не охватывающие этот период,
+      b  RUMEX INTERNATIONAL LTD
+      |  может отменить любую прибыль, полученную во время проведенной сделки с этой линии. 
+
+.row.big
+  .col-xs-4
+    span.mr-10 Дата: 
+    span.ml-10
+      b #{moment(contract.createdAt).format('DD/MM/YYYY')}
+  .col-xs-8
+    .row
+      .col-xs-12
+        div Подпись: 
+        if (contract.signature)
+          img(src='#{contract.signature}')
+        else
+          .row.signature
+            .col-xs-12
+              canvas(v-el:signature, style='border: solid 1px black;')
+              span#resetsignature(@click='resetsignature', title='очистить подпись')
+                i.fa.fa-close
+            .col-xs-3
+                span#savecontract(@click='save')
+                  +button('Отправить')
+
+

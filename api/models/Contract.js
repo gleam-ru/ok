@@ -8,14 +8,13 @@
 module.exports = {
 
     attributes: {
-        sum: { type: 'string' },
-        name: { type: 'string' },
-        number : { type: 'string' },
-        currency: { type: 'string' }, // rub/usd
-        transaction: { type: 'string' }, // card/bank
-        transactionDate: { type: 'string' },
 
-        signature: { type: 'text' },
+        type: {type: 'string', required: true},
+
+        data: {type: 'json', defaultsTo: {data: {}}},
+
+        signature: {type: 'text'},
+
     },
 
 };

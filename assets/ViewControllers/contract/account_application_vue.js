@@ -31,14 +31,17 @@ $(document).ready(function() {
                     $.post('/api/contract', {
                         msg: {
                             id: vm.contract.id,
-                            sum: vm.sum,
-                            name: vm.name,
-                            number: vm.number,
-                            currency: vm.currency,
-                            transaction: vm.transaction,
-                            transactionDate: vm.transactionDate,
-
+                            type: 'credit_line',
                             signature: vm.signature,
+
+                            data: {
+                                sum: vm.sum,
+                                name: vm.name,
+                                number: vm.number,
+                                currency: vm.currency,
+                                transaction: vm.transaction,
+                                transactionDate: vm.transactionDate,
+                            },
                         }
                     })
                     .done(function(data) {
@@ -63,7 +66,7 @@ $(document).ready(function() {
 
                 vm.sum = '';
                 vm.number = '';
-                vm.name = globalVars.profile.name+' '+globalVars.profile.surname;
+                vm.name = (globalVars.profile.name || '')+' '+(globalVars.profile.surname || '');
                 vm.currency = 'rub';
                 vm.transaction = 'bank';
                 vm.transactionDate = moment().format('YYYY-MM-DD');

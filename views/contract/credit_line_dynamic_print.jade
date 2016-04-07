@@ -1,11 +1,11 @@
-extends ../_layouts/default.jade
+extends ../_layouts/no-page.jade
 //- blog-grid-3columns.html
 
 block append head
   //- +globalVar('users', users)
   +globalVar('contract', contract)
   +globalVar('profile', profile)
-  script(src='/ViewControllers/profile/contract.js')
+  script(src='/ViewControllers/contract/credit_line_vue.js')
   style.
 
 
@@ -13,9 +13,4 @@ block flashes
 block content
   section
     .container.contract#vue
-      include ../_parts/contract
-
-
-
-
-        
+      include ./credit_line

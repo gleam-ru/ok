@@ -61,8 +61,6 @@ module.exports.routes = {
     'get  /profile/settings'  : 'Profile.edit',
     // --
     'post /profile/update'    : 'Profile.update',
-    // --
-    'get  /profile/contract'  : 'Profile.contract',
 
 
 //////////
@@ -92,9 +90,6 @@ module.exports.routes = {
     'get  /create' : 'Blog.create',
     'get  /edit'   : 'Blog.edit',
     // //
-    'get  /admin/contracts'           : 'Admin.contracts',
-    'get  /admin/contracts/get/:id'   : 'Admin.single_contract',
-    // //
 
 
 
@@ -115,8 +110,6 @@ module.exports.routes = {
     'post /api/remove_qa'          : 'API.qa_remove',
     // //
     'post /api/subscribe'          : 'API.subscribe',
-    // //
-    'post /api/contract'           : 'API.update_contract',
 
 
 
@@ -134,5 +127,22 @@ module.exports.routes = {
     // 'get  /settings': 'Settings',
     // //
     // 'post /settings/update': 'Settings.update',
+
+
+///////////////
+// Contracts //
+///////////////
+
+    // версии "для печати" с отвязкой от стилей сайта
+    'get  /contract/:type'            : 'Contract.create',
+    'get  /contract/get/:id'          : 'Contract.printpage',
+
+    // администрирование контрактов
+    'get  /admin/contracts/:type'     : 'Contract.all',
+    'get  /admin/contracts/get/:id'   : 'Contract.single',
+
+    // //
+    'post /api/contract'              : 'Contract.update',
+
 
 };

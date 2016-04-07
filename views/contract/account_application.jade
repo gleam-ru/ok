@@ -1,18 +1,18 @@
 h2 Запрос кредитной линии для пополнения торгового счета
 .row
-  .col-md-2 ФИО
-  .col-md-10
-    input(v-model='name', value='#{contract.name}')
+  .col-xs-2 ФИО
+  .col-xs-10
+    input(v-model='name', value='#{contract.data.name}')
 .row
-  .col-md-2 Номер счета
-  .col-md-10
-    input(v-model='number', value='#{contract.number}')
+  .col-xs-2 Номер счета
+  .col-xs-10
+    input(v-model='number', value='#{contract.data.number}')
 .row
-  .col-md-2 Для
-  .col-md-10
+  .col-xs-2 Для
+  .col-xs-10
     b RUMEX INTERNATIONAL LTD
 .row.no-margin-bottom
-  .col-md-12
+  .col-xs-12
     p Клиент обращается с запросом к
       b  RUMEX INTERNATIONAL LTD
       | , чтобы открыть кредитную линию на сумму, указанную ниже, до осуществления денежного перевода на счет в
@@ -24,37 +24,37 @@ h2 Запрос кредитной линии для пополнения тор
       | .
 h2.no-margin-top Реквизиты
 .row
-  .col-md-2 Сумма
-  .col-md-10
+  .col-xs-2 Сумма
+  .col-xs-10
     label
-      input(v-model='sum', value='#{contract.sum}')
+      input(v-model='sum', value='#{contract.data.sum}')
 .row
-  .col-md-2 Валюта
-  .col-md-5
+  .col-xs-2 Валюта
+  .col-xs-5
     label
-      input(type='radio', v-model='currency', value='usd', checked=(contract.currency === "usd"))
+      input(type='radio', v-model='currency', value='usd', checked=(contract.data.currency === "usd"))
       | Доллары США
-  .col-md-5
+  .col-xs-5
     label
-      input(type='radio', v-model='currency', value='rub', checked=(contract.currency === "rub"))
+      input(type='radio', v-model='currency', value='rub', checked=(contract.data.currency === "rub"))
       | Рубли
 .row
-  .col-md-2 Вид перевода
-  .col-md-5
+  .col-xs-2 Вид перевода
+  .col-xs-5
     label
-      input(type='radio', v-model='transaction', value='bank', checked=(contract.transaction === "bank"))
+      input(type='radio', v-model='transaction', value='bank', checked=(contract.data.transaction === "bank"))
       | Банковский перевод
-  .col-md-5
+  .col-xs-5
     label
-      input(type='radio', v-model='transaction', value='card', checked=(contract.transaction === "card"))
+      input(type='radio', v-model='transaction', value='card', checked=(contract.data.transaction === "card"))
       | Перевод с карты
 .row
-  .col-md-2 Дата перевода
-  .col-md-10
-    input(type='date', v-model='transactionDate', value='#{contract.transactionDate || moment().format("YYYY-MM-DD")}')
+  .col-xs-2 Дата перевода
+  .col-xs-10
+    input(type='date', v-model='transactionDate', value='#{contract.data.transactionDate || moment().format("YYYY-MM-DD")}')
 
 .row.no-margin-bottom
-  .col-md-12
+  .col-xs-12
     p 
       | Эта сумма будет храниться на моем счету
       b  RUMEX INTERNATIONAL LTD
@@ -77,23 +77,23 @@ h2.no-margin-top Реквизиты
       |  может отменить любую прибыль, полученную во время проведенной сделки с этой линии. 
 
 .row.big
-  .col-md-4
+  .col-xs-4
     span.mr-10 Дата: 
     span.ml-10
       b #{moment(contract.createdAt).format('DD/MM/YYYY')}
-  .col-md-8
+  .col-xs-8
     .row
-      .col-md-12
+      .col-xs-12
         div Подпись: 
         if (contract.signature)
           img(src='#{contract.signature}')
         else
           .row.signature
-            .col-md-12
+            .col-xs-12
               canvas(v-el:signature, style='border: solid 1px black;')
               span#resetsignature(@click='resetsignature', title='очистить подпись')
                 i.fa.fa-close
-            .col-md-3
+            .col-xs-3
                 span#savecontract(@click='save')
                   +button('Отправить')
 

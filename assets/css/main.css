@@ -437,6 +437,14 @@ input.has-error {
 
 
 
+.container-non-responsive {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 1170px;
+    }
+
 
 .contract {
     border: solid 1px #888;
