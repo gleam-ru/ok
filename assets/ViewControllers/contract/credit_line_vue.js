@@ -75,6 +75,7 @@ $(document).ready(function() {
                 var canvas = vm.$els.signature;
                 canvas.width = canvas.parentNode.offsetWidth - 30;
                 vm.signaturePad = new SignaturePad(canvas, {
+                    penColor: "#4343DA",
                     onBegin: function() {
                         vm.signature = null;
                         console.debug('reset');

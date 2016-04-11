@@ -13,14 +13,14 @@ module.exports = {
         return Q.all([
                 QA.find(),
                 Request.find({type: 'pay_request'}),
-                Contract.find({type: 'accout_application'}),
+                Contract.find({type: 'account_application'}),
                 Contract.find({type: 'credit_line'}),
             ])
             .spread(function(qa, pay_request, contract_1, contract_2) {
                 _.extend(data, {
                     qas: qa.length,
                     pay_requests: pay_request.length,
-                    accout_applications: contract_1.length,
+                    account_applications: contract_1.length,
                     credit_lines: contract_2.length,
                 });
             })

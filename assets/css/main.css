@@ -449,14 +449,20 @@ input.has-error {
 .contract {
     border: solid 1px #888;
     box-shadow: 3px 3px 4px 1px #aaa;
-    padding: 140px 50px 40px 50px;
+    padding: 140px 50px 120px 50px;
     width: 1000px;
-    background: url('/images/pdfbg.png');
     background-size: cover;
     background-position: 50% 0;
     background-repeat-x: no-repeat;
-    height: 1410px;
     }
+    .contract h3 {
+        font-size: 18px;
+        color: #1D55B5;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-align: left;
+        font-weight: normal;
+        }
     .contract h2 {
         font-size: 25px;
         margin-bottom: 30px;
@@ -464,7 +470,8 @@ input.has-error {
         text-align: center;
         font-weight: bold;
         }
-    .contract input[type=radio] {
+    .contract input[type=radio],
+    .contract input[type=checkbox] {
         margin: 0px 10px 0px 0px;
         width: 3em;
         height: 3em;
@@ -502,3 +509,58 @@ input.has-error {
         .contract .row.big {
             font-size: 20px;
             }
+
+.contract ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    }
+.contract li {
+    list-style: initial;
+    line-height: 1.5;
+    }
+.contract p {
+    margin-bottom: 5px;
+}
+.contract p.b {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.contract.maincontract .row {
+    margin-bottom: 20px;
+}
+
+
+
+.vcenter .col-xs-1,
+.vcenter .col-xs-2,
+.vcenter .col-xs-3,
+.vcenter .col-xs-4,
+.vcenter .col-xs-5,
+.vcenter .col-xs-6,
+.vcenter .col-xs-7,
+.vcenter .col-xs-8,
+.vcenter .col-xs-9,
+.vcenter .col-xs-10,
+.vcenter .col-xs-11,
+.vcenter .col-xs-12 {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    }
+
+.contract.maincontract .row p {
+    font-size: 13px;
+}
+
+.contract .ru {
+    opacity: 0.5;
+    }
+
+
+.contract {
+    background-image: url('/images/pdfbg_01_header.png'), url('/images/pdfbg_03_footer.png'), url('/images/pdfbg_02_body.png');
+    background-repeat: no-repeat, no-repeat, repeat;
+    background-position: 100% 10px, 0px 100%, 0px 0px;
+    background-size: 410px, contain, 80%;
+}

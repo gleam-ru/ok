@@ -1,100 +1,849 @@
-h2 Запрос кредитной линии для пополнения торгового счета
 .row
-  .col-xs-2 ФИО
-  .col-xs-10
-    input(v-model='name', value='#{contract.data.name}')
-.row
-  .col-xs-2 Номер счета
-  .col-xs-10
-    input(v-model='number', value='#{contract.data.number}')
-.row
-  .col-xs-2 Для
-  .col-xs-10
-    b RUMEX INTERNATIONAL LTD
-.row.no-margin-bottom
-  .col-xs-12
-    p Клиент обращается с запросом к
-      b  RUMEX INTERNATIONAL LTD
-      | , чтобы открыть кредитную линию на сумму, указанную ниже, до осуществления денежного перевода на счет в
-      b  0515071507702
-      |  в 
-      b  EMIRATES NBD BANK
-      | , и на это же имя в
-      b  RUMEX INTERNATIONAL LTD
-      | .
-h2.no-margin-top Реквизиты
-.row
-  .col-xs-2 Сумма
-  .col-xs-10
-    label
-      input(v-model='sum', value='#{contract.data.sum}')
-.row
-  .col-xs-2 Валюта
-  .col-xs-5
-    label
-      input(type='radio', v-model='currency', value='usd', checked=(contract.data.currency === "usd"))
-      | Доллары США
-  .col-xs-5
-    label
-      input(type='radio', v-model='currency', value='rub', checked=(contract.data.currency === "rub"))
-      | Рубли
-.row
-  .col-xs-2 Вид перевода
-  .col-xs-5
-    label
-      input(type='radio', v-model='transaction', value='bank', checked=(contract.data.transaction === "bank"))
-      | Банковский перевод
-  .col-xs-5
-    label
-      input(type='radio', v-model='transaction', value='card', checked=(contract.data.transaction === "card"))
-      | Перевод с карты
-.row
-  .col-xs-2 Дата перевода
-  .col-xs-10
-    input(type='date', v-model='transactionDate', value='#{contract.data.transactionDate || moment().format("YYYY-MM-DD")}')
+  .col-xs-6
+    h3 INDIVIDUAL ACCOUNT APPLICATION
+  .col-xs-6
+    h3.ru ЗАЯВЛЕНИЕ НА ОТКРЫТИЕ ЛИЧНОГО СЧЕТА
 
-.row.no-margin-bottom
-  .col-xs-12
+.row
+  .col-xs-6
+    p
+      | Please complete ALL sections of this form.
+  .col-xs-6
+    p.ru
+      | Пожалуйста, заполните все разделы данной формы.
+
+.row
+  .col-xs-6
+    p
+      | Any sections which do not apply to you should be marked with “N/A” to 
+      | indicate that the relevant question has been considered by you. Leaving 
+      | sections blank may cause delays in your account application process
+  .col-xs-6
+    p.ru 
+      | Любые разделы, которые не относятся к Вам, должны быть отмечены как 
+      | "N/A", чтобы дать понять нам, что соответствующий раздел бы 
+      | рассмотрен Вами. Если Вы не заполните разделы, то это может задержать 
+      | процесс подачи заявления на открытие Вашего счета.  
+
+.row
+  .col-xs-6
     p 
-      | Эта сумма будет храниться на моем счету
-      b  RUMEX INTERNATIONAL LTD
-      | , и я буду использовать её в качестве залога для выполнения операций на внебиржевом (OTC) рынке. Этот залог регулируется контрактом, подписанным с
-      b  RUMEX INTERNATIONAL LTD
-      | .
+      | RUMEX  INTERNATIONAL  LTD.  (“RUMEX”)  will  assess  whether  it  is 
+      | appropriate for us to provide Services to you, based on the information 
+      | provided on this Application Form. For this reason, it is essential that you 
+      | immediately inform RUMEX in writing of any changes in the information 
+      | which you have provided. 
+  .col-xs-6
+    p.ru
+      | RUMEX  International  LTD  (“RUMEX”)  будет  оценивать,  является  ли 
+      | целесообразным  для  нас  предоставить  Вам  услуги,  на  основе 
+      | информации,  представленной  в  этом  заявлении.  По  этой  причине  Вам 
+      | важно  немедленно  уведомить  RUMEX  в  письменной  форме  о  любых 
+      | изменениях в информации, которую Вы предоставили. 
+
+.row
+  .col-xs-6
+    p 
+      | RUMEX requires the following documentation in addition to a completed 
+      | Application Form:
+  .col-xs-6
+    p.ru
+      | RUMEX  требует  следующие  документы  в  дополнение  к  заполненной 
+      | анкете: 
+
+
+.row
+  .col-xs-6
+    p 
+      | Your application must be accompanied by ONE (1) legible certified (true) 
+      | copy of identification document from Section A. Your application 
+      | must also be accompanied by ONE (1) legible proof of residential address 
+      | document from Section B, for each account applicant. 
+  .col-xs-6
+    p.ru
+      | К  Вашему  заявлению  необходимо  приложить  одну  (1)  разборчивую 
+      | копию  документа,  удостоверяющего  личность  из  Раздела  А.  К  Вашему 
+      | заявлению  так  же  необходимо  приложить  одно  (1)  разборчивое 
+      | доказательство  документа,  подтверждающего  адрес  проживания  из 
+      | Раздела Б, от каждого заявителя на открытие счета. 
+
+
+.row
+  .col-xs-6
+    h4 SECTION A (Provide ONE (1) of the following) 
+  .col-xs-6
+    h4.ru РАЗДЕЛ А (предоставить одно (1) из следующего) 
+
+
+.row
+  .col-xs-6
+    p.b 
+      | Passport 
+    ul
+      li MUST be within validity period 
+      
+    p.b
+      | Government Issued ID 
+    ul
+      li MUST be accompanied by an attestation that you do not hold a valid passport 
+      li MUST be within validity period – not more than 10 years from date of issue 
+      li MUST  show  legal  name,  date  of  birth,  nationality  &  registered  ID number SECTION B (Provide ONE of the following)
+
+    p.b 
+      | Utility Bill 
+    ul
+      li MUST state your current residential address as listed on the application form 
+      li MUST have been issued within the last 3 calendar months Bank Statement 
+      li MUST state your current residential address as listed on the application form 
+      li MUST have been issued within the last 3 calendar months 
+      li MUST be issued from the financial institution 
+        ul
+          li online PDF is acceptable
+          li online screen shots are not acceptable 
+    
+    p.b 
+      | Lease / Tenancy Agreement
+    ul
+      li MUST state your current residential address as listed on the application form 
+      li MUST be still within its lease term 
+  .col-xs-6.ru
+    p.b 
+      | Паспорт (международный) 
+    ul
+      li должен быть в пределах срока действия
+      li Выданный государством документ, удостоверяющий личность должен  быть в  пределах срока действия – не  больше  10  лет  от даты выдачи 
+      li  должен  содержать  официально  зарегистрированное  ФИО,  дату рождения,  гражданство  и  зарегистрированный  номер  документа, удостоверяющего личность
+    
+    p.b
+      | Счет за коммунальные услуги 
+    ul
+      li должен подтверждать Ваш текущий адрес проживания, как это указано в Вашем заявлении 
+      li должен быть выдан в течение 3х последних календарных месяцев
+    
+    p.b
+      | Выписка из банка 
+    ul
+      li  должен  указывать  Ваш  текущий  адрес  проживания,  как  указано  в заявлении  
+      li должен быть выдан в течение 3х последних календарных месяцев  
+      li должен быть выдан финансовым учреждением, в формате pdf
+    
+    p.b
+      | Договор аренды 
+    ul
+      li должен  указывать  Ваш  текущий  адрес  проживания,  как  указано  в заявлении  
+      li должен быть в рамках срока действия договора аренды  
+
+
+.row
+  .col-xs-6
+    h4 CERTIFYING YOUR DOCUMENTS
+  .col-xs-6.ru
+    h4 ПОДТВЕРЖДЕНИЕ ВАШИХ ДОКУМЕНТОВ
+
+
+.row
+  .col-xs-6
+    p 
+      | For the copies of your documents to be considered certified, they must 
+      | be signed by ONE of the following:
+    ul
+      li An  RUMEX  employee  can  certify  your  documents  upon  seeing  the ORIGINALS 
+      li A registered lawyer 
+      li A registered notary 
+      li A chartered accountant 
+      li A government ministry 
+      li A designated bank employee 
+      li A designated postal official 
+      li A designated police official 
+      li An embassy or consulate 
+  .col-xs-6.ru
+    p 
+      | Для  того,  чтобы  Ваши  документы  считались  подтвержденными, они 
+      | должны быть подписаны одним из следующих лиц: 
+    ul
+      li сотрудником  RUMEX,  который  может  подтвердить  Ваши  документы, если увидит оригиналы  
+      li уполномоченным адвокатом 
+      li уполномоченным нотариусом 
+      li бухгалтером 
+      li государственным министерством 
+      li официальным банковским работником 
+      li официальным почтовым служащим 
+      li официальным сотрудником полиции 
+      li посольством или консульством 
+
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 ACCOUNT INFORMATION / ИНФОРМАЦИЯ ПО СЧЕТУ 
+
+
+
+.row
+  .col-xs-6
+    p Account Type (Choose One):
+    p.ru Тип счета (выбрать одно):
+  .col-xs-2
+    label
+      input(type='radio', v-model='account', value='lite', checked=(contract.data.account === "lite"))
+      | Lite
+  .col-xs-2
+    label
+      input(type='radio', v-model='account', value='classic', checked=(contract.data.account === "classic"))
+      | Classic
+  .col-xs-2
+    label
+      input(type='radio', v-model='account', value='elite', checked=(contract.data.account === "elite"))
+      | Elite
+
+
+
+.row
+  .col-xs-6
+    p Introduced By (for Introduced Accounts Only): 
+    p.ru Имя представляющего агента (только для счетов, открываемых агентами):
+  .col-xs-6
+    input(v-model='introduced', value='#{contract.data.introduced}')
+
+
+
+.row
+  .col-xs-6
+    p Managed By (for Managed Accounts Only):
+    p.ru Имя управляющего счетом (только для управляемых счетов):
+  .col-xs-6
+    input(v-model='managed', value='#{contract.data.introduced}')
+
+
+
+.row
+  .col-xs-12
+    p If your account will be a managed account, please contact your money manager to obtain a copy of a Limited Power of Attorney which you need to complete and sign and provide to RUMEX. 
+    p.ru Если Ваш счет будет управляться доверительным управляющим, пожалуйста, свяжитесь с Вашим консультантом для того, чтобы получить копию ограниченной доверенности, которую Вам необходимо заполнить, подписать и предоставить RUMEX.
+
+
+
+.row
+  .col-xs-12
+    h3 GENERAL INFORMATION / ОБЩАЯ ИНФОРМАЦИЯ 
+
+
+.row
+  .col-xs-4
+    p Legal Name:
+    p.ru Официальное ФИО:
+  .col-xs-8
+    input(v-model='fio', value='#{contract.data.fio}')
+
+.row
+  .col-xs-4
+    p Registered Address:
+    p.ru Адрес регистрации:
+  .col-xs-8
+    input(v-model='address', value='#{contract.data.address}')
+
+.row
+  .col-xs-4
+    p Building Name/Number/Floor:
+    p.ru Название здания/номер:
+  .col-xs-8
+    input(v-model='building', value='#{contract.data.building}')
+.row
+  .col-xs-4
+    p Building housing:
+    p.ru Корпус:
+  .col-xs-8
+    input(v-model='housing', value='#{contract.data.housing}')
+.row
+  .col-xs-4
+    p Suite/Apt#:
+    p.ru Квартира: 
+  .col-xs-8
+    input(v-model='apt', value='#{contract.data.apt}')
+.row
+  .col-xs-4
+    p City:
+    p.ru Город:
+  .col-xs-8
+    input(v-model='city', value='#{contract.data.city}')
+.row
+  .col-xs-4
+    p State/Province: 
+    p.ru Область/Край/Республика:
+  .col-xs-8
+    input(v-model='state', value='#{contract.data.state}')
+.row
+  .col-xs-4
+    p Zip/Postal Code: 
+    p.ru Индекс/Почтовый код: 
+  .col-xs-8
+    input(v-model='zipcode', value='#{contract.data.zipcode}')
+
+.row
+  .col-xs-4
+    p Country: 
+    p.ru Страна: 
+  .col-xs-8
+    input(v-model='country', value='#{contract.data.country}')
+
+.row
+  .col-xs-4
+    p Mailing Address: 
+    p.ru Почтовый адрес: 
+  .col-xs-8
+    input(v-model='mail_address', value='#{contract.data.mail_address}')
+
+.row
+  .col-xs-3
+    p Country of Citizenship: 
+    p.ru Гражданство: 
+  .col-xs-3
+    input(v-model='citizenship', value='#{contract.data.citizenship}')
+  .col-xs-3
+    p Nationality:
+    p.ru Национальность:
+  .col-xs-3
+    input(v-model='nationality', value='#{contract.data.nationality}')
+
+.row
+  .col-xs-3
+    p Date of Birth: 
+    p.ru Дата рождения: 
+  .col-xs-3
+    input(type='date', v-model='dateofbirth', value='#{contract.data.dateofbirth || moment().format("YYYY-MM-DD")}')
+  .col-xs-3
+    p Telephone #:
+    p.ru Номер телефона:
+  .col-xs-3
+    input(v-model='phone', value='#{contract.data.phone}')
+
+.row
+  .col-xs-3
+    p Preferred Language: 
+    p.ru Предпочтительный язык: 
+  .col-xs-3
+    input(v-model='lang', value='#{contract.data.lang}')
+  .col-xs-3
+    p E‐mail:
+  .col-xs-3
+    input(v-model='email', value='#{contract.data.email}')
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 EMPLOYMENT INFORMATION / ИНФОРМАЦИЯ О ЗАНЯТОСТИ 
+
+
+.row
+  .col-xs-6
+    label
+      input(type='radio', v-model='employment', value='employed', checked=(contract.data.employment === "employed"))
+      | Employed / Рабочий
+  .col-xs-6
+    label
+      input(type='radio', v-model='employment', value='se', checked=(contract.data.employment === "se"))
+      | Self Employed / Частный предприниматель
+  .col-xs-6
+    label
+      input(type='radio', v-model='employment', value='retired', checked=(contract.data.employment === "retired"))
+      | Retired / Пенсионер
+  .col-xs-6
+    label
+      input(type='radio', v-model='employment', value='unemployed', checked=(contract.data.employment === "unemployed"))
+      | Unemployed / Безработный
+
+
+.row
+  .col-xs-4
+    p Name of Current Employer: 
+    p.ru Название компании работодателя: 
+  .col-xs-8
+    input(v-model='currentemployer', value='#{contract.data.currentemployer}')
+.row
+  .col-xs-4
+    p Type of Business:
+    p.ru Вид деятельности:
+  .col-xs-8
+    input(v-model='typeofbusiness', value='#{contract.data.typeofbusiness}')
+
+
+.row
+  .col-xs-4
+    p Occupation: 
+    p.ru Профессия: 
+  .col-xs-8
+    input(v-model='occupation', value='#{contract.data.occupation}')
+.row
+  .col-xs-4
+    p Years with Current Employer:
+    p.ru Стаж работы у текущего работодателя:
+  .col-xs-8
+    input(v-model='yearsofwork', value='#{contract.data.yearsofwork}')
+
+
+.row
+  .col-xs-4
+    p Employer Address: 
+    p.ru Адрес работодателя: 
+  .col-xs-8
+    input(v-model='employeraddress', value='#{contract.data.employeraddress}')
+
+.row
+  .col-xs-4
+    p Telephone #: 
+    p.ru Номер телефона: 
+  .col-xs-8
+    input(v-model='employerphone', value='#{contract.data.employerphone}')
+
+
+
+.row
+  .col-xs-12
     p
-      | Я понимаю, что до тех пор, пока перевод не осуществлён и не получено разрешение от
-      b  RUMEX INTERNATIONAL LTD
-      |  о снятии средств, вывод средств со счета невозможен. Я беру на себя всю ответственность за перечисление денег на счет
-      b  RUMEX INTERNATIONAL LTD
-      | . Я понимаю, что
-      b  RUMEX INTERNATIONAL LTD
-      |  оставляет за собой право отменить операции, осуществляемые на моем счету, в случае несоблюдения данного обязательства. Я освобождаю
-      b  RUMEX INTERNATIONAL LTD
-      |  от ответственности за расходы и жалобы в случае неуплаты кредитной линии.
+      b BANK INFORMATION
+      br
+      | Note that in accordance with RUMEX ’s policies, RUMEX can only send and receive 
+      | funds from two bank accounts. 
+      | Whichever accounts you list below are the 
+      | only  two accounts which RUMEX can  send and  receive  funds  from 
+      | throughout your relationship with RUMEX , unless you were  to close one or both of  the 
+      | accounts, then proof of account closure would be required to amend your bank account details.
+    p.ru
+      b БАНКОВСКАЯ ИНФОРАМАЦИЯ 
+      br
+      | Обратите  внимание,  что  в  соответствии  с  политикой  RUMEX, 
+      | RUMEX  может  отправлять  и  получать  денежные  средства  только  из  двух 
+      | банковских счетов. Независимо от того, какие счета Вы указали, есть 
+      | только два счета (указанных ниже), на которые RUMEX может отправлять, 
+      | и с которых может получать денежные средства во время Вашей работы с RUMEX.
+
+
+.row
+  .col-xs-6
+    .row
+      .col-xs-12
+        p ORIGIN OF FUNDS ‐ ACCOUNT 1 / СЧЕТ 1 
+    .row
+      .col-xs-12
+        p Accountholder’s Name: / Имя владельца счета:
+      .col-xs-12
+        input(v-model='fund1_holdername', value='#{contract.data.fund1_holdername}')
+    .row
+      .col-xs-12
+        p Bank Name: / Название банка: 
+      .col-xs-12
+        input(v-model='fund1_bankname', value='#{contract.data.fund1_bankname}')
+    .row
+      .col-xs-12
+        p Bank Address: / Адрес Банка: 
+      .col-xs-12
+        input(v-model='fund1_bankaddress', value='#{contract.data.fund1_bankaddress}')
+    .row
+      .col-xs-12
+        p Account or IBAN Number: / Счет или номер IBAN: 
+      .col-xs-12
+        input(v-model='fund1_iban', value='#{contract.data.fund1_iban}')
+    .row
+      .col-xs-12
+        p Swift Code/ABA (Routing Number): / SWIFT код/ABA: 
+      .col-xs-12
+        input(v-model='fund1_swift', value='#{contract.data.fund1_swift}')
+  .col-xs-6
+    .row
+      .col-xs-12
+        p ORIGIN OF FUNDS ‐ ACCOUNT 2 / СЧЕТ 2 
+    .row
+      .col-xs-12
+        p Accountholder’s Name: / Имя владельца счета:
+      .col-xs-12
+        input(v-model='fund2_holdername', value='#{contract.data.fund2_holdername}')
+    .row
+      .col-xs-12
+        p Bank Name: / Название банка: 
+      .col-xs-12
+        input(v-model='fund2_bankname', value='#{contract.data.fund2_bankname}')
+    .row
+      .col-xs-12
+        p Bank Address: / Адрес Банка: 
+      .col-xs-12
+        input(v-model='fund2_bankaddress', value='#{contract.data.fund2_bankaddress}')
+    .row
+      .col-xs-12
+        p Account or IBAN Number: / Счет или номер IBAN: 
+      .col-xs-12
+        input(v-model='fund2_iban', value='#{contract.data.fund2_iban}')
+    .row
+      .col-xs-12
+        p Swift Code/ABA (Routing Number): / SWIFT код/ABA: 
+      .col-xs-12
+        input(v-model='fund2_swift', value='#{contract.data.fund2_swift}')
+
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 FINANCIAL & CUSTOMER INFORMATION / ФИНАНСОВАЯ ИНФОРМАЦИЯ И ИФОРМАЦИЯ О КЛИЕНТЕ 
+
+
+.row
+  .col-xs-6
+    p What is the entity’s estimated annual income? 
+    p.ru Какой годовой доход клиента?
+  .col-xs-6
+    .row
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='<25000', checked=(contract.data.income === "<25000"))
+          | Under/ Менее $25,000 
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='<49999', checked=(contract.data.income === "<49999"))
+          | $25,000‐$49,999
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='<99999', checked=(contract.data.income === "<99999"))
+          | $50,000‐$99,999 
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='<249999', checked=(contract.data.income === "<249999"))
+          | $100,000‐$249,999 
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='<999999', checked=(contract.data.income === "<999999"))
+          | $250,000‐$1,000,000
+      .col-xs-12
+        label
+          input(type='radio', v-model='income', value='>1000000', checked=(contract.data.income === ">1000000"))
+          | Over/ Более $1,000,000
+
+
+.row
+  .col-xs-6
     p
-      | Я принимаю условие, что срок действия этой доверительной линии лимитирован, и что в даты, не охватывающие этот период,
-      b  RUMEX INTERNATIONAL LTD
-      |  может отменить любую прибыль, полученную во время проведенной сделки с этой линии. 
+      | What is the entity’s Net Worth 
+      br
+      | (assets minus liabilities)?
+    p.ru
+      | Какая стоимость чистых активов клиента
+      br
+      | (активы минус пассивы)?
+  .col-xs-6
+    .row
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='<25000', checked=(contract.data.assets === "<25000"))
+          | Under/ Менее $25,000 
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='<49999', checked=(contract.data.assets === "<49999"))
+          | $25,000‐$49,999
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='<99999', checked=(contract.data.assets === "<99999"))
+          | $50,000‐$99,999 
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='<249999', checked=(contract.data.assets === "<249999"))
+          | $100,000‐$249,999 
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='<999999', checked=(contract.data.assets === "<999999"))
+          | $250,000‐$1,000,000
+      .col-xs-12
+        label
+          input(type='radio', v-model='assets', value='>1000000', checked=(contract.data.assets === ">1000000"))
+          | Over/ Более $1,000,000
+
+
+.row
+  .col-xs-4
+    p What is the origin of wealth? 
+    p.ru Каково происхождение активов? 
+  .col-xs-8
+    .row
+      .col-xs-12
+        input(v-model='originofwealth', value='#{contract.data.originofwealth}')
+
+
+.row
+  .col-xs-4
+    p Initial Deposit: $
+    p.ru Начальный депозит $:
+  .col-xs-8
+    .row
+      .col-xs-12
+        input(v-model='initialdeposit', value='#{contract.data.initialdeposit}')
+
+
+.row
+  .col-xs-6
+    p Has  the  business  or any of its  principals, beneficial  owners, or  controlling persons ever been licensed or authorized with any regulatory authority? 
+    p.ru Имеет  ли  Ваша  компания  или  любой  из  его  директоров, бенефициарных  владельцев  или  контролирующих лиц  лицензию регулирующего органа?
+  .col-xs-6
+    .row
+      .col-xs-12
+        label
+          input(type='radio', v-model='businesshaslicense', value='yes', checked=(contract.data.businesshaslicense === "yes"))
+          | Yes / Да
+      .col-xs-12
+        label
+          input(type='radio', v-model='businesshaslicense', value='no', checked=(contract.data.businesshaslicense === "no"))
+          | No / Нет 
+.row
+  .col-xs-6
+    p If yes, indicate which regulator and provide the ID number:
+    p.ru Если да, укажите регулирующий орган и предоставьте номер документа:
+  .col-xs-6
+    input(v-model='businesslicense', value='#{contract.data.businesslicense}')
+
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 TRADING INFORMATION / ИНФОРМАЦИЯ О ТОРГАХ
+
+.row
+  .col-xs-5
+    p Have you had experience trading the following instruments: (please check all which apply)
+    p.ru Есть ли у Вас опыт торговли следующими инструментами: (пожалуйста, отметьте все что подходит)
+  .col-xs-7
+    .row
+      .col-xs-12
+        label
+          input(type='checkbox', v-model='expexchderivatives', checked=(contract.data.expexchderivatives === 'true'))
+          | Exchange Traded Derivatives / Производственные инструменты 
+      .col-xs-12
+        label
+          input(type='checkbox', v-model='expotcderivatives', checked=(contract.data.expotcderivatives === 'true'))
+          | OTC Derivatives / Внебиржевые финансовые инструменты 
+      .col-xs-12
+        label
+          input(type='checkbox', v-model='expsecurities', checked=(contract.data.expsecurities === 'true'))
+          | Securities / Ценные бумаги
+
+.row
+  .col-xs-5
+    p If yes, please check one of the below: 
+    p.ru Если да, отметьте одно из следующего:
+  .col-xs-7
+    .row
+      .col-xs-12
+        label
+          input(type='radio', v-model='explength', value='<1', checked=(contract.data.explength === '<1'))
+          | Less than 1 year / менее одного года 
+      .col-xs-12
+        label
+          input(type='radio', v-model='explength', value='<5', checked=(contract.data.explength === '<5'))
+          | 1‐5 years / 1‐5 лет
+      .col-xs-12
+        label
+          input(type='radio', v-model='explength', value='>5', checked=(contract.data.explength === '>5'))
+          | 5 or more years / 5 и более лет 
+
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 HOW DID YOU HEAR ABOUT RUMEX?/ КАК ВЫ УЗНАЛИ О RUMEX? 
+
+.row
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='bymagazine', checked=(contract.data.bymagazine === 'true'))
+      | Magazine / Журналы 
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='byonline', checked=(contract.data.byonline === 'true'))
+      | Online Ad / Интернет 
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='byfriend', checked=(contract.data.byfriend === 'true'))
+      | Friend / Друзья
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='byforum', checked=(contract.data.byforum === 'true'))
+      | Forum / Форумы 
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='bynewspaper', checked=(contract.data.bynewspaper === 'true'))
+      | Newspaper / Газеты  
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='byseminar', checked=(contract.data.byseminar === 'true'))
+      | Seminar / Семинары 
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='bysearch', checked=(contract.data.bysearch === 'true'))
+      | Search Engine / Поисковые системы
+  .col-xs-4
+    label
+      input(type='checkbox', v-model='byother', checked=(contract.data.byother === 'true'))
+      | Other / Другое
+
+
+
+
+
+
+.row
+  .col-xs-6
+    p
+      | YOU SHOULD NOT SIGN THE APPLICATION FORM IF YOU ARE UNSURE AS TO 
+      | THE  NATURE  OF  THE  RISKS  INVOLVED  IN  TRADING  USING  THE  RUMEX 
+      | SERVICES. 
+  .col-xs-6
+    p.ru 
+      | ВЫ  НЕ  ДОЛЖНЫ  ПОДПИСЫВАТЬ  ЗАЯВЛЕНИЕ,  ЕСЛИ  ВЫ  НЕ  УВЕРЕНЫ 
+      | ОТНОСИТЕЛЬНО  ПОДРАЗУМЕВАЕМЫХ  РИСКОВ  В  ТОРГОВЛЕ  ПРИ 
+      | ИСПОЛЬЗОВАНИИ УСЛУГ RUMEX. 
+
+
+
+.row
+  .col-xs-6
+    p
+      | MARGINED TRANSACTIONS CARRY A HIGH LEVEL OF RISK TO YOUR CAPITAL. IT
+      | IS  POSSIBLE  TO  LOSE  MORE  THAN  YOUR  INITIAL  INVESTMENT.  BEFORE 
+      | SUBMITTING  THIS  APPLICATION  FORM,  FOR  YOUR  OWN  BENEFIT  AND 
+      | PROTECTION YOU SHOULD CAREFULLY READ THE INFORMATION NOTICE, RISK 
+      | DISCLOSURES, THE ORDER EXECUTION POLICY AND THE TERMS OF BUSINESS. 
+  .col-xs-6
+    p.ru 
+      | МАРЖИНАЛЬНЫЕ  СДЕЛКИ  НЕСУТ  ВЫСОКУЮ  СТЕПЕНЬ  РИСКА  ПО 
+      | ОТНОШЕНИЮ  К  ВАШЕМУ  КАПИТАЛУ.  ВОЗМОЖНО,  ЧТО  ВЫ  ПОТЕРЯЕТЕ 
+      | СУММУ  БОЛЬШЕ,  ЧЕМ  ВАШ  НАЧАЛЬНЫЙ  ДЕПОЗИТ.  ДО  ТОГО,  КАК 
+      | ПЕРЕДАТЬ  ЭТО  ЗАЯВЛЕНИЕ,  ДЛЯ  ВАШЕЙ  СОБСВТЕННОЙ  ВЫГОДЫ  И 
+      | ЗАЩИТЫ,  ВЫ ДОЛЖНЫ ВНИМАТЕЛЬНО ПРОЧИТАТЬ ИНФОРМАЦИОННОЕ 
+      | СООБЩЕНИЕ,  ПРЕДУПРЕЖДЕНИЯ  О  РИСКАХ,  ПОЛИТИКУ  ИСПОЛНЕНИЯ 
+      | ОРДЕРОВ И ДРУГИЕ УСЛОВИЯ БИЗНЕСА.  
+
+
+.row
+  .col-xs-6
+    p
+      | WE HIGHLY RECOMMEND THAT YOU DOWNLOAD OR PRINT A COPY OF THE 
+      | RISK  DISCLOSURES,  THE  ORDER  EXECUTION  POLICY  AND  THE  TERMS  OF 
+      | BUSINESS  AND  REVIEW  THEM.  WE  FURTHER  RECOMMEND  THAT  YOU 
+      | REGULARLY  REFER  TO  OUR  WEBSITE  FOR  ANY  UPDATES  TO  THOSE 
+      | DOCUMENTS. 
+  .col-xs-6
+    p.ru 
+      | МЫ  НАСТОЯТЕЛЬНО  РЕКОМЕНДУЕМ  ВАМ  ЗАГРУЗИТЬ ИЛИ  РАСПЕЧАТАТЬ 
+      | КОПИЮ ПРЕДУПРЕЖДЕНИЯ О РИСКАХ, ПОЛИТИКИ ИСПОЛНЕНИЯ ОРДЕРОВ 
+      | И  УСЛОВИЙ  БИЗНЕСА  И  ПЕРЕСМОТРЕТЬ  ИХ.  МЫ  ДАЛЕЕ  НАСТОЯТЕЛЬНО 
+      | РЕКОМЕНДУЕМ  ВАМ  РЕГУЛЯРНО  ПОСЕЩАТЬ  НАШ  ИНТЕРНЕТ‐САЙТ  ДЛЯ 
+      | ТОГО, ЧТОБЫ ПОЛУЧИТЬ ЛЮБЫЕ ОБНОВЛЕНИЯ ЭТИХ ДОКУМЕНТОВ.  
+
+
+.row
+  .col-xs-6
+    p
+      | IF THERE IS ANYTHING IN THE DOCUMENTS REFERRED TO ABOVE THAT YOU 
+      | DO NOT UNDERSTAND, PLEASE CONTACT A MEMBER OF OUR PRIME SERVICES 
+      | TEAM  FOR  MORE  INFORMATION  BY  CALLING  +971‐4‐313‐2444. 
+      | ALTERNATIVELY  YOU  CAN  EMAIL  OUR  PRIME  SUPPORT  TEAM  AT 
+      | SUPPORT@RUMEX.AE 
+  .col-xs-6
+    p.ru 
+      | ЕСЛИ  ЧТО‐ЛИБО  В  ДОКУМЕНТАХ,  УПОМЯНУТЫХ  ВЫШЕ,  ВЫ  НЕ 
+      | ПОНИМАЕТЕ,  ПОЖАЛУЙСТА,  СВЯЖИТЕСЬ  С  ЧЛЕНОМ  НАШЕЙ  КОМАНДЫ 
+      | ПО ОКАЗАНИЮ УСЛУГ ДЛЯ ПОЛУЧЕНИЯ БОЛЕЕ ТОЧНОЙ ИНФОРМАЦИИ ПО 
+      | ТЕЛЕФОНУ  +971‐4‐313‐2444.  ТАК  ЖЕ  ВЫ  МОЖЕТЕ  ОТПРАВИТЬ 
+      | ЭЛЕКТРОННОЕ  ПИСЬМО  НАШЕЙ  КОМАНДЕ  ПО  ОКАЗАНИЮ  УСЛУГ  НА 
+      | АДРЕС SUPPORT@RUMEX.AE 
+
+
+
+
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 CUSTOMER ACKNOWLEDGEMENT / ПОДТВЕРЖДЕНИЕ КЛИЕНТА 
+
+
+.row
+  .col-xs-6
+    p
+      | I  HEREBY  REPRESENT  THAT,  AND  BY  SIGNING  BELOW,  THE  INFORMATION 
+      | PROVIDED BY ME ON THIS INDIVIDUAL ACCOUNT APPLICATION IS TRUE AND 
+      | ACCURATE.  I  FURTHER  REPRESENT  THAT  I  WILL  NOTIFY  RUMEX 
+      | INTERNATIONAL  LTD  (“RUMEX”)  OF  ANY  MATERIAL  CHANGES  TO  THIS 
+      | APPLICATION IN WRITING. RUMEX RESERVES THE RIGHT, BUT HAS NO DUTY, 
+      | TO  VERIFY  THE  ACCURACY OF  INFORMATION  PROVIDED,  AND  TO  CONTACT 
+      | ANY BANKS, AGENCIES OR OTHERS REFERENCED ON THIS APPLICATION AS IT 
+      | DEEMS NECESSARY. 
+  .col-xs-6
+    p.ru 
+      | НАСТОЯЩИМ  Я  ПОДТВЕРЖДАЮ  И  ПОДПИСЫВАЮСЬ  НИЖЕ,  ЧТО 
+      | ИНФОРМАЦИЯ ПРЕДСТАВЛЕННАЯ МНОЙ В ЭТОМ ЛИЧНОМ ЗАЯВЛЕНИИ НА 
+      | ОТКРЫТИЕ СЧЕТА, ДОСТОВЕРНА И ТОЧНА. ДАЛЕЕ Я ПОДТВЕРЖДАЮ, ЧТО 
+      | БУДУ  УВЕДОМЛЯТЬ  RUMEX  INTERNATIONAL  LTD  (“RUMEX”)  О  ЛЮБЫХ 
+      | СУЩЕСТВЕННЫХ  ИЗМЕНЕНИЯХ  В  ЭТОМ  ЗАЯВЛЕНИИ  В  ПИСЬМЕННОЙ 
+      | ФОРМЕ. RUMEX ОСТАВЛЯЕТ ЗА СОБОЙ ПРАВО, НО НЕ ОБЯЗАН, ВЫВЕРЯТЬ 
+      | ТОЧНОСТЬ  ПРЕДСТАВЛЕННОЙ  ИНФОРМАЦИИ,  И  СВЯЗЫВАТЬСЯ  С 
+      | ЛЮБЫМИ  БАНКАМИ,  АГЕНСТВАМИ  УКАЗАННЫМИ  В  ЭТОМ  ЗАЯВЛЕНИИ, 
+      | ЕСЛИ ПОЯВИТСЯ НЕОБХОДИМОСТЬ. 
+
+
+
+
+
+
+.row
+  .col-xs-12
+    h3 ACKNOWLEDGED BY / ПРИНЯТО ОТ 
+
 
 .row.big
   .col-xs-4
     span.mr-10 Дата: 
     span.ml-10
-      b #{moment(contract.createdAt).format('DD/MM/YYYY')}
+      b #{moment(contract.createdAt || new Date()).format('DD/MM/YYYY')}
   .col-xs-8
     .row
+      .col-xs-4
+        p Account holder name
+        p.ru Имя владельца счета
+      .col-xs-8
+        input(v-model='acknowledgedby', value='#{contract.data.acknowledgedby}')
+
+
       .col-xs-12
         div Подпись: 
         if (contract.signature)
           img(src='#{contract.signature}')
         else
           .row.signature
-            .col-xs-12
+            .col-xs-12(style='height: 300px;')
               canvas(v-el:signature, style='border: solid 1px black;')
               span#resetsignature(@click='resetsignature', title='очистить подпись')
                 i.fa.fa-close
-            .col-xs-3
+            .col-xs-3.mt-10
                 span#savecontract(@click='save')
                   +button('Отправить')
-
 
