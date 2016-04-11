@@ -51,8 +51,9 @@
     "winston": "^2.1.1"
   },
   "scripts": {
+    "start": "node app.js",
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "postinstall": "bower install"
   },
   "main": "app.js",
   "repository": {
