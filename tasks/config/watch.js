@@ -20,7 +20,7 @@ module.exports = function(grunt) {
             // Assets to watch:
             files: ['assets/**/*', '!**/node_modules/**'],
             // When assets are changed:
-            tasks: ['sync:assets', 'less:dev'],
+            tasks: ['sync:assets'],
         },
 
         tasks: {

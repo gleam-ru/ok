@@ -5,6 +5,5 @@ module.exports = function (grunt) {
         'jade2js',      // create jade client templates
         'copy:head',    // особенности минификатора
         'sync:assets',  // синхронизирую исходники
-        'less:dev',
     ]);
 };
