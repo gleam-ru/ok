@@ -4,7 +4,7 @@ block append head
   //- +globalVar('users', users)
   +globalVar('tags', tags)
   +globalVar('tree', tree)
-  +globalVar('text', post.text)
+  +globalVar('text', post && post.text)
   script(src='/ViewControllers/index.js')
   style.
 
