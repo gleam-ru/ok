@@ -27,19 +27,11 @@ block content
             th #
             th Date
             th Name
-            th Number
-            th Sum
-            th Curr
-            th Type
             each c in contracts
               tr
                 td #{i++}
                 td #{moment(c.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
-                td #{c.name}
-                td #{c.num}
-                td #{c.sum}
-                td #{c.currency ? '₽' : '$'}
-                td #{c.transaction ? 'Card' : 'Bank'}
+                td #{c.data.name || c.data.acknowledgedby}
                 td(style="min-width: 80px;")
                   a(href='/admin/contracts/get/#{c.id}')
                     +iconButton('fa-link')
