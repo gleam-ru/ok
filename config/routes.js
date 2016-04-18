@@ -134,6 +134,7 @@ module.exports.routes = {
 ///////////////
 
     // версии "для печати" с отвязкой от стилей сайта
+    'get  /contract/success'        : 'Contract.success',
     'get  /contract/:type'            : 'Contract.create',
     'get  /contract/get/:id'          : 'Contract.printpage',
 

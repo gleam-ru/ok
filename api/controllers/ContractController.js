@@ -44,6 +44,32 @@ module.exports = {
             ;
     },
 
+    // страница с сообщением об успехе
+    success: function(req, res) {
+        var type = req.param('type');
+        var referer = req.get('referer');
+        var data = {
+            pageTitle: 'Contract',
+            title: 'Contract',
+            bc: [
+                {name: 'Home', href: '/'},
+                {name: 'Profile', href: '/profile'},
+                {name: 'Contract', href: '/profile/contract'},
+            ],
+        };
+
+        return Q()
+            .then(function() {
+                return res.render('contract/success', data);
+            })
+            .catch(function(err) {
+                console.error(err.stack);
+                flashes.error(req, err);
+                return res.redirect(referer);
+            })
+            ;
+    },
+
     // страница для печати
     printpage: function(req, res) {
         var id = parseInt(req.param('id'));
