@@ -45,7 +45,7 @@ $(document).ready(function() {
                         }
                     })
                     .done(function(data) {
-                        window.location.href = '/profile';
+                        window.location.href = '/contract/success';
                     })
                     .fail(function(err) {
                         console.error(err);

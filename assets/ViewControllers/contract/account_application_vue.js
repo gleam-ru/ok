@@ -92,7 +92,7 @@ $(document).ready(function() {
                         }
                     })
                     .done(function(data) {
-                        mp.alert('Ваша анкета успешно отправлена.');
+                        window.location.href = '/contract/success';
                     })
                     .fail(function(err) {
                         console.error(err);
